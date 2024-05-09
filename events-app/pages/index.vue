@@ -11,6 +11,7 @@
 <script setup>
     //Get events from api
     const { data: events } = await useFetch('https://events-api.org/events')
+    definePageMeta({ middleware: 'auth' })
 </script>
 
 <style scoped>

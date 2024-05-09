@@ -3,7 +3,7 @@
         <img class="rounded-md w-[200px] mx-auto " :src="event.img_url">
         <p class="font-bold text-gray-700 m-4 ">{{ event.title }}</p>
         <p class="font-bold text-gray-700 m-4 ">{{ useDateFormat(event.start_datetime, "dddd DD MMMM, YYYY") }}</p>
-        <NuxtLink :to="`/${event.id}`">
+        <NuxtLink :to="`/event/${event.id}`">
             <p class="my-4">View details</p>
         </NuxtLink>
     </div>

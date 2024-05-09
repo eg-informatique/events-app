@@ -13,6 +13,7 @@
     useHead({
         title: 'Events Manages | About'
     })
+    definePageMeta({ middleware: 'auth' })
 </script>
 
 <style scoped>
