@@ -1,11 +1,12 @@
 <template>
     <div>
-        <button v-if="loggedIn" @click="handleSignOut">Sign Out</button>
-        <button v-else @click="handleSignIn">Sign In</button>
+        <Login/>
     </div>
 </template>
 
 <script setup>
+import Login from '~/components/Signin/Login.vue';
+
 const { status, signIn, signOut } = useAuth()
 
 const loggedIn = computed(() => status.value === 'authenticated')
@@ -17,12 +18,10 @@ async function handleSignIn() {
 async function handleSignOut() {
     await signOut()
 }
-definePageMeta({
-    auth:{
-        unauthenticatedOnly: true,
-        navigateAuthenticatedTo : '/account'
-    }
-})
+definePageMeta({ auth: {
+    unauthenticatedOnly: true,
+    navugateAuthenticatedTo: '/'
+} })
 </script>
 
 <style lang="scss" scoped>

@@ -48,11 +48,11 @@ async function handleSignOut() {
                     <Icon size="20" name="ph:sign-out-bold" color="black"/>
                     <button @click="handleSignOut">Sign Out</button> 
                 </div>
-                <NuxtLink v-else to="signin" class="flex items-center gap-3 px-2 py-1 transition rounded cursor-pointer 
+                <div v-else class="flex items-center gap-3 px-2 py-1 transition rounded cursor-pointer 
                 hover:bg-neutral-100 hover:scale-[101%]">
                     <Icon size="20" name="ph:sign-in-bold" color="black"/>
-                    <span>Sign In</span>    
-                </NuxtLink>
+                    <button @click="handleSignIn">Sign In</button>    
+            </div>
             </div>
         </div>
     </div>

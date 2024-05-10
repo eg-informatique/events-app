@@ -21,7 +21,7 @@
     if (!events.value) {
         throw createError({statusCode: 404, statusMessage: 'Event not found'})
     }
-    definePageMeta({ middleware: 'auth' })
+    definePageMeta({ auth: false })
 </script>
 
 <style scoped>
