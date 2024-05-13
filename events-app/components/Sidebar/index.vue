@@ -12,7 +12,7 @@ const open = ref(false)
                 <SidebarMenu />
             </div>
         </div>
-        <div class="hidden lg:flex w-[190px] h-screen flex-col justify-bete
+        <div class="hidden lg:flex w-[190px] h-full flex-col justify-bete
         ween border-r">
             <SidebarMenu />
             <div class="absolute inset-x-0 bottom-0">
