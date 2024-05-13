@@ -14,7 +14,6 @@
                 <SidebarMenu />
             </div>
         </div>
-        <div class="fixed flex flex-col">
             <div class="hidden lg:flex w-[190px] h-screen flex-col justify-bete
         ween border-r">
                 <SidebarMenu />
@@ -22,7 +21,5 @@
                     User Item
                 </div>
             </div>
-        </div>
-
     </div>
 </template>
