@@ -23,6 +23,12 @@ async function handleSignIn() {
 async function handleSignOut() {
     await signOut()
 }
+
+const emits = defineEmits('closeSidebar')
+
+const closeSidebar = () => {
+    emits('closeSidebar')
+}
 </script>
 <template>
     <div>
@@ -32,7 +38,7 @@ async function handleSignOut() {
         </header>
         <div class="px-4 grow">
             <div class="grid gap-2">
-                <NuxtLink :to="item.path" v-for='(item, index) in items' :key='index' 
+                <NuxtLink :to="item.path" v-for='(item, index) in items' :key='index' @click="closeSidebar"
                 class="flex items-center gap-3 px-2 py-1 transition rounded cursor-pointer 
                 hover:bg-neutral-100 hover:scale-[101%]">
                     <Icon size="20" :name="item.icon" color="black"/>

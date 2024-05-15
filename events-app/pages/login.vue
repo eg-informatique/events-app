@@ -5,7 +5,6 @@
 </template>
 
 <script setup>
-import Login from '~/components/Signin/Login.vue';
 
 const { status, signIn, signOut } = useAuth()
 

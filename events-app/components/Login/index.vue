@@ -9,7 +9,7 @@
             Welcome back
           </h1>
 
-          <SigninGitHubLogin />
+          <LoginGitHubLogin />
 
           <div class="flex items-center">
             <div class="bg-gray-900 h-[.125rem] w-full"></div>
@@ -17,7 +17,7 @@
             <div class="bg-gray-800 h-[.125rem] w-full"></div>
           </div>
 
-          <SigninLoginForm />
+          <LoginForm />
         </div>
       </div>
     </div>
