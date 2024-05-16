@@ -22,7 +22,7 @@
             <div class="hidden lg:flex w-[190px] h-screen flex-col justify-bete
         ween border-r">
                 <SidebarMenu />
-                <div class="absolute left-0 bottom-0 w-5">
+                <div class="absolute left-0 bottom-0 w-[80px]">
                     User Item
                 </div>
             </div>
