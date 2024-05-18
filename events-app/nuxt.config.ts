@@ -12,6 +12,12 @@ export default defineNuxtConfig({
     },
   },
   auth: {
+    redirect: {
+      login: '/login',
+      logout: '/',
+      callback: '/login',
+      home: '/'
+    },
     globalAppMiddleware: true,
     provider: {
         type: 'authjs'
