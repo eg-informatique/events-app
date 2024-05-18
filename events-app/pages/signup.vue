@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Signup/>
+        <CreateUser/>
     </div>
 </template>
 
