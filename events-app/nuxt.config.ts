@@ -25,6 +25,7 @@ export default defineNuxtConfig({
   },
   ui: {
     primary: 'green',
-    gray: 'cool'
+    gray: 'cool',
+    icons: ['majesticons', 'mdi'],
   }
 })

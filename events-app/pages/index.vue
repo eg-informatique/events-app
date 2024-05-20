@@ -1,6 +1,6 @@
 <template>
     <div class="grid lg:grid-cols-4 gap-7">
-        <div v-for="event in events" class="border rounded-lg">
+        <div v-for="event in events">
             <EventCard :event='event'/>
         </div>
     </div>

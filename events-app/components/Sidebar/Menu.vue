@@ -1,16 +1,34 @@
 <script setup>
 const { status, signIn, signOut } = useAuth()
 
-const items = ref([
+const itemsSignedIn = ref([
     {
-        title: "Home",
-        path: "/",
-        icon: "majesticons:home"
+        label: "Home",
+        to: "/",
+        icon: "i-majesticons-home"
     },
     {
-        title : "About us",
-        path: "/about",
-        icon: "mdi:about-circle-outline"
+        label : "About us",
+        to: "/about",
+        icon: "i-mdi-about-circle-outline"
+    },
+    {
+        label:'Acount',
+        to:'/account',
+        icon:'i-mdi-account'
+    }
+])
+
+const itemsSignedOut = ref([
+    {
+        label: "Home",
+        to: "/",
+        icon: "i-majesticons-home"
+    },
+    {
+        label : "About us",
+        to: "/about",
+        icon: "i-mdi-about-circle-outline"
     },
 ])
 
@@ -31,35 +49,22 @@ const closeSidebar = () => {
 }
 </script>
 <template>
-    <div>
-        <header class="flex items-center gap-2 p-4 hover:scale-[102%] transition cursor-pointer">
-          <Logo /> 
-          <p class="font-bold">Events manager</p>
-        </header>
-        <div class="px-4 grow">
-            <div class="grid gap-2">
-                <NuxtLink :to="item.path" v-for='(item, index) in items' :key='index' @click="closeSidebar"
-                class="flex items-center gap-3 px-2 py-1 transition rounded cursor-pointer 
-                hover:bg-neutral-100 hover:scale-[101%]">
-                    <Icon size="20" :name="item.icon" color="black"/>
-                    <span> {{ item.title }}</span>
-                </NuxtLink>
-                <NuxtLink v-if="loggedIn" to="account" class="flex items-center gap-3 px-2 py-1 transition rounded cursor-pointer 
-                hover:bg-neutral-100 hover:scale-[101%]">
-                        <Icon size="20" name="mdi:account-outline" color="black"/>
-                        <span>Acount</span>
-                </NuxtLink>
-                <div v-if="loggedIn" class="flex items-center gap-3 px-2 py-1 transition rounded cursor-pointer 
-                hover:bg-neutral-100 hover:scale-[101%]">
-                    <Icon size="20" name="ph:sign-out-bold" color="black"/>
-                    <button @click="handleSignOut">Sign Out</button> 
-                </div>
-                <div v-else class="flex items-center gap-3 px-2 py-1 transition rounded cursor-pointer 
-                hover:bg-neutral-100 hover:scale-[101%]">
-                    <Icon size="20" name="ph:sign-in-bold" color="black"/>
-                    <button @click="handleSignIn">Sign In</button>    
-            </div>
-            </div>
-        </div>
+    <header class="flex items-center gap-2 p-4 hover:scale-[102%] transition cursor-pointer">
+        <Logo /> 
+        <p class="font-bold">Events manager</p>
+    </header>
+    <div v-if="loggedIn">
+        <UVerticalNavigation :links="itemsSignedIn" @click="closeSidebar"/>
+        <UButton @click="handleSignOut"
+            label="Sign Out"
+            icon="i-mdi-sign-out"
+        />
+    </div>
+    <div v-else>
+        <UVerticalNavigation :links="itemsSignedOut" @click="closeSidebar" class="top-0"></UVerticalNavigation>
+        <UButton @click="handleSignIn"
+            label="Sign In"
+            icon="i-mdi-sign-in"
+        />
     </div>
 </template>
