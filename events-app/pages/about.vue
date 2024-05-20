@@ -7,7 +7,7 @@
     </div>
     <div class="max-w-3xl mx-auto">
       <p class="text-lg text-center text-gray-700 leading-relaxed">
-        This website was created as part of Petr Slazai and Paul Lasry-Robin's maturity project at Emilie-Gourd College.
+        This website was created as part of Petr Szalai and Paul Lasry-Robin's maturity project at Emilie-Gourd College.
         The development of this site spanned over a year. It first involved crafting an API using Flask and Nginx. This
         project is entirely open source and is available on GitHub.
       </p>
