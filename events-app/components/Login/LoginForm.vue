@@ -25,7 +25,7 @@
         password?</a>
     </div>
     <button type="submit"
-      class="w-full text-black bg-grey-800 hover:bg-grey-900 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+      class="w-full text-white bg-green-800 hover:bg-grey-900 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
       Sign in
     </button>
     <p class="text-sm font-light text-gray-500 dark:text-gray-400">
