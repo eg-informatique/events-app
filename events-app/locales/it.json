@@ -1,0 +1,4 @@
+{
+    "about_title" : "Chi Siamo?",
+    "about_text": "Questo sito web è stato creato come parte del progetto di maturità di Petr Szalai e Paul Lasry-Robin al Collegio Emilie-Gourd. Lo sviluppo di questo sito è durato oltre un anno. Ha inizialmente coinvolto la creazione di un'API utilizzando Flask e Nginx. Questo progetto è interamente open source ed è disponibile su GitHub."
+}
