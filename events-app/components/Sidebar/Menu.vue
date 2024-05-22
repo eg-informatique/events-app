@@ -1,20 +1,21 @@
 <script setup>
 const { status, signIn, signOut } = useAuth()
+const locaPath = useLocalePath()
 
 const itemsSignedIn = ref([
     {
         label: "Home",
-        to: "/",
+        to: `${locaPath('/')}`,
         icon: "i-majesticons-home"
     },
     {
         label : "About us",
-        to: "/about",
+        to: `${locaPath('/about')}`,
         icon: "i-mdi-about-circle-outline"
     },
     {
         label:'Acount',
-        to:'/account',
+        to:`${locaPath('/account')}`,
         icon:'i-mdi-account'
     }
 ])
@@ -22,12 +23,12 @@ const itemsSignedIn = ref([
 const itemsSignedOut = ref([
     {
         label: "Home",
-        to: "/",
+        to: `${locaPath('/')}`,
         icon: "i-majesticons-home"
     },
     {
         label : "About us",
-        to: "/about",
+        to: `${locaPath('/about')}`,
         icon: "i-mdi-about-circle-outline"
     },
 ])

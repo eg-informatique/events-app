@@ -9,7 +9,7 @@
             <UButton class="text-center" 
                 label="Details"
                 icon="i-mdi-more"
-                :to="`/event/${event.id}`"/>  
+                :to="`${locaPath('/event/' + `${event.id}`)}`"/>  
         </template> 
     </UCard>
 </template>
@@ -17,6 +17,7 @@
 <script setup>
     const { $formatDate } = useNuxtApp()
     const { event } = defineProps(['event'])
+    const locaPath = useLocalePath()
 </script>
 
 <style scoped>
