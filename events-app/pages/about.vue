@@ -7,7 +7,7 @@
     </div>
     <div class="max-w-3xl mx-auto">
       <p class="text-lg text-center text-gray-700 dark:text-gray-200 leading-relaxed">
-        {{ $t("about_text")}}
+        {{ $t("about_text") }}
       </p>
     </div>
   </div>
