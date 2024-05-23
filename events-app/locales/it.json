@@ -1,4 +1,16 @@
 {
-    "about_title" : "Chi Siamo?",
-    "about_text": "Questo sito web è stato creato come parte del progetto di maturità di Petr Szalai e Paul Lasry-Robin al Collegio Emilie-Gourd. Lo sviluppo di questo sito è durato oltre un anno. Ha inizialmente coinvolto la creazione di un'API utilizzando Flask e Nginx. Questo progetto è interamente open source ed è disponibile su GitHub."
+    "about_title": "Chi siamo?",
+    "about_text": "Questo sito è stato creato come parte del progetto di maturità di Petr Szalai e Paul Lasry-Robin al College Emilie-Gourd. Lo sviluppo di questo sito è durato oltre un anno. Inizialmente è stata creata un'API utilizzando Flask e Nginx. Questo progetto è completamente open source ed è disponibile su GitHub.",
+    "home_nav": "Home",
+    "about_us_nav": "Chi siamo",
+    "acount_nav": "Account",
+    "signout_nav_btn": "Disconnetti",
+    "signin_nav_btn": "Accedi",
+    "details_btn": "Dettagli",
+    "signup_github": "Registrati con GitHub",
+    "signin_github": "Accedi con GitHub",
+    "signin_welcome": "Bentornato!",
+    "signin_submit_btn": "Invia",
+    "signin_haveAcount": "Non hai ancora un account?",
+    "signin_haveAcount_btn": "Registrati"
 }

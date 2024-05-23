@@ -1,15 +1,16 @@
 <script setup>
+const { t } = useI18n()
 const { status, signIn, signOut } = useAuth()
 const locaPath = useLocalePath()
 
 const itemsSignedIn = ref([
     {
-        label: "Home",
+        label: t('home_nav'),
         to: `${locaPath('/')}`,
         icon: "i-majesticons-home"
     },
     {
-        label : "About us",
+        label : t('about_us_nav'),
         to: `${locaPath('/about')}`,
         icon: "i-mdi-about-circle-outline"
     },
@@ -22,12 +23,12 @@ const itemsSignedIn = ref([
 
 const itemsSignedOut = ref([
     {
-        label: "Home",
+        label: t('home_nav'),
         to: `${locaPath('/')}`,
         icon: "i-majesticons-home"
     },
     {
-        label : "About us",
+        label : t('about_us_nav'),
         to: `${locaPath('/about')}`,
         icon: "i-mdi-about-circle-outline"
     },
@@ -57,14 +58,14 @@ const closeSidebar = () => {
     <div v-if="loggedIn">
         <UVerticalNavigation :links="itemsSignedIn" @click="closeSidebar"/>
         <UButton @click="handleSignOut"
-            label="Sign Out"
+            :label="$t('signout_nav_btn')"
             icon="i-mdi-sign-out"
         />
     </div>
     <div v-else>
         <UVerticalNavigation :links="itemsSignedOut" @click="closeSidebar" class="top-0"></UVerticalNavigation>
         <UButton @click="handleSignIn"
-            label="Sign In"
+            :label="$t('signin_nav_btn')"
             icon="i-mdi-sign-in"
         />
     </div>

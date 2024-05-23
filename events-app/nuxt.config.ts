@@ -31,34 +31,38 @@ export default defineNuxtConfig({
   i18n: {
       lazy: true,
       langDir: "locales",
-      strategy: "prefix_except_default",
+      strategy: "no_prefix",
       locales :[
         {
-          code: "fr-FR",
+          code: "fr",
           iso: "fr-FR",
           name: "Francais",
-          file: "fr.json"
+          file: "fr.json",
+          icon: "twemoji:flag-france"
         },
         {
-          code: "en-EN",
+          code: "en",
           iso: "en-EN",
           name: "English",
-          file: "EN.json"
+          file: "EN.json",
+          icon: "twemoji:flag-united-kingdom"
         },
         {
-          code: "de-DE",
+          code: "de",
           iso: "de-DE",
           name: "Deutsch",
-          file: "DE.json"
+          file: "DE.json",
+          icon: "twemoji:flag-germany"
         },
         {
-          code: "it-IT",
+          code: "it",
           iso: "it-IT",
           name: "Italien",
-          file: "IT.json"
+          file: "IT.json",
+          icon: "twemoji:flag-italy"
         },
       ],
-      defaultLocale: "FR",
+      defaultLocale: "fr",
      
 
   }

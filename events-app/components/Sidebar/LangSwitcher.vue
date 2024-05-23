@@ -1,11 +1,11 @@
 <template>
-  <select v-model="language">
+  <select v-model="language" onchange="window.location.reload()">   
     <option
       v-for="item in locales"
       :key="typeof item === 'object' ? item.code : item"
       :value="typeof item === 'object' ? item.code : item"
     >
-      {{ typeof item === "object" ? item.name : item }}
+      <p>{{ typeof item === "object" ? item.name : item }}</p>
     </option>
   </select>
 </template>

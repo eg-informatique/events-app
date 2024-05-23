@@ -8,6 +8,6 @@ const { signIn } = useAuth()
     @click="signIn('github')"
   >
   <Icon size="25" name="mdi:github" color="black"/>
-    Sign up with Github
+    {{$t("signup_github")}}
   </button>
 </template>

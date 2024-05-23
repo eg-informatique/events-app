@@ -7,7 +7,7 @@
         <p class="font-bold m-4 text-center">{{ $formatDate(event, 'start_datetime') }}</p>
         <template #footer class="items-center">
             <UButton class="text-center" 
-                label="Details"
+                :label="$t('details_btn')"
                 icon="i-mdi-more"
                 :to="`${locaPath('/event/' + `${event.id}`)}`"/>  
         </template> 

@@ -4,7 +4,7 @@ const { signIn } = useAuth()
 
 <template>
   <UButton 
-  label="Log in with Github"
+  :label="$t('signin_github')"
   icon="i-mdi-github"
   variant="outline"
   @click="signIn('github')"

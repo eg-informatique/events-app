@@ -4,7 +4,7 @@
     <UCard>
       <template #header>
         <h1 class="text-xl font-bold leading-tight tracking-tightmd:text-2px">
-          Welcome back
+          {{$t('signin_welcome')}}
         </h1>
         <LoginGitHubLogin class="mt-3" />
       </template>
@@ -15,12 +15,12 @@
         <UFormGroup label="Password" name="password">
           <UInput v-model="state.password" type="password" placeholder="••••••••"/>
         </UFormGroup>
-        <UButton type="submit">Submit</UButton>
+        <UButton type="submit">{{$t("signin_submit_btn")}}</UButton>
       </UForm>
       <template #footer>
         <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-          Do not have an account yet?
-          <NuxtLink to="signup" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up
+          {{$t("signin_haveAcount")}}
+          <NuxtLink to="signup" class="font-medium text-primary-600 hover:underline dark:text-primary-500">{{ $t("signin_haveAcount_btn") }}
           </NuxtLink>
         </p>
       </template>
