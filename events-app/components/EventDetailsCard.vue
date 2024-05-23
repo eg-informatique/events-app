@@ -12,6 +12,13 @@
             <p class="font-bold text-gray-400 col-start-3 mt-1.5">{{ event.prices.minor }} - {{ event.prices.major }} {{ event.prices.currency }}</p>
         </div>
     </UCard>
+
+    <!--Pettttttre, la documentation de <Ucard> ==> https://ui.nuxt.com/components/card et les champs de l'api ==> https://events-api.org/events
+        Si tu veux utiliser un champs de l'api tu fais comme au dessus: event.title par ex. Si tu veuc l'ajouter a de l'HTML comme au dessus tu
+        dois utilise {{  }}
+        MTN tu fais !!!!!!!!!!!!!!!!!!
+    -->
+
     <!--
     <div class="flex flex-col items-center justify-top px-6 py-8 mx-auto h-screen lg:py-0">
         <img class="rounded-md w-[400px] mx-auto " :src="event.img_url">
