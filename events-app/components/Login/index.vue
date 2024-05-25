@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col items-center justify-center mx-auto h-full">
-    <UCard class="max-w-md">
+  <div class="flex items-center justify-center h-full">
+    <UCard class="lg:w-4/12 sm:mx-4">
       <template #header>
         <h1 class="text-xl font-bold leading-tight tracking-tightmd:text-2px">
           {{$t('signin_welcome')}}
@@ -25,7 +25,6 @@
       </template>
     </UCard>
   </div>
-  
 </template>
 
 <script setup lang="ts">

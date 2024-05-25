@@ -26,5 +26,6 @@
     "last_name_validation_len": "Last name must be at most 64 characters long",
     "last_name_validation": "Last name must contain only letters, spaces, hyphens, and apostrophes",
     "email_validation": "Email is not valid",
-    "password_validation": "Password is too short"
+    "password_validation": "Password is too short",
+    "passwords_dont_match": "Passwords do not match"
 }

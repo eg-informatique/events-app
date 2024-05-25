@@ -13,7 +13,7 @@
     "signin_nav_btn": "Connexion",
     "details_btn": "Détails",
     "signup_github": "S'inscrire avec GitHub",
-    "signin_welcome": "Bienvenue de retour !",
+    "signin_welcome": "Bon retour !",
     "signin_submit_btn": "Soumettre",
     "signin_haveAcount": "Vous n'avez pas encore de compte ?",
     "signin_haveAcount_btn": "S'inscrire",
@@ -26,5 +26,6 @@
     "last_name_validation_len": "Le nom de famille doit comporter au maximum 64 caractères",
     "last_name_validation": "Le nom de famille ne doit contenir que des lettres, des espaces, des tirets et des apostrophes",
     "email_validation": "L'e-mail n'est pas valide",
-    "password_validation": "Le mot de passe est trop court"
+    "password_validation": "Le mot de passe est trop court",
+    "passwords_dont_match": "Les mots de passe ne correspondent pas"
 }

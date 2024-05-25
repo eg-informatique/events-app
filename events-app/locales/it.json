@@ -26,5 +26,6 @@
     "last_name_validation_len": "Il cognome deve essere lungo al massimo 64 caratteri",
     "last_name_validation": "Il cognome deve contenere solo lettere, spazi, trattini e apostrofi",
     "email_validation": "L'email non è valida",
-    "password_validation": "La password è troppo corta"
+    "password_validation": "La password è troppo corta",
+    "passwords_dont_match": "Le password non corrispondono"
 }

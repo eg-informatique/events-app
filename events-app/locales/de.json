@@ -26,5 +26,6 @@
     "last_name_validation_len": "Der Nachname darf höchstens 64 Zeichen lang sein",
     "last_name_validation": "Der Nachname darf nur Buchstaben, Leerzeichen, Bindestriche und Apostrophe enthalten",
     "email_validation": "Die E-Mail-Adresse ist ungültig",
-    "password_validation": "Das Passwort ist zu kurz"
+    "password_validation": "Das Passwort ist zu kurz",
+    "passwords_dont_match": "Die Passwörter stimmen nicht überein"
 }
