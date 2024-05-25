@@ -1,4 +1,9 @@
 {
+    "email": "Email",
+    "password": "Password",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "veritfy_password": "Veritfy password",
     "about_title" : "Who Are We?",
     "about_text": "This website was created as part of Petr Szalai and Paul Lasry-Robin's maturity project at Emilie-Gourd College. The development of this site spanned over a year. It first involved crafting an API using Flask and Nginx. This project is entirely open source and is available on GitHub.",
     "home_nav": "Home",
@@ -8,9 +13,18 @@
     "signin_nav_btn": "Sign in",
     "details_btn": "Details",
     "signup_github": "Sign up with GitHub",
-    "signin_github": "Sign in with GitHub",
     "signin_welcome": "Welcome back !",
     "signin_submit_btn": "Submit",
     "signin_haveAcount": "Do not have an account yet?",
-    "signin_haveAcount_btn": "Sign up"
+    "signin_haveAcount_btn": "Sign up",
+    "signin_github": "Sign in with GitHub",
+    "signup_welcome": "Welcome to the app",
+    "signup_error": "Something went wrong",
+    "verify_password": "Verify password",
+    "first_name_validation_len": "First name must be at most 64 characters long",
+    "first_name_validation": "First name must contain only letters, spaces, hyphens, and apostrophes",
+    "last_name_validation_len": "Last name must be at most 64 characters long",
+    "last_name_validation": "Last name must contain only letters, spaces, hyphens, and apostrophes",
+    "email_validation": "Email is not valid",
+    "password_validation": "Password is too short"
 }

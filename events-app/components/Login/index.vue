@@ -1,7 +1,6 @@
-<!--<div class="flex flex-col items-center justify-center  p-y-7 mx-auto h-full lg:py-0">-->
 <template>
   <div class="flex flex-col items-center justify-center mx-auto h-full">
-    <UCard>
+    <UCard class="max-w-md">
       <template #header>
         <h1 class="text-xl font-bold leading-tight tracking-tightmd:text-2px">
           {{$t('signin_welcome')}}
@@ -9,10 +8,10 @@
         <LoginGitHubLogin class="mt-3" />
       </template>
       <UForm :schema="LoginValidationSchemas" :state="state" class="space-y-4" @submit="handleFormSubmit">
-        <UFormGroup label="Email" name="email">
+        <UFormGroup :label="$t('email')" name="email">
           <UInput v-model="state.email" placeholder="exemple@gmail.com"/>
         </UFormGroup>
-        <UFormGroup label="Password" name="password">
+        <UFormGroup :label="$t('password')" name="password">
           <UInput v-model="state.password" type="password" placeholder="••••••••"/>
         </UFormGroup>
         <UButton type="submit">{{$t("signin_submit_btn")}}</UButton>
@@ -26,14 +25,18 @@
       </template>
     </UCard>
   </div>
+  
 </template>
 
 <script setup lang="ts">
-  import { LoginValidationSchemas} from '~/schemas/LoginValidation';
+  import { createLoginValidationSchemas } from '~/schemas/LoginValidation';
   import { z } from 'zod'
   import type { FormSubmitEvent } from '#ui/types'
 
+  const { t } = useI18n()
   const { signIn } = useAuth()
+
+  const LoginValidationSchemas = createLoginValidationSchemas(t)
 
   const state = ref({
     email: undefined,

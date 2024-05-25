@@ -1,7 +1,7 @@
 import { NuxtAuthHandler } from '#auth'
 import GithubProvider from 'next-auth/providers/github'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import { addUser } from '../addUser'
+import { addUser } from '../addUserServer'
 import { randomBytes } from 'crypto'
 
 const randomPassword = (length: number) => {

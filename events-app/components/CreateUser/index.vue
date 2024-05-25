@@ -1,30 +1,79 @@
-<script setup lang="ts">
-import SignUpForm from './SignUpForm.vue';
-</script>
-
 <template>
-    <section>
-      <div class="flex flex-col items-center justify-center  p-y-7 mx-auto h-full lg:py-0">
-        <Logo class="mb-6" />
-        <div
-          class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-100 dark:border-gray-50">
-          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2px">
-              Welcome
-            </h1>
-            
-            <SignUpForm />
-
-            <div class="flex items-center">
-              <div class="bg-gray-900 h-[.125rem] w-full"></div>
-              <p class="mx-8 text-medium text-gray-800">or</p>
-              <div class="bg-gray-800 h-[.125rem] w-full"></div>
-            </div>
-
-            <CreateUserGitHubSignUp />
-            
+  <div class="flex flex-col items-center justify-center mx-auto h-full">
+    <UCard class="max-w-md">
+      <template #header>
+        <h1 class="text-xl font-bold text-color(leading-tight tracking-tightmd:text-2px">
+          {{$t('signup_welcome')}}
+        </h1>
+      </template>
+        <UForm :schema="SignUpValidationSchemas" :state="state" class="space-y-4" @submit="handleFormSubmit">
+          <div v-if="status">
+            <p class="text-red-500">{{ $t('signup_error') }}</p>
           </div>
-        </div>
-      </div>
-    </section>
-  </template>
+          <UFormGroup :label="$t('first_name')" name="first_name">
+            <UInput v-model="state.first_name" placeholder="Harry "></UInput>
+          </UFormGroup>
+          <UFormGroup :label="$t('last_name')" name="last_name">
+            <UInput v-model="state.last_name" placeholder="Potter"></UInput>
+          </UFormGroup>
+          <UFormGroup :label="$t('email')" name="email">
+            <UInput v-model="state.email" placeholder="exemple@gmail.com"></UInput>
+          </UFormGroup>
+          <UFormGroup :label="$t('password')" name="password">
+            <UInput v-model="state.password" type="password" placeholder="••••••••"/>
+          </UFormGroup>
+          <UFormGroup :label="$t('verify_password')" name="verify_password">
+            <UInput v-model="state.verify_password" type="password" placeholder="••••••••"/>
+          </UFormGroup>
+          <UButton type="submit">{{$t("signin_submit_btn")}}</UButton>
+        </UForm>
+        <template #footer>
+          <CreateUserGitHubSignUp></CreateUserGitHubSignUp>
+        </template>
+    </UCard>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { createSignUpValidationSchemas } from '~/schemas/SignupValidation'
+import { z } from 'zod'
+import { addUser } from '~/utils/addUserClient';
+import type { FormSubmitEvent } from '#ui/types'
+
+const status = ref(false)
+
+const { signIn } = useAuth()
+const {t} = useI18n()
+const SignUpValidationSchemas = createSignUpValidationSchemas(t)
+
+const state = ref({
+    first_name: undefined,
+    last_name: undefined,
+    email: undefined,
+    password: undefined,
+    verify_password: undefined
+})
+
+async function handleFormSubmit(event: FormSubmitEvent < z.output < typeof SignUpValidationSchemas >> ) {
+  const user = {
+    first_name: event.data.first_name,
+    last_name: event.data.last_name,
+    email: event.data.email,
+    password: event.data.password
+  }
+  const email = event.data.email
+  const password = event.data.password
+  try {
+    const response = await addUser(user)
+    if (response !== 200 && response !==409) {
+        throw new Error('Failed to create account');
+    }
+    if (response == 409){
+      status.value = true
+    }
+    console.log("ca vient aussi ici")
+  } catch (error) {
+    console.error('error adding user:', error);
+  }
+}
+</script>
