@@ -18,6 +18,7 @@
     "signin_haveAcount": "Vous n'avez pas encore de compte ?",
     "signin_haveAcount_btn": "S'inscrire",
     "signin_github": "Se connecter avec GitHub",
+    "signin_error": "E-mail ou mot de passe invalide",
     "signup_welcome": "Bienvenue dans l'application",
     "signup_error": "Une erreur s'est produite",
     "verify_password": "Vérifier le mot de passe",

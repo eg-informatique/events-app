@@ -23,7 +23,6 @@ export default NuxtAuthHandler({
                     const response = await fetch(`https://events-api.org/user?email=${user.email}`)
                     const data = await response.json()
                     
-
                     if(response.status === 404 || !data.exists) {
                         const newUser = {
                             first_name: '',
@@ -41,7 +40,11 @@ export default NuxtAuthHandler({
                     console.error('Error in signIn callback', error)
                     return false
                 }
-            } else {
+            } 
+            else if(account?.provider === 'credentials' && !user){
+                throw new Error('Invalid email or password')
+            }
+            else {
                 return true
             }
         }

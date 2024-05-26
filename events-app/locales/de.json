@@ -18,6 +18,7 @@
     "signin_haveAcount": "Noch kein Konto?",
     "signin_haveAcount_btn": "Registrieren",
     "signin_github": "Mit GitHub anmelden",
+    "signin_error": "Ungültige E-Mail oder Passwort",
     "signup_welcome": "Willkommen in der App",
     "signup_error": "Etwas ist schief gelaufen",
     "verify_password": "Passwort bestätigen",

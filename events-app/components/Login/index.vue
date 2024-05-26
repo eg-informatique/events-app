@@ -7,6 +7,7 @@
         </h1>
         <LoginGitHubLogin class="mt-3" />
       </template>
+      <p v-if="status" class="text-red-500"> {{ $t('signin_error') }}</p>
       <UForm :schema="LoginValidationSchemas" :state="state" class="space-y-4" @submit="handleFormSubmit">
         <UFormGroup :label="$t('email')" name="email">
           <UInput v-model="state.email" placeholder="exemple@gmail.com"/>
@@ -34,6 +35,7 @@
 
   const { t } = useI18n()
   const { signIn } = useAuth()
+  const status = ref(false)
 
   const LoginValidationSchemas = createLoginValidationSchemas(t)
 
@@ -42,12 +44,23 @@
     password: undefined
   })
 
-  function handleFormSubmit(event: FormSubmitEvent < z.output < typeof LoginValidationSchemas >> ) {
+  async function handleFormSubmit(event: FormSubmitEvent < z.output < typeof LoginValidationSchemas >> ) {
     const email = event.data.email
     const password = event.data.password
-    signIn('credentials', {
-      email,
-      password
-    })
+    try {
+      const result = await signIn('credentials', {
+        redirect: false,
+        email, password
+      })
+      if(result?.error){
+        status.value=true
+      }
+      else if (result?.status==200){
+        window.location.reload()
+      }
+    }catch(error){
+      console.error("Authentification error:", error)
+      status.value = true
+    }
   }
 </script>
