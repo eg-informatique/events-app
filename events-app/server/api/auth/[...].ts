@@ -41,7 +41,8 @@ export default NuxtAuthHandler({
                         const response = await fetch(`https://events-api.org/user?email=${credentials?.email}`)
                         const userData = await response.json()
                         return{
-                            email: userData.user.email
+                            email: userData.user.email,
+                            id: userData.user.id
                         }
                     }
                 } catch(error){

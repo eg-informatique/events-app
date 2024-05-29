@@ -63,8 +63,6 @@ async function handleFormSubmit(event: FormSubmitEvent < z.output < typeof SignU
     email: event.data.email,
     password: event.data.password
   }
-  const email = event.data.email
-  const password = event.data.password
   try {
     const response = await addUser(user)
     if (response !== 200 && response !==409) {
