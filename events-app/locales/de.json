@@ -4,6 +4,7 @@
     "first_name": "Vorname",
     "last_name": "Nachname",
     "veritfy_password": "Passwort bestätigen",
+    "index_loading_error": "Beim Herunterladen ist ein Fehler aufgetreten",
     "about_title" : "Wer sind wir?",
     "about_text": "Diese Website wurde im Rahmen des Reifeprojekts von Petr Szalai und Paul Lasry-Robin am Emilie-Gourd College erstellt. Die Entwicklung dieser Website dauerte über ein Jahr. Zunächst wurde eine API mit Flask und Nginx erstellt. Dieses Projekt ist vollständig Open Source und auf GitHub verfügbar.",
     "home_nav": "Startseite",
@@ -28,5 +29,10 @@
     "last_name_validation": "Der Nachname darf nur Buchstaben, Leerzeichen, Bindestriche und Apostrophe enthalten",
     "email_validation": "Die E-Mail-Adresse ist ungültig",
     "password_validation": "Das Passwort ist zu kurz",
-    "passwords_dont_match": "Die Passwörter stimmen nicht überein"
+    "passwords_dont_match": "Die Passwörter stimmen nicht überein",
+    "events_details_reserve_btn": "Reservieren",
+    "events_details_venue_name":"Veranstaltungsort",
+    "events_details_description": "Beschreibung",
+    "events_details_prices": "Preis",
+    "events_details_dates": "Datum"
 }

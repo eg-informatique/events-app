@@ -4,6 +4,7 @@
     "first_name": "Prénom",
     "last_name": "Nom de famille",
     "veritfy_password": "Vérifier le mot de passe",
+    "index_loading_error": "Une erreur s'est produite lors du téléchargement",
     "about_title" : "Qui sommes-nous ?",
     "about_text": "Ce site a été créé dans le cadre du projet de maturité de Petr Szalai et Paul Lasry-Robin au Collège Emilie-Gourd. Le développement de ce site s'est étalé sur plus d'un an. Il a d'abord impliqué la création d'une API utilisant Flask et Nginx. Ce projet est entièrement open source et est disponible sur GitHub.",
     "home_nav": "Accueil",
@@ -13,7 +14,7 @@
     "signin_nav_btn": "Connexion",
     "details_btn": "Détails",
     "signup_github": "S'inscrire avec GitHub",
-    "signin_welcome": "Bon retour !",
+    "signin_welcome": "Bienvenue de retour !",
     "signin_submit_btn": "Soumettre",
     "signin_haveAcount": "Vous n'avez pas encore de compte ?",
     "signin_haveAcount_btn": "S'inscrire",
@@ -28,5 +29,10 @@
     "last_name_validation": "Le nom de famille ne doit contenir que des lettres, des espaces, des tirets et des apostrophes",
     "email_validation": "L'e-mail n'est pas valide",
     "password_validation": "Le mot de passe est trop court",
-    "passwords_dont_match": "Les mots de passe ne correspondent pas"
+    "passwords_dont_match": "Les mots de passe ne correspondent pas",
+    "events_details_reserve_btn": "Réserver",
+    "events_details_venue_name":"Lieu",
+    "events_details_description": "Description",
+    "events_details_prices": "Prix",
+    "events_details_dates": "Date"
 }

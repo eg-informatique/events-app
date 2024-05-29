@@ -4,6 +4,7 @@
     "first_name": "First name",
     "last_name": "Last name",
     "veritfy_password": "Veritfy password",
+    "index_loading_error": "An error occurred while downloading",
     "about_title" : "Who Are We?",
     "about_text": "This website was created as part of Petr Szalai and Paul Lasry-Robin's maturity project at Emilie-Gourd College. The development of this site spanned over a year. It first involved crafting an API using Flask and Nginx. This project is entirely open source and is available on GitHub.",
     "home_nav": "Home",
@@ -28,5 +29,10 @@
     "last_name_validation": "Last name must contain only letters, spaces, hyphens, and apostrophes",
     "email_validation": "Email is not valid",
     "password_validation": "Password is too short",
-    "passwords_dont_match": "Passwords do not match"
+    "passwords_dont_match": "Passwords do not match",
+    "events_details_reserve_btn": "Reserve",
+    "events_details_venue_name":"Venue",
+    "events_details_description": "Description",
+    "events_details_prices": "Price",
+    "events_details_dates": "Date"
 }
