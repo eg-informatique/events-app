@@ -66,7 +66,7 @@ async function handleFormSubmit(event: FormSubmitEvent < z.output < typeof SignU
   try {
     const response = await addUser(user)
     if (response !== 200 && response !==409) {
-        throw new Error('Failed to create account');
+      status.value = true
     }
     else if (response == 409){
       status.value = true

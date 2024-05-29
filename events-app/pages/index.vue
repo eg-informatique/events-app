@@ -3,7 +3,7 @@
         <Icon name="line-md:loading-twotone-loop" size="80px"/>
     </div>
     <div v-else-if="error" class="flex flex-col items-center justify-center h-full">
-        <p class="text-red-500 font-bold">Une erreur est survenue lors du chargement des données.</p>
+        <p class="text-red-500 font-bold">{{ $t('index_loading_error') }}</p>
     </div>
     <div v-else class="grid lg:grid-cols-4 gap-7">
         <div v-for="event in events">

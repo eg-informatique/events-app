@@ -9,7 +9,6 @@ export const addUser = async (user: Record<string, any>) => {
         });
       return response.status
     } catch (error) {
-      console.error('Error adding user:', error);
-      throw new Error('Error adding user');
+      return error
     }
   };

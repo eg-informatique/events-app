@@ -5,13 +5,13 @@
         </template>
         <div v-if="event.prices.minor===event.prices.major" class="grid grid-cols-3 grid-rows-1 ">
             <p class="text-2xl font-bold mt-3">{{ event.title }}</p>
-            <p class="flex font-bold text-gray-400">{{ event.prices.major }} {{ event.prices.currency }}</p>
+            <p class="flex font-bold text-gray-600 dark:text-gray-400">{{ event.prices.major }} {{ event.prices.currency }}</p>
         </div>
         <div v-else class="grid grid-cols-3 grid-rows-1 ">
             <p class="text-2xl font-bold col-span-2">{{ event.title }}</p>
-            <p class="font-bold text-gray-400 col-start-3 mt-1.5">{{ event.prices.minor }} - {{ event.prices.major }} {{ event.prices.currency }}</p>
+            <p class="font-bold text-gray-600 dark:text-gray-400 col-start-3 mt-1.5">{{ event.prices.minor }} - {{ event.prices.major }} {{ event.prices.currency }}</p>
         </div> 
-        <p class="font-bold text-gray-400">{{ venueData.name }}</p>
+        <p class="font-bold text-gray-600 dark:text-gray-400">{{ venueData.name }}</p>
         <p class="font-bold mt-1.5">{{ $formatShortDate(event, 'start_datetime') }} - {{ $formatShortDate(event, 'end_datetime') }}</p>
         <div class="w-[3/4] break-words md:break-all">
            <p class="font-bold ">{{ event.description }}</p> 
@@ -27,7 +27,7 @@
             <img class="rounded-md w-[350px]" :src="event.img_url">
             <article class="flex-1">
                 <p class="font-bold break-keep text-xl">{{ $t('events_details_description') }} :</p>
-                <p class="font-bold text-gray-300 break-words md:break-normal" v-html="formatDescription(event.description)"></p>
+                <p class="font-bold text-gray-700 dark:text-gray-400 break-words md:break-normal" v-html="formatDescription(event.description)"></p>
             </article>
             <div class="flex-shrink-0">
                 <USkeleton class="h-[300px] w-[450px]" />
@@ -36,20 +36,20 @@
 
         <div class="flex">
             <h1 class="font-bold">{{ $t('events_details_venue_name') }} : </h1>
-            <p class="font-bold text-gray-400 ml-2">{{ venueData.name }}</p>
+            <p class="font-bold text-gray-600 dark:text-gray-400 ml-2">{{ venueData.name }}</p>
         </div>
         <div class="flex mt-1.5">
             <h1 class="font-bold">{{ $t('events_details_dates') }} : </h1>
-            <p class="font-bold ml-2">{{ $formatShortDate(event, 'start_datetime') }} - {{ $formatShortDate(event, 'end_datetime') }}</p>
+            <p class="font-bold ml-2 text-gray-600 dark:text-gray-400">{{ $formatShortDate(event, 'start_datetime') }} - {{ $formatShortDate(event, 'end_datetime') }}</p>
         </div>
         
         <div v-if="event.prices.minor===event.prices.major" class="flex mt-1.5">
             <h1 class="font-bold">{{ $t('events_details_prices') }} : </h1>
-            <p class="flex font-bold text-gray-400">{{ event.prices.major }} {{ event.prices.currency }}</p>
+            <p class="flex font-bold text-gray-600 dark:text-gray-400">{{ event.prices.major }} {{ event.prices.currency }}</p>
         </div>
         <div v-else class="flex mt-1.5">
             <h1 class="font-bold">{{ $t('events_details_prices') }} : </h1>
-            <p class="font-bold text-gray-400 ml-2">{{ event.prices.minor }} - {{ event.prices.major }} {{ event.prices.currency }}</p>
+            <p class="font-bold text-gray-600 dark:text-gray-400 ml-2">{{ event.prices.minor }} - {{ event.prices.major }} {{ event.prices.currency }}</p>
         </div> 
         <template #footer>
             <UButton square :label="$t('events_details_reserve_btn')" class="text-1xl font-bold mt-3" variant="solid"/>
