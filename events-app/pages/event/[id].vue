@@ -1,14 +1,12 @@
 <template>
-    <div v-for="event in events">
-        <EventDetailsCard :event='event'/>
-    </div>
+    <EventDetailsCard :event='event'/>
 </template>
 
 <script setup>
     const { id } = useRoute().params
     const uri = 'https://events-api.org/event/' + id
-    const { data : events } = await useFetch(uri, { key: id })
-    if (!events.value) {
+    const { data : event } = await useFetch(uri, { key: id })
+    if (!event.value) {
         throw createError({statusCode: 404, statusMessage: 'Event not found'})
     }
     definePageMeta({ auth: false })
