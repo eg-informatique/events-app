@@ -3,7 +3,7 @@
         <template #header>
             <img class="rounded-md w-[400px] mx-auto " :src="event.img_url">
         </template>
-        <div v-if="event.prices.minor===event.prices.major">
+        <div v-if="event.prices.minor===event.prices.major" class="grid grid-cols-3 grid-rows-1">
             <p class="text-2xl font-bold mt-3">{{ event.title }}</p>
             <p class="flex font-bold text-gray-400">{{ event.prices.major }} {{ event.prices.currency }}</p>
         </div>
