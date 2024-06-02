@@ -1,7 +1,8 @@
 <template>
     <div>
-        <h1>Vous etes sur le dash board</h1>
+        <h1>Bonjour {{ data.user.name }}</h1>
         <p>{{ data }}</p>
+        <Dashboard/>
     </div>
 </template>
 
