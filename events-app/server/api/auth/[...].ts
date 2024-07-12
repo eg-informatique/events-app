@@ -56,7 +56,6 @@ export default NuxtAuthHandler({
         async signIn({user, account, profile}) {
             if(account?.provider === 'github') {
                 try{
-                    console.log("C'est pas")
                     const response = await fetch(`https://events-api.org/user?email=${user.email}`)
                     const data = await response.json()
                     

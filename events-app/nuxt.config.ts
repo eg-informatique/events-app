@@ -1,16 +1,20 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: ["@sidebase/nuxt-auth", "@nuxt/ui", "@nuxtjs/i18n"],
+
   devtools: { 
     enabled: true 
   },
+
   css: ['~/assets/css/main.css'],
+
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
     },
   },
+
   auth: {
     redirect: {
       login: '/login',
@@ -23,11 +27,13 @@ export default defineNuxtConfig({
         type: 'authjs'
     }
   },
+
   ui: {
     primary: 'green',
     gray: 'cool',
     icons: ['majesticons', 'mdi'],
   },
+
   i18n: {
       lazy: true,
       langDir: "locales",
@@ -65,5 +71,7 @@ export default defineNuxtConfig({
       defaultLocale: "fr",
      
 
-  }
+  },
+
+  compatibilityDate: "2024-07-13"
 })
