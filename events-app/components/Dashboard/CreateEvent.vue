@@ -55,7 +55,7 @@
                     <UInput v-model="state.venue"></UInput>
                 </UFormGroup name="validate">
                 <UButton type="submit">{{$t('create_event_btn')}}</UButton>
-                <UButton type="reset" variant="outline" class="ml-2">{{ $t('create_event_clear_btn') }}</UButton>
+                <UButton type="reset" variant="outline" @click="resetFormState()" class="ml-2">{{ $t('create_event_clear_btn') }}</UButton>
             </UForm>
         </UCard>
     </div>
@@ -67,7 +67,10 @@ import { createEventValidationSchemas } from '~/schemas/CreateEventValidation';
 import { z } from 'zod'
 import type { FormSubmitEvent } from '#ui/types'
 
+
 const { t } = useI18n()
+
+const { email } = defineProps(['email'])
 
 const EventValidatonSchemas = createEventValidationSchemas(t)
 
@@ -84,6 +87,22 @@ const state = ref({
 
 const startDate = ref(new Date())
 const endDate = ref(new Date())
+const eventState = ref(false)
+const eventConflictState = ref(false)
+const eventErrortState = ref(false)
+
+function resetFormState() {
+    state.value = {
+        title: '',
+        start_datetime: '',
+        end_datetime: '',
+        description: '',
+        major_price: 0,
+        minor_price: 0,
+        img: null,
+        venue: ''
+    };
+}
 
 const updateStartDatetime = (date: Date) => {
     state.value.start_datetime = date.toISOString();
@@ -101,15 +120,9 @@ const handleFileChange = (event: Event) => {
     }
 }
 
-const eventState = ref(false)
-const eventConflictState = ref(false)
-const eventErrortState = ref(false)
-
 async function handleFormSubmit(event: FormSubmitEvent<z.output<typeof EventValidatonSchemas>>) {
-    if (!state.value.title || !state.value.start_datetime || !state.value.end_datetime || !state.value.description || !state.value.major_price || !state.value.minor_price || !state.value.venue || !state.value.img) {
-        console.error('All fields are required');
-        return;
-    }
+    const response = await fetch(`https://events-api.org/user?email=${email}`)
+    const userData = await response.json()
 
     const formData = new FormData();
     formData.append('title', state.value.title);
@@ -119,9 +132,10 @@ async function handleFormSubmit(event: FormSubmitEvent<z.output<typeof EventVali
     formData.append('major_price', state.value.major_price.toString());
     formData.append('minor_price', state.value.minor_price.toString());
     formData.append('venue', state.value.venue);
+    formData.append('organizer', userData.user.id)
     
     if (state.value.img) {
-        formData.append('file', state.value.img);  // Assuming state.value.img is a File object
+        formData.append('file', state.value.img);
     } else {
         console.error('No file selected');
         return;
@@ -133,9 +147,7 @@ async function handleFormSubmit(event: FormSubmitEvent<z.output<typeof EventVali
             body: formData,
         });
 
-        // Loguer la réponse brute pour voir ce que le serveur renvoie
         const responseText = await response.text();
-        console.log('Raw response:', responseText);
 
         // Essayer de parser la réponse en JSON
         let data;

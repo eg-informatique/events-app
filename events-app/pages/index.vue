@@ -1,14 +1,14 @@
 <template>
     <div class="parent-container">
-        <div class="right-06">
+        <div class="right-06 mb-3">
             <UPopover mode="hover" :popper="{ placement: 'top-end' }">
-                <UButton color="white" :label="buttonLabel" trailing-icon="i-heroicons-chevron-down-20-solid" />
+                <UButton color="white" :label="$t('home_sort_by_btn')" trailing-icon="i-heroicons-chevron-down-20-solid" />
                 <template #panel="{ close }">
-                    <div class="button-container">
-                        <UButton color="white" :label="$t('home_datesort_asc')" @click="() => changeSortOrder($t('home_datesort_asc'), 'ascending', close)" />
+                    <div class="button-container mb-3">
+                        <UButton :label="$t('home_datesort_asc')" @click="() => changeSortOrder($t('home_datesort_asc'), 'ascending', close)" />
                     </div>
                     <div class="button-container">
-                        <UButton color="white" :label="$t('home_datesort_desc')" @click="() => changeSortOrder($t('home_datesort_desc'), 'descending', close)" />
+                        <UButton :label="$t('home_datesort_desc')" @click="() => changeSortOrder($t('home_datesort_desc'), 'descending', close)" />
                     </div>
                 </template>
             </UPopover>
