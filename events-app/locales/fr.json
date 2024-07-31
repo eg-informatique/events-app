@@ -38,6 +38,7 @@
     "create_event_pageTitle":"Créer un événement",
     "event_created":"Événement créé avec succès !",
     "event_name_conflict":"Ce nom existe déjà",
+    "event_creation_error":"Une erreur s'est produite",
     "create_event_title":"Nom de l'événement",
     "create_event_start":"Date et heure de début",
     "create_event_end":"Date et heure de fin",

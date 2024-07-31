@@ -10,6 +10,9 @@
             <div v-if="eventConflictState" class="mb-5 text-center">
                 <p class="font-bold text-red-400">{{  $t('event_name_conflict') }}</p>
             </div>
+            <div v-if="eventErrortState" class="mb-5 text-center">
+                <p class="font-bold text-red-400">{{  $t('event_creation_error') }}</p>
+            </div>
             <UForm id="form" :state="state" class="space-y-4" :schema="EventValidatonSchemas" @submit="handleFormSubmit">
                 <UFormGroup :label="$t('create_event_title')" name="title">
                     <UInput v-model="state.title"></UInput>
@@ -100,6 +103,7 @@ const handleFileChange = (event: Event) => {
 
 const eventState = ref(false)
 const eventConflictState = ref(false)
+const eventErrortState = ref(false)
 
 async function handleFormSubmit(event: FormSubmitEvent<z.output<typeof EventValidatonSchemas>>) {
     if (!state.value.title || !state.value.start_datetime || !state.value.end_datetime || !state.value.description || !state.value.major_price || !state.value.minor_price || !state.value.venue || !state.value.img) {
@@ -144,8 +148,7 @@ async function handleFormSubmit(event: FormSubmitEvent<z.output<typeof EventVali
         if(response.status==409){
             eventConflictState.value = true
         } else if (!response.ok) {
-            console.error('Error data:', data);
-            throw new Error(data.message || 'Failed to create event');
+            eventErrortState.value = true
         } 
         else {
             eventState.value = true;
