@@ -54,5 +54,8 @@
     "price_validation":"Ungültiger Preis",
     "not_image":"Die Datei muss ein Bild (jpeg, png, jpg oder webp) sein",
     "end_datetime_before_start_datetime":"Das Ende kann nicht vor dem Anfang liegen",
-    "major_under_minor":"Der niedrigste Preis kann nicht höher sein als der höchste Preis"
+    "major_under_minor":"Der niedrigste Preis kann nicht höher sein als der höchste Preis",
+    "home_datesort_desc": "Datum absteigend",
+    "home_datesort_asc": "Datum aufsteigend",
+    "home_sort_by": "Sortieren nach"
 }
