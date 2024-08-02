@@ -67,20 +67,26 @@
             <p class="font-bold text-gray-600 dark:text-gray-400 ml-2">{{ event.prices.minor }} - {{ event.prices.major }} {{ event.prices.currency }}</p>
         </div> 
         <template #footer>
-            <TicketSelector/>
+            <TicketSelector v-if="authenticated" :eventId="event.id"/>
+            <UButton v-else :label="$t('login_to_reserve')" to="/login" />
         </template>
     </UCard>
 </template>
 
 <script setup>
+
     const { $formatShortDate } = useNuxtApp()
     const { event } = defineProps(['event'])
     const venue = await fetch(`https://events-api.org/venue/${event.venue}`)
     const venueData = await venue.json()
-
     const formatDescription = (description) => {
         return description.replace(/\n/g, '<br><br>');
     };
+    const authenticated = ref(false)
+    const { status } = useAuth()
+    if(status.value == 'authenticated'){
+        authenticated.value = true
+    }
 </script>
 
 <style scoped>

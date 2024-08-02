@@ -4,7 +4,7 @@
         <Icon name="line-md:loading-twotone-loop" size="80px"/>
     </div>
     <div v-else-if="error" class="flex flex-col items-center justify-center h-full">
-        <p class="text-red-500 font-bold">{{ $t('index_loading_error') }}</p>
+        <p class="text-red-500 font-bold text-2xl">{{ $t('index_loading_error') }}</p>
     </div>
     <div v-else >
         <div class="parent-container" flex items-end>
@@ -71,7 +71,9 @@ const changeSortOrder = (newLabel, order, close) => {
     sortOrder.value = order;
     close();
 };
-</script>
+const {status} = useAuth()
+console.log(status.value)
+</script> 
 
 <style scoped>
 .parent-container {

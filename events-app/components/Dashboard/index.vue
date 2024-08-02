@@ -9,7 +9,6 @@
     </div>
   </template>
   
-  <script setup>
-  const email = 'example@example.com'
-  </script>
-  
+<script setup>
+    const {email} = defineProps(['email'])
+</script>

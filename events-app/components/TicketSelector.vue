@@ -15,12 +15,34 @@
         </div>
       </template>
     </UPopover>
+    <UAlert v-if="reserveStatusOk"
+      icon="i-heroicons-check-circle"
+      color="primary"
+      variant="solid"
+      :title="$t('reserve_ok')"
+      :description="$t('reserve_ok_description')"
+      class="mt-3"
+    />
+    <UAlert v-if="reserveStatusErr"
+      icon="i-heroicons-exclamation-circle"
+      color="red-400"
+      variant="solid"
+      :title="$t('reserve_ok')"
+      :description="$t('reserve_ok_description')"
+      class="mt-3"
+    />
   </template>
   
   <script setup>
   import { ref } from 'vue'
   
   const ticketCount = ref(1)
+  const reserveStatusOk = ref(false)
+  const reserveStatusErr = ref(false)
+
+  const  eventId = defineProps(["eventId"])
+  
+  const { data, status } = useAuth()
   
   const increaseTickets = () => {
     ticketCount.value++
@@ -33,8 +55,18 @@
   }
   
   const reserve = async (close) => {
-    console.log(ticketCount.value)
-    close()
+    if (status.value == 'authenticated') {
+        const response = await fetch(`https://events-api.org/user?email=${data.value.user.email}`)
+        if (response.ok) {
+            const userData = await response.json()
+            const response2 = await fetch(`https://events-api.org/reserve/${eventId.eventId}/${userData.user.id}/${ticketCount.value}`, {method:'POST'})
+            if(response2.ok){
+              reserveStatusOk.value = true
+            }
+            close()
+        }
+  }
+    
   }
   </script>
   
