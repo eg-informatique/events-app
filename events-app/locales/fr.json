@@ -73,5 +73,6 @@
     "create_venue_phone": "Numéro de téléphone lié au lieu",
     "create_venue_btn": "Soumettre",
     "create_venue_clear_btn": "Réinitialiser",
-    "search_events": "Rechercher des événements"
+    "search_events": "Rechercher des événements",
+    "account_welcome":"Bonjour"
 }

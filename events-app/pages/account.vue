@@ -1,7 +1,7 @@
 <template>
     <div>
-        <h1>Bonjour {{ data.user.name }} !</h1>
-        <p>{{ data }}</p>
+        <p class="font-bold text-2xl mb-4">{{ $t("account_welcome") }} {{ data.user.name }} !</p>
+    
         <Dashboard :email="data.user.email"/>
     </div>
 </template>
