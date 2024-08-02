@@ -72,5 +72,6 @@
     "create_venue_email": "Email del luogo",
     "create_venue_phone": "Numero di telefono del luogo",
     "create_venue_btn": "Invia",
-    "create_venue_clear_btn": "Ripristina"
+    "create_venue_clear_btn": "Ripristina",
+    "search_events": "Cerca eventi"
 }
