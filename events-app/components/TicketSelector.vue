@@ -27,8 +27,8 @@
       icon="i-heroicons-exclamation-circle"
       color="red-400"
       variant="solid"
-      :title="$t('reserve_ok')"
-      :description="$t('reserve_ok_description')"
+      :title="$t('reserve_err')"
+      :description="$t('reserve_err_description')"
       class="mt-3"
     />
   </template>

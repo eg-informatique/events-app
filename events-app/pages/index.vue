@@ -71,8 +71,6 @@ const changeSortOrder = (newLabel, order, close) => {
     sortOrder.value = order;
     close();
 };
-const {status} = useAuth()
-console.log(status.value)
 </script> 
 
 <style scoped>

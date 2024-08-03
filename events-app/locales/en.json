@@ -74,5 +74,15 @@
     "create_venue_btn":"Submit",
     "create_venue_clear_btn":"Reset",
     "search_events": "Search events",
-    "account_welcome":"Hi"
+    "account_welcome":"Hi",
+    "login_to_reserve":"Login in to reserve",
+    "events_details_open_pophover":"Reserve",
+    "event_details_tickets_title":"Choose the number of tickets",
+    "reserve_ok":"Booking confirmed !",
+    "reserve_ok_description":"You will pay with the host, you can manage your reservations in the account section.",
+    "reserve_err":"Something went wrong...",
+    "reserve_err_description":"Retry later, their is an internal error, if the problem persists, contact us.",
+    "validation_required":"Invalid",
+    "validation_invalid_url":"Invalid url",
+    "validation_invalid_email":"Invalid email"
 }
