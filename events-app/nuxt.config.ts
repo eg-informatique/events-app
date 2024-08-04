@@ -63,7 +63,7 @@ export default defineNuxtConfig({
         {
           code: "it",
           iso: "it-IT",
-          name: "Italien",
+          name: "Italiano",
           file: "IT.json",
           icon: "twemoji:flag-italy"
         },

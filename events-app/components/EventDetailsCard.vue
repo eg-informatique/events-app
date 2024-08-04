@@ -68,7 +68,7 @@
         </div> 
         <template #footer>
             <TicketSelector v-if="authenticated" :eventId="event.id"/>
-            <UButton v-else :label="$t('login_to_reserve')" to="/login" />
+            <UButton v-else :label="$t('login_to_reserve')" to="/login" icon="i-mdi-sign-in"/>
         </template>
     </UCard>
 </template>
