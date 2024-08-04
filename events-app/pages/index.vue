@@ -1,88 +1,64 @@
 <template>
-     
-    <div v-if="pending" class="flex flex-col items-center justify-center h-full">
-        <Icon name="line-md:loading-twotone-loop" size="80px"/>
-    </div>
-    <div v-else-if="error" class="flex flex-col items-center justify-center h-full">
-        <p class="text-red-500 font-bold text-2xl">{{ $t('index_loading_error') }}</p>
-    </div>
-    <div v-else >
-        <div class="parent-container" flex items-end>
-                <div class="flex justify-between items-center mb-3 w-full " >
-                    
-                     <UInput
-                        icon="i-heroicons-magnifying-glass-20-solid"
-                        :placeholder="$t('search_events')"
-                        class="search-bar"
-                        variant="none"
-                        size="xl"
-                        v-model="searchQuery"
-                        @input="debouncedFetchEvents"
-                        
-                        >
-                    </UInput>
+  <div v-if="pending" class="flex flex-col items-center justify-center h-full">
+    <Icon name="line-md:loading-twotone-loop" size="80px"/>
+  </div>
+  <div v-else-if="error" class="flex flex-col items-center justify-center h-full">
+    <Icon name="line-md:close-circle" size="80px"/>
+    <p class="text-red-500 font-bold text-1xl">{{ $t('index_loading_error') }}</p>
+  </div>
+  <div v-else >
+    <div class="parent-container" flex items-end>
+      <div class="flex justify-between items-center mb-3 w-full " >
+        <UInput
+          icon="i-heroicons-magnifying-glass-20-solid"
+          :placeholder="$t('search_events')"
+          class="search-bar"
+          variant="none"
+          size="xl"
+          v-model="searchQuery"
+          @change="fetchEvents"
+        >
+        </UInput>
+      </div>
+        <div class="right-06 mb-3" >
+          <UPopover mode="hover" :popper="{ placement: 'top-end' }">
+            <UButton color="white" :label="$t('home_sort_by_btn')" trailing-icon="i-heroicons-chevron-down-20-solid" />
+              <template #panel="{ close }">
+                <div class="button-container mb-3">
+                  <UButton :label="$t('home_datesort_asc')" @click="() => changeSortOrder($t('home_datesort_asc'), 'ascending', close)" />
                 </div>
-                <div class="right-06 mb-3" >
-                    <UPopover mode="hover" :popper="{ placement: 'top-end' }">
-                        <UButton color="white" :label="$t('home_sort_by_btn')" trailing-icon="i-heroicons-chevron-down-20-solid" />
-                        <template #panel="{ close }">
-                            <div class="button-container mb-3">
-                                <UButton :label="$t('home_datesort_asc')" @click="() => changeSortOrder($t('home_datesort_asc'), 'ascending', close)" />
-                          </div>
-                            <div class="button-container">
-                             <UButton :label="$t('home_datesort_desc')" @click="() => changeSortOrder($t('home_datesort_desc'), 'descending', close)" />
-                         </div>
-                      </template>
-                  </UPopover>
-               </div>
-           </div>
-           <div class="grid lg:grid-cols-4 gap-7">     
-            <div v-for="event in sortedEvents" :key="event.id" >
-            <EventCard :event="event" />
-        </div>
-
+                <div class="button-container">
+                  <UButton :label="$t('home_datesort_desc')" @click="() => changeSortOrder($t('home_datesort_desc'), 'descending', close)" />
+                </div>
+              </template>
+          </UPopover>
         </div>
     </div>
+    <div v-if="emptyState" class="flex flex-col items-center justify-center h-full mt-20">
+      <Icon name="line-md:compass-loop" size="80px"/>
+      <p class="text-red-500 font-bold text-1xl">{{ $t("home_no_result") }}</p>
+    </div>
+    <div class="grid lg:grid-cols-4 gap-7">     
+      <div v-for="event in sortedEvents" :key="event.id" >
+        <EventCard :event="event" />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
 import { ref, computed, watch } from 'vue';
 
-
-
 const searchQuery = ref('');
+const emptyState = ref(false)
 
-const { data: events, pending, error } = useLazyFetch('/api/fetchEvents');
+const { data: event, pending, error } = useLazyFetch('/api/fetchEvents');
 definePageMeta({ auth: false });
+const events = event
 
 const buttonLabel = ref("Sort By");
 const sortOrder = ref('ascending');
 
-
-watch(events, (newEvents) => {
-});
-
-const sortedEvents = computed(() => {
-  if (!events.value) return [];
-
-  const filteredEvents = events.value.filter(event => {
-    const searchTarget = `${event.title || ''} ${event.description || ''}`.toLowerCase();
-    return searchTarget.includes(searchQuery.value.toLowerCase());
-  });
-
-
-
-  return filteredEvents.sort((a, b) => {
-    const dateA = new Date(a.start_datetime);
-    const dateB = new Date(b.start_datetime);
-
-    if (sortOrder.value === 'ascending') {
-      return dateA - dateB;
-    } else {
-      return dateB - dateA;
-    }
-  });
-});
 
 const changeSortOrder = (newLabel, order, close) => {
   buttonLabel.value = newLabel;
@@ -90,32 +66,33 @@ const changeSortOrder = (newLabel, order, close) => {
   close();
 };
 
+
 const fetchEvents = async () => {
-  pending.value = true;
-  error.value = null;
-
+  emptyState.value = false
   try {
-    const response = await $fetch('/api/fetchEvents', {
-      query: {
-        search: searchQuery.value,
-        page: 0
-      }
-    });
-
-    events.value = response;
-
+    const response = await fetch(`https://events-api.org/events?search=${searchQuery.value}`);
+    const responseJson = await response.json()
+    console.log(responseJson)
+    if (responseJson.length == 0){
+      console.log("c dedan")
+      emptyState.value = true
+    }
+    events.value = responseJson
+    
   } catch (err) {
-    error.value = err;
-  } finally {
-    pending.value = false;
+    console.error(err)   
   }
 };
 
+watch(searchQuery, fetchEvents);
 
-
-watch(searchQuery,);
-
-fetchEvents();
+const sortedEvents = computed(() => {
+  if (sortOrder.value === 'ascending') {
+    return events.value.sort((a, b) => new Date(a.start_datetime) - new Date(b.start_datetime));
+  } else {
+    return events.value.sort((a, b) => new Date(b.start_datetime) - new Date(a.start_datetime));
+  }
+});
 </script>
 
 <style scoped>
