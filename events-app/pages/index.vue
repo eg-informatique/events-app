@@ -9,12 +9,15 @@
     <div v-else >
         <div class="parent-container" flex items-end>
                 <div class="flex justify-between items-center mb-3 w-full " >
+                    
                      <UInput
                         icon="i-heroicons-magnifying-glass-20-solid"
                         :placeholder="$t('search_events')"
                         class="search-bar"
                         variant="none"
                         size="xl"
+                        v-model="searchQuery"
+                        @input="debouncedFetchEvents"
                         
                         >
                     </UInput>
@@ -43,35 +46,77 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
+
+
+
+const searchQuery = ref('');
 
 const { data: events, pending, error } = useLazyFetch('/api/fetchEvents');
 definePageMeta({ auth: false });
 
-const buttonLabel = ref("Sort By"); 
+const buttonLabel = ref("Sort By");
 const sortOrder = ref('ascending');
 
+
+watch(events, (newEvents) => {
+});
+
 const sortedEvents = computed(() => {
-    if (!events.value) return [];
+  if (!events.value) return [];
 
-    return events.value.slice().sort((a, b) => {
-        const dateA = new Date(a.start_datetime);
-        const dateB = new Date(b.start_datetime);
+  const filteredEvents = events.value.filter(event => {
+    const searchTarget = `${event.title || ''} ${event.description || ''}`.toLowerCase();
+    return searchTarget.includes(searchQuery.value.toLowerCase());
+  });
 
-        if (sortOrder.value === 'ascending') {
-            return dateA - dateB;
-        } else {
-            return dateB - dateA;
-        }
-    });
+
+
+  return filteredEvents.sort((a, b) => {
+    const dateA = new Date(a.start_datetime);
+    const dateB = new Date(b.start_datetime);
+
+    if (sortOrder.value === 'ascending') {
+      return dateA - dateB;
+    } else {
+      return dateB - dateA;
+    }
+  });
 });
 
 const changeSortOrder = (newLabel, order, close) => {
-    buttonLabel.value = newLabel;
-    sortOrder.value = order;
-    close();
+  buttonLabel.value = newLabel;
+  sortOrder.value = order;
+  close();
 };
-</script> 
+
+const fetchEvents = async () => {
+  pending.value = true;
+  error.value = null;
+
+  try {
+    const response = await $fetch('/api/fetchEvents', {
+      query: {
+        search: searchQuery.value,
+        page: 0
+      }
+    });
+
+    events.value = response;
+
+  } catch (err) {
+    error.value = err;
+  } finally {
+    pending.value = false;
+  }
+};
+
+
+
+watch(searchQuery,);
+
+fetchEvents();
+</script>
 
 <style scoped>
 .parent-container {
