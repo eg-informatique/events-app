@@ -38,7 +38,7 @@
       <Icon name="line-md:compass-loop" size="80px"/>
       <p class="text-red-500 font-bold text-1xl">{{ $t("home_no_result") }}</p>
     </div>
-    <div class="grid lg:grid-cols-4 gap-7">     
+    <div class="grid lg:grid-cols-3 gap-7">     
       <div v-for="event in sortedEvents" :key="event.id" >
         <EventCard :event="event" />
       </div>
