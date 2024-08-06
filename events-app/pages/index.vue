@@ -17,8 +17,7 @@
           size="xl"
           v-model="searchQuery"
           @change="fetchEvents"
-        >
-        </UInput>
+        />
       </div>
         <div class="right-06 mb-3" >
           <UPopover mode="hover" :popper="{ placement: 'top-end' }">
@@ -72,7 +71,6 @@ const fetchEvents = async () => {
   try {
     const response = await fetch(`https://events-api.org/events?search=${searchQuery.value}`);
     const responseJson = await response.json()
-    console.log(responseJson)
     if (responseJson.length == 0){
       console.log("c dedan")
       emptyState.value = true
