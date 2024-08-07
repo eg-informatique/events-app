@@ -15,7 +15,7 @@ const itemsSignedIn = ref([
         icon: "i-mdi-about-circle-outline"
     },
     {
-        label:'Acount',
+        label:t('acount_nav'),
         to:`${locaPath('/account')}`,
         icon:'i-mdi-account'
     }

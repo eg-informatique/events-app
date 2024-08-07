@@ -52,8 +52,16 @@
                     <input type="file" @change="handleFileChange"></input>
                 </UFormGroup>
                 <UFormGroup :label="$t('create_event_venue')" name="venue">
-                    <UInput v-model="state.venue"></UInput>
-                </UFormGroup name="validate">
+                    <UPopover :popper="{ placement: 'top-end', arrow:true }" v-model="state.venue">
+                        <UButton :label="$t('createEvent_search_venue')" trailing-icon="i-heroicons-chevron-down-20-solid" />
+                        <template #panel="{ close }">
+                            <div class="flex flex-col items-center space-y-2 p-4 rounded max-w-full sm:max-w-sm">
+                            <VenuePicker @venue-selected="updateVenueId"/>
+                            <UButton label="Validate" @click="close" /> 
+                            </div>
+                        </template>    
+                    </UPopover>
+                </UFormGroup>
                 <UButton type="submit">{{$t('create_event_btn')}}</UButton>
                 <UButton type="reset" variant="outline" @click="resetFormState()" class="ml-2">{{ $t('create_event_clear_btn') }}</UButton>
             </UForm>
@@ -111,6 +119,11 @@ const updateStartDatetime = (date: Date) => {
 const updateEndDatetime = (date: Date) => {
     state.value.end_datetime = date.toISOString();
 }
+
+const updateVenueId = (venueId) => {
+  state.value.venue = venueId;  // Met à jour l'ID de la venue sélectionnée
+  console.log(venueId)
+};
 
 const handleFileChange = (event: Event) => {
     const input = event.target as HTMLInputElement;
