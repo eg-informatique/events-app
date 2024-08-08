@@ -25,7 +25,8 @@ export default defineNuxtConfig({
     globalAppMiddleware: true,
     provider: {
         type: 'authjs'
-    }
+    },
+    origin:'https://swiss-events.org'
   },
 
   ui: {
