@@ -16,6 +16,7 @@ export default defineNuxtConfig({
   },
 
   auth: {
+    baseURL: 'https://swiss-events.org',
     redirect: {
       login: '/login',
       logout: '/',
@@ -26,7 +27,7 @@ export default defineNuxtConfig({
     provider: {
         type: 'authjs'
     },
-    origin:'https://swiss-events.org'
+  
   },
 
   ui: {
@@ -70,8 +71,6 @@ export default defineNuxtConfig({
         },
       ],
       defaultLocale: "fr",
-     
-
   },
 
   compatibilityDate: "2024-07-13"
