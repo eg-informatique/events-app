@@ -50,21 +50,21 @@ export default defineNuxtConfig({
           code: "en",
           iso: "en-EN",
           name: "English",
-          file: "EN.json",
+          file: "en.json",
           icon: "twemoji:flag-united-kingdom"
         },
         {
           code: "de",
           iso: "de-DE",
           name: "Deutsch",
-          file: "DE.json",
+          file: "de.json",
           icon: "twemoji:flag-germany"
         },
         {
           code: "it",
           iso: "it-IT",
           name: "Italiano",
-          file: "IT.json",
+          file: "it.json",
           icon: "twemoji:flag-italy"
         },
       ],
