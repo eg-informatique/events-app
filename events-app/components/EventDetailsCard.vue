@@ -30,7 +30,8 @@
         </div>
 
         <template #footer>
-            <TicketSelector/>
+            <TicketSelector v-if="authenticated" :eventId="event.id"/>
+            <UButton v-else :label="$t('login_to_reserve')" to="/login" icon="i-mdi-sign-in"/>
         </template>
     </UCard>
 
