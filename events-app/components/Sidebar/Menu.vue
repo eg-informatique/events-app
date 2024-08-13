@@ -60,6 +60,7 @@ const closeSidebar = () => {
         <UButton @click="handleSignOut"
             :label="$t('signout_nav_btn')"
             icon="i-mdi-sign-out"
+            class="ml-2 mt-1"
         />
     </div>
     <div v-else>
@@ -67,6 +68,7 @@ const closeSidebar = () => {
         <UButton @click="handleSignIn"
             :label="$t('signin_nav_btn')"
             icon="i-mdi-sign-in"
+            class="ml-2 mt-1"
         />
     </div>
 </template>
