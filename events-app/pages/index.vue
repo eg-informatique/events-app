@@ -42,11 +42,23 @@
         <EventCard :event="event" />
       </div>
     </div>
+    <div class="flex justify-center mt-7">
+      <UPagination
+        v-model="page"
+        :page-count="12"
+        :total="nb_events_data"
+        @click="fetchEvents"
+      />
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, watch } from 'vue';
+
+const nb_events = await fetch('https://events-api.org/nb_events')
+const nb_events_data = await nb_events.json()
+const page = ref(1)
 
 const searchQuery = ref('');
 const emptyState = ref(false)
@@ -69,7 +81,7 @@ const changeSortOrder = (newLabel, order, close) => {
 const fetchEvents = async () => {
   emptyState.value = false
   try {
-    const response = await fetch(`https://events-api.org/events?search=${searchQuery.value}`);
+    const response = await fetch(`https://events-api.org/events?search=${searchQuery.value}&page=${page.value-1}`);
     const responseJson = await response.json()
     if (responseJson.length == 0){
       console.log("c dedan")
@@ -82,7 +94,7 @@ const fetchEvents = async () => {
   }
 };
 
-watch(searchQuery, fetchEvents);
+watch(searchQuery, page, fetchEvents);
 
 const sortedEvents = computed(() => {
   if (sortOrder.value === 'ascending') {
