@@ -19,19 +19,22 @@
           @change="fetchEvents"
         />
       </div>
-        <div class="right-06 mb-3" >
-          <UPopover mode="hover" :popper="{ placement: 'top-end' }">
-            <UButton color="white" :label="$t('home_sort_by_btn')" trailing-icon="i-heroicons-chevron-down-20-solid" />
-              <template #panel="{ close }">
-                <div class="button-container mb-3">
-                  <UButton :label="$t('home_datesort_asc')" @click="() => changeSortOrder($t('home_datesort_asc'), 'ascending', close)" />
-                </div>
-                <div class="button-container">
-                  <UButton :label="$t('home_datesort_desc')" @click="() => changeSortOrder($t('home_datesort_desc'), 'descending', close)" />
-                </div>
-              </template>
-          </UPopover>
-        </div>
+      <div class="right-7 mb-1" >
+        <UButton v-if="authenticated" :label="$t('home_create_event')" to="/account" icon="i-mdi-plus" class="mb-2"/>
+        <UButton v-else :label="$t('home_create_event')" to="/login" icon="i-mdi-sign-in" class="mb-2"/>
+
+        <UPopover mode="hover" :popper="{ placement: 'top-end' }">
+          <UButton :label="$t('home_sort_by_btn')" trailing-icon="i-heroicons-chevron-down-20-solid" />
+            <template #panel="{ close }">
+              <div class="button-container mb-3">
+                <UButton :label="$t('home_datesort_asc')" @click="() => changeSortOrder($t('home_datesort_asc'), 'ascending', close)" />
+              </div>
+              <div class="button-container">
+                <UButton :label="$t('home_datesort_desc')" @click="() => changeSortOrder($t('home_datesort_desc'), 'descending', close)" />
+              </div>
+            </template>
+        </UPopover>
+      </div>
     </div>
     <div v-if="emptyState" class="flex flex-col items-center justify-center h-full mt-20">
       <Icon name="line-md:compass-loop" size="80px"/>
@@ -55,6 +58,12 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue';
+
+const authenticated = ref(false)
+const { status } = useAuth()
+if(status.value == 'authenticated'){
+    authenticated.value = true
+}
 
 const nb_events = await fetch('https://events-api.org/nb_events')
 const nb_events_data = await nb_events.json()

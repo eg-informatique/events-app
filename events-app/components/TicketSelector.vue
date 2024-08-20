@@ -11,7 +11,7 @@
             <UInput v-model.number="ticketCount" type="number" min="0" class="u-input" />
             <UButton @click="increaseTickets" label="+" />
           </div>
-          <UButton :label="$t('events_details_reserve_btn')" class="text-1xl font-bold mt-3" @click="reserve(close)" />
+          <UButton :label="$t('events_details_reserve_btn')" icon="i-mdi-account-plus" class="text-1xl font-bold mt-3" @click="reserve(close)"/>
         </div>
       </template>
     </UPopover>
