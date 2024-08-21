@@ -1,4 +1,4 @@
-<!-- components/TicketSelector.vue -->
+
 <template>
     <UPopover :popper="{ placement: 'bottom-start' }">
       <UButton :label="$t('events_details_open_pophover')" trailing-icon="i-heroicons-chevron-down-20-solid" class="text-1xl font-bold mt-3" variant="solid" />

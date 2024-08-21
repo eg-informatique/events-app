@@ -87,5 +87,16 @@
     "reserve_err_description":"Réessayez plus tard, il y a une erreur interne, si le problème persiste, contactez-nous.",
     "validation_required":"Invalide",
     "validation_invalid_url":"Url invalide",
-    "validation_invalid_email":"Email invalide"
+    "validation_invalid_email":"Email invalide",
+    "show_event": "Créer un événement",
+    "show_venue": "Créer un lieu",
+    "no_reserved_events": "Vous n'êtes inscrit à aucun événement",
+    "edit_reservation": "Modifier la réservation",
+    "account_hide": "Masquer les événements",
+    "account_show": "Afficher les événements",
+    "dashoard_desc_register_events": "Événements auxquels vous êtes inscrit",
+    "dashboard_desc_creation": "Créer un événement et un lieu",
+    "dashboard_desc_creation_deep": "Vous pouvez créer un événement, mais vous devez créer un lieu s'il n'existe pas dans notre base de données (vous pouvez vérifier dans le formulaire de création d'événement)",
+    "or": "Ou",
+    "no_event_register":"Vous n'êtes inscrit à aucun événement, créez-les !!"
 }

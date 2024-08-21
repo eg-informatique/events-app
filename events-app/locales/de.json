@@ -87,5 +87,16 @@
     "reserve_err_description":"Versuchen Sie es später erneut, es liegt ein interner Fehler vor, wenn das Problem weiterhin besteht, kontaktieren Sie uns.",
     "validation_required":"Ungültig",
     "validation_invalid_url":"Ungültige Url",
-    "validation_invalid_email":"Ungültige E-Mail"
+    "validation_invalid_email":"Ungültige E-Mail",
+    "show_event": "Ereignis erstellen",
+    "show_venue": "Veranstaltungsort erstellen",
+    "no_reserved_events": "Sie sind für keine Veranstaltungen angemeldet",
+    "edit_reservation": "Reservierung bearbeiten",
+    "account_hide": "Veranstaltungen ausblenden",
+    "account_show": "Veranstaltungen anzeigen",
+    "dashoard_desc_register_events": "Veranstaltungen, für die Sie angemeldet sind",
+    "dashboard_desc_creation": "Veranstaltung und Veranstaltungsort erstellen",
+    "dashboard_desc_creation_deep": "Sie können eine Veranstaltung erstellen, aber Sie müssen einen Veranstaltungsort erstellen, wenn dieser nicht in unserer Datenbank vorhanden ist (Sie können dies im Erstellungsformular der Veranstaltung überprüfen)",
+    "or": "Oder",
+    "no_event_register":"Sie sind für keine Veranstaltungen registriert, erstellen Sie sie !!"
 }

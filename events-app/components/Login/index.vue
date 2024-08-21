@@ -1,12 +1,12 @@
 <template>
   <div class="flex items-center justify-center h-full">
     <UCard class="lg:w-4/12 sm:mx-4">
-      <template #header>
+      
         <h1 class="text-xl font-bold leading-tight tracking-tightmd:text-2px">
           {{$t('signin_welcome')}}
         </h1>
         <LoginGitHubLogin class="mt-3" />
-      </template>
+      <UDivider :label="$t('or')"/>
       <p v-if="status" class="text-red-500"> {{ $t('signin_error') }}</p>
       <UForm :schema="LoginValidationSchemas" :state="state" class="space-y-4" @submit="handleFormSubmit">
         <UFormGroup :label="$t('email')" name="email">

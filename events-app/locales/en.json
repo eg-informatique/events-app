@@ -9,6 +9,7 @@
     "about_title" : "Who Are We?",
     "about_text": "This website was created as part of Petr Szalai and Paul Lasry-Robin's maturity project at Emilie-Gourd College. The development of this site spanned over a year. It first involved crafting an API using Flask and Nginx. This project is entirely open source and is available on GitHub.",
     "home_nav": "Home",
+    "home_create_event":"Create event",
     "about_us_nav": "About us",
     "acount_nav": "Acount",
     "signout_nav_btn": "Sign out",
@@ -87,5 +88,16 @@
     "reserve_err_description":"Retry later, their is an internal error, if the problem persists, contact us.",
     "validation_required":"Invalid",
     "validation_invalid_url":"Invalid url",
-    "validation_invalid_email":"Invalid email"
+    "validation_invalid_email":"Invalid email",
+    "show_event":"Create an event",
+    "show_venue":"Create a venue",
+    "no_reserved_events":"You are not registered for any events",
+    "edit_reservation":"Edit reservation",
+    "account_hide":"Hide events",
+    "account_show":"Show events",
+    "dashoard_desc_register_events":"Events for which you are registered ",
+    "dashboard_desc_creation":"Create event and venue",
+    "dashboard_desc_creation_deep":"You can create an event, but you have to create a venue if it doesn't exists in our database (you can check in the event creation form)", 
+    "or":"Or",
+    "no_event_register":"You are not registered for any events, create them !!"
 }

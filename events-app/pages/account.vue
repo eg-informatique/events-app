@@ -1,7 +1,6 @@
 <template>
     <div>
-        <p class="font-bold text-2xl mb-4">{{ $t("account_welcome") }} {{ data.user.name }} !</p>
-    
+        <p class="font-bold text-3xl mb-4">{{ $t("account_welcome") }} {{ data.user.name }} !</p>
         <Dashboard :email="data.user.email"/>
     </div>
 </template>
