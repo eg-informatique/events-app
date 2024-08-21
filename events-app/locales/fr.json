@@ -98,5 +98,6 @@
     "dashboard_desc_creation": "Créer un événement et un lieu",
     "dashboard_desc_creation_deep": "Vous pouvez créer un événement, mais vous devez créer un lieu s'il n'existe pas dans notre base de données (vous pouvez vérifier dans le formulaire de création d'événement)",
     "or": "Ou",
-    "no_event_register":"Vous n'êtes inscrit à aucun événement, créez-les !!"
+    "no_event_register":"Vous n'êtes inscrit à aucun événement, créez-les !!",
+    "home_create_event":"Créer un événement"
 }
