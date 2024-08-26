@@ -11,6 +11,7 @@
       </p>
     </div>
   </div>
+  <DatePicker v-model="date" mode="dateTime" is24hr is-required/>
 </template>
 <script setup>
   useHead({
@@ -19,6 +20,8 @@
   definePageMeta({
     auth: false
   })
+  
+  const date = ref(new Date())
 </script>
 
 <style scoped>

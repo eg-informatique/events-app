@@ -56,19 +56,39 @@ const closeSidebar = () => {
         <p class="font-bold">Events manager</p>
     </header>
     <div v-if="loggedIn">
-        <UVerticalNavigation :links="itemsSignedIn" @click="closeSidebar"/>
-        <UButton @click="handleSignOut"
-            :label="$t('signout_nav_btn')"
-            icon="i-mdi-sign-out"
-            class="ml-2 mt-1"
-        />
+        <div class="lg:hidden">
+            <UVerticalNavigation :links="itemsSignedIn" @click="closeSidebar"/>
+            <UButton @click="handleSignOut"
+                :label="$t('signout_nav_btn')"
+                icon="i-mdi-sign-out"
+                class="ml-2 mt-1"
+            />
+        </div>
+        <div class="hidden lg:block">
+            <UHorizontalNavigation :links="itemsSignedIn"/>
+            <UButton @click="handleSignOut"
+                :label="$t('signout_nav_btn')"
+                icon="i-mdi-sign-out"
+                class="ml-2 mt-1"
+            />
+        </div>
     </div>
     <div v-else>
-        <UVerticalNavigation :links="itemsSignedOut" @click="closeSidebar" class="top-0"></UVerticalNavigation>
-        <UButton @click="handleSignIn"
-            :label="$t('signin_nav_btn')"
-            icon="i-mdi-sign-in"
-            class="ml-2 mt-1"
-        />
+        <div class="lg:hidden">
+            <UVerticalNavigation :links="itemsSignedOut" @click="closeSidebar" class="top-0"></UVerticalNavigation>
+            <UButton @click="handleSignIn"
+                :label="$t('signin_nav_btn')"
+                icon="i-mdi-sign-in"
+                class="ml-2 mt-1"
+            />
+        </div>
+        <div class="hidden lg:block">
+            <UHorizontalNavigation :links="itemsSignedOut"/>
+            <UButton @click="handleSignIn"
+                :label="$t('signin_nav_btn')"
+                icon="i-mdi-sign-in"
+                class="ml-2 mt-1"
+            />
+        </div>
     </div>
 </template>

@@ -22,13 +22,14 @@
                 <SidebarLangSwitcher/>
             </div>
         </div>
-        <div class="hidden lg:flex fixed top-0 left-0 w-[190px] h-screen flex-col justify-between border-r dark:border-gray-800 z-50">
-            <div class="w-full">
+        <div class="hidden lg:flex fixed top-0 left-0 w-full h-[80px] flex-row justify-between border-b dark:border-gray-800 z-50">
+            <div class="w-full flex items-center">
                 <SidebarMenu/>
             </div>
-            <div class="absolute left-1 bottom-0 w-[80px]">
+            <div class="absolute right-1 bottom-0 w-[190px] flex items-center justify-end">
                 <SidebarLangSwitcher/>
             </div>
         </div>
+
     </div>
 </template>

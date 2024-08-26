@@ -10,18 +10,18 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['update:model-value', 'close'])
+const emit = defineEmits(['change:model-value', 'close'])
 
 const date = computed({
   get: () => props.modelValue,
   set: (value) => {
-    emit('update:model-value', value)
+    emit('change:model-value', value)
     emit('close')
   }
 })
 
 const attrs = {
-  transparent: true,
+  transparent: false,
   borderless: true,
   color: 'primary',
   'is-dark': { selector: 'html', darkClass: 'dark' },

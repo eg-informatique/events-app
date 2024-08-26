@@ -1,12 +1,6 @@
 <template>
-  <div v-if="pending" class="flex flex-col items-center justify-center h-full">
-    <Icon name="line-md:loading-twotone-loop" size="80px"/>
-  </div>
-  <div v-else-if="error" class="flex flex-col items-center justify-center h-full">
-    <Icon name="line-md:close-circle" size="80px"/>
-    <p class="text-red-500 font-bold text-1xl">{{ $t('index_loading_error') }}</p>
-  </div>
-  <div v-else >
+
+  <div>
     <div class="parent-container" flex items-end>
       <div class="flex justify-between items-center mb-3 w-full " >
         <UInput
@@ -40,10 +34,13 @@
       <Icon name="line-md:compass-loop" size="80px"/>
       <p class="text-red-500 font-bold text-1xl">{{ $t("home_no_result") }}</p>
     </div>
-    <div class="grid lg:grid-cols-3 gap-7">     
-      <div v-for="event in sortedEvents" :key="event.id" >
-        <EventCard :event="event" />
+    <div class="flex">
+      <div class="grid lg:grid-cols-3 gap-7 flex-grow">     
+        <div v-for="event in events" :key="event.id" >
+          <EventCard :event="event" />
+        </div>
       </div>
+      <DatePicker v-model="date" class="sticky top-0 flex-shrink-0 self-start ml-5 " mode="date" is24hr is-required @update:modelValue="updateDate"/>
     </div>
     <div class="flex justify-center mt-7">
       <UPagination
@@ -59,6 +56,9 @@
 <script setup>
 import { ref, computed, watch } from 'vue';
 
+definePageMeta({ auth: false });
+const route = useRoute()
+const router = useRouter()
 const authenticated = ref(false)
 const { status } = useAuth()
 if(status.value == 'authenticated'){
@@ -72,28 +72,36 @@ const page = ref(1)
 const searchQuery = ref('');
 const emptyState = ref(false)
 
-const { data: event, pending, error } = useLazyFetch('/api/fetchEvents');
-definePageMeta({ auth: false });
-const events = event
-
 const buttonLabel = ref("Sort By");
 const sortOrder = ref('ascending');
+const date = ref(new Date())
+const events = ref({})
 
+const response = await fetch(`https://events-api.org/events?search=${searchQuery.value}&page=${page.value-1}&d=${route.query['d']}&sort=${sortOrder.value}`);
+events.value = await response.json()
+
+
+const updateDate = (date) => {
+  console.log(date)
+  const dateOnly = date.toISOString().split('T')[0]
+  console.log(dateOnly)
+  router.push({path:'/', query: {d: dateOnly}})
+  fetchEvents()
+}
 
 const changeSortOrder = (newLabel, order, close) => {
   buttonLabel.value = newLabel;
   sortOrder.value = order;
+  fetchEvents()
   close();
 };
-
 
 const fetchEvents = async () => {
   emptyState.value = false
   try {
-    const response = await fetch(`https://events-api.org/events?search=${searchQuery.value}&page=${page.value-1}`);
+    const response = await fetch(`https://events-api.org/events?search=${searchQuery.value}&page=${page.value-1}&d=${route.query['d']}&sort=${sortOrder.value}`);
     const responseJson = await response.json()
     if (responseJson.length == 0){
-      console.log("c dedan")
       emptyState.value = true
     }
     events.value = responseJson
@@ -103,15 +111,7 @@ const fetchEvents = async () => {
   }
 };
 
-watch(searchQuery, page, fetchEvents);
-
-const sortedEvents = computed(() => {
-  if (sortOrder.value === 'ascending') {
-    return events.value.sort((a, b) => new Date(a.start_datetime) - new Date(b.start_datetime));
-  } else {
-    return events.value.sort((a, b) => new Date(b.start_datetime) - new Date(a.start_datetime));
-  }
-});
+watch(searchQuery, page, sortOrder, fetchEvents);
 </script>
 
 <style scoped>
