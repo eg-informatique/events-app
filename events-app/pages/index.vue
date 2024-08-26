@@ -1,5 +1,4 @@
 <template>
-
   <div>
     <div class="parent-container" flex items-end>
       <div class="flex justify-between items-center mb-3 w-full " >
@@ -40,7 +39,17 @@
           <EventCard :event="event" />
         </div>
       </div>
-      <DatePicker v-model="date" class="sticky top-0 flex-shrink-0 self-start ml-5 " mode="date" is24hr is-required @update:modelValue="updateDate"/>
+      <UPopover :popper="{ placement: 'bottom-start' }" overlay class="block lg:hidden">
+          <UButton icon="i-heroicons-calendar-days-20-solid"/>
+          <template #panel="{ close }">
+              <div class="flex flex-col items-center space-y-2">
+                <DatePicker v-model="date" mode="date" is24hr is-required @update:modelValue="updateDate"/> 
+              </div>
+          </template>
+      </UPopover>
+      <div class="hidden lg:block">
+        <DatePicker v-model="date" class="hidden lg:sticky top-0 flex-shrink-0 self-start ml-5" mode="date" is24hr is-required @update:modelValue="updateDate"/>
+      </div>
     </div>
     <div class="flex justify-center mt-7">
       <UPagination

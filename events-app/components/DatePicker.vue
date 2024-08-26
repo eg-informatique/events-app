@@ -10,12 +10,12 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['change:model-value', 'close'])
+const emit = defineEmits(['update:model-value', 'close'])
 
 const date = computed({
   get: () => props.modelValue,
   set: (value) => {
-    emit('change:model-value', value)
+    emit('update:model-value', value)
     emit('close')
   }
 })
