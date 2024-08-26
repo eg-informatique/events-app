@@ -94,7 +94,7 @@ const updateDate = (date) => {
   console.log(date)
   const dateOnly = date.toISOString().split('T')[0]
   console.log(dateOnly)
-  router.push({path:'/', query: {d: dateOnly}})
+  router.replace({path:'/', query: {d: dateOnly}})
   fetchEvents()
 }
 
