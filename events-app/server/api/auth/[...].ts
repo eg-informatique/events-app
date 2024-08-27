@@ -3,6 +3,7 @@ import GithubProvider from 'next-auth/providers/github'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { addUser } from '../addUserServer'
 import { randomBytes } from 'crypto'
+import jwt from 'jsonwebtoken'
 
 const randomPassword = (length: number) => {
     return randomBytes(Math.ceil(length / 2))
@@ -83,6 +84,16 @@ export default NuxtAuthHandler({
             else {
                 return true
             }
+        },
+        async jwt({ token, user }) {
+            if (user) {
+                token.jwt = jwt.sign({ email: user.email }, 'polosecrets', { expiresIn: '1h' });
+            }
+            return token;
+        },
+        async session({ session, token }) {
+            session.jwt = token.jwt;
+            return session;
         }
     }
 })
