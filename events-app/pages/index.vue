@@ -50,8 +50,10 @@
       </UPopover>
       <div class="hidden lg:block ml-5">
         <ClientOnly>
-          <DatePicker v-model="date" class="top-0 flex-shrink-0 self-start" mode="date" is24hr is-required @update:modelValue="updateDate"/>
-          <UButton :label="$t('home_all_btn')" class="mt-2" @click="dateToNull"/>
+          <div class="flex flex-col">
+            <DatePicker v-model="date" class="top-0 flex-shrink-0 self-start" mode="date" is24hr is-required @update:modelValue="updateDate"/>
+            <UButton :label="$t('home_all_btn')" class="mt-2 text-center" block @click="dateToNull"/>
+          </div>
         </ClientOnly>
       </div>
     </div>
