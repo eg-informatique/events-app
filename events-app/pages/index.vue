@@ -44,11 +44,15 @@
           <template #panel="{ close }">
               <div class="flex flex-col items-center space-y-2">
                 <DatePicker v-model="date" mode="date" is24hr is-required @update:modelValue="updateDate"/> 
+                <UButton :label="$t('home_all_btn')" class="mb-2" @click="dateToNull"/>
               </div>
           </template>
       </UPopover>
-      <div class="hidden lg:block">
-        <DatePicker v-model="date" class="hidden lg:sticky top-0 flex-shrink-0 self-start ml-5" mode="date" is24hr is-required @update:modelValue="updateDate"/>
+      <div class="hidden lg:block ml-5">
+        <ClientOnly>
+          <DatePicker v-model="date" class="top-0 flex-shrink-0 self-start" mode="date" is24hr is-required @update:modelValue="updateDate"/>
+          <UButton :label="$t('home_all_btn')" class="mt-2" @click="dateToNull"/>
+        </ClientOnly>
       </div>
     </div>
     <div class="flex justify-center mt-7">
@@ -63,11 +67,9 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue';
+import { ref, watch } from 'vue';
 
 definePageMeta({ auth: false });
-const route = useRoute()
-const router = useRouter()
 const authenticated = ref(false)
 const { status } = useAuth()
 if(status.value == 'authenticated'){
@@ -83,18 +85,18 @@ const emptyState = ref(false)
 
 const buttonLabel = ref("Sort By");
 const sortOrder = ref('ascending');
-const date = ref(new Date())
+const date = ref(new Date().toISOString().split('T')[0])
+const dateOnly = ref('')
 const events = ref({})
 
-const response = await fetch(`https://events-api.org/events?search=${searchQuery.value}&page=${page.value-1}&d=${route.query['d']}&sort=${sortOrder.value}`);
+const response = await fetch(`https://events-api.org/events?search=${searchQuery.value}&page=${page.value-1}&sort=${sortOrder.value}`);
 events.value = await response.json()
 
 
+
 const updateDate = (date) => {
-  console.log(date)
-  const dateOnly = date.toISOString().split('T')[0]
-  console.log(dateOnly)
-  router.replace({path:'/', query: {d: dateOnly}})
+  dateOnly.value = date.toISOString().split('T')[0]
+  console.log(dateOnly.value)
   fetchEvents()
 }
 
@@ -105,19 +107,41 @@ const changeSortOrder = (newLabel, order, close) => {
   close();
 };
 
+const dateToNull = () => {
+  dateOnly.value = null
+  fetchEvents()
+}
+
 const fetchEvents = async () => {
+  console.log(dateOnly.value)
   emptyState.value = false
-  try {
-    const response = await fetch(`https://events-api.org/events?search=${searchQuery.value}&page=${page.value-1}&d=${route.query['d']}&sort=${sortOrder.value}`);
+  if(dateOnly.value == null){
+    try {
+    const response = await fetch(`https://events-api.org/events?search=${searchQuery.value}&page=${page.value-1}&sort=${sortOrder.value}`);
     const responseJson = await response.json()
     if (responseJson.length == 0){
       emptyState.value = true
     }
     events.value = responseJson
     
-  } catch (err) {
-    console.error(err)   
+    } catch (err) {
+      console.error(err)   
+    }
   }
+  else{
+    try {
+    const response = await fetch(`https://events-api.org/events?search=${searchQuery.value}&page=${page.value-1}&d=${dateOnly.value}&sort=${sortOrder.value}`);
+    const responseJson = await response.json()
+    if (responseJson.length == 0){
+      emptyState.value = true
+    }
+    events.value = responseJson
+    
+    } catch (err) {
+      console.error(err)   
+    }
+  }
+  
 };
 
 watch(searchQuery, page, sortOrder, fetchEvents);

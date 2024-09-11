@@ -99,5 +99,7 @@
     "dashboard_desc_creation":"Create event and venue",
     "dashboard_desc_creation_deep":"You can create an event, but you have to create a venue if it doesn't exists in our database (you can check in the event creation form)", 
     "or":"Or",
-    "no_event_register":"You are not registered for any events, create them !!"
+    "no_event_register":"You are not registered for any events, create them !!",
+    "home_no_result": "This event doesn't exists",
+    "home_all_btn": "All dates"
 }

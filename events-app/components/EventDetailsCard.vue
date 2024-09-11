@@ -42,7 +42,6 @@
         <div class="flex items-start space-x-7">
             <img class="rounded-md w-[350px]" :src="event.img_url">
             <article class="flex-1">
-                <p class="font-bold break-keep text-xl">{{ $t('events_details_description') }} :</p>
                 <p class="font-bold text-gray-700 dark:text-gray-400 break-words md:break-normal" v-html="formatDescription(event.description)"></p>
             </article>
             <div class="flex-shrink-0">

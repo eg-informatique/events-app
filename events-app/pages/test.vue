@@ -12,6 +12,7 @@
     })
     if(response.ok){
         const userData = await response.json()
+        console.log(userData)
     }
     
 </script>
