@@ -1,4 +1,6 @@
 <script setup>
+import ProfileDropDown from './ProfileDropDown.vue';
+
     const open = ref(false)
 
     // Méthode pour fermer la sidebar
@@ -28,6 +30,7 @@
             </div>
             <div class="absolute right-1 bottom-0 w-[190px] flex items-center justify-end">
                 <SidebarLangSwitcher/>
+                <ProfileDropDown/>
             </div>
         </div>
 
