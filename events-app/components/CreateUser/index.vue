@@ -26,7 +26,8 @@
           <UButton type="submit">{{$t("signin_submit_btn")}}</UButton>
         </UForm>
         <template #footer>
-          <CreateUserGitHubSignUp></CreateUserGitHubSignUp>
+          <CreateUserGitHubSignUp/><br>
+          <CreateUserGoogleSignUp/>
         </template>
     </UCard>
   </div>
