@@ -5,7 +5,8 @@
         <h1 class="text-xl font-bold leading-tight tracking-tightmd:text-2px">
           {{$t('signin_welcome')}}
         </h1>
-        <LoginGitHubLogin class="mt-3" />
+        <LoginGitHubLogin class="mt-3" /><br>
+        <LoginGoogleLogin class="mt-3"/>
       <UDivider :label="$t('or')"/>
       <p v-if="status" class="text-red-500"> {{ $t('signin_error') }}</p>
       <UForm :schema="LoginValidationSchemas" :state="state" class="space-y-4" @submit="handleFormSubmit">

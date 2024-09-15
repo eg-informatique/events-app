@@ -1,5 +1,6 @@
 import { NuxtAuthHandler } from '#auth'
 import GithubProvider from 'next-auth/providers/github'
+import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { addUser } from '../addUserServer'
 import { randomBytes } from 'crypto'
@@ -21,7 +22,12 @@ export default NuxtAuthHandler({
         GithubProvider.default({
            clientId: 'Ov23liguUeojPL4ky0Gi',
            clientSecret: '9989e8c5a1098a874c8886d139cc610abbd48ab8'
-        }), 
+        }),
+        // @ts-expect-error You need to use .default here for it to work during SSR. May be fixed via Vite at some point
+        GoogleProvider.default({
+            clientId: '1091989876852-tgc9lg2s79rbuom4r93md5097g9jardq.apps.googleusercontent.com',
+            clientSecret: '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'
+        }),
         // @ts-expect-error You need to use .default here for it to work during SSR. May be fixed via Vite at some point
         CredentialsProvider.default({
             name: 'Credentials',
@@ -55,7 +61,7 @@ export default NuxtAuthHandler({
     ],
     callbacks: {
         async signIn({user, account, profile}) {
-            if(account?.provider === 'github') {
+            if(account?.provider === 'github' || account?.provider === 'google') {
                 try{
                     const response = await fetch(`https://events-api.org/user?email=${user.email}`)
                     const data = await response.json()

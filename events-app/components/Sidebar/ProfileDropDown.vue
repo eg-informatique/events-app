@@ -1,6 +1,6 @@
 <template>
-     <UDropdown :popper="{ placement: 'bottom-start' } ":ui="{ item: { disabled: 'cursor-text select-text' } }":items="items" class="w-20 h-20">
-    <UAvatar icon="i-heroicons-light-bulb" class="w-20 h-20"/>
+  <UDropdown :popper="{ placement: 'bottom-start' } ":ui="{ item: { disabled: 'cursor-text select-text' } }":items="items" class="w-10 h-10 mb-5">
+    <UAvatar icon="i-heroicons-user" class="w-10 h-10"/>
 
     <template #account="{ item }">
       <div class="text-left">
