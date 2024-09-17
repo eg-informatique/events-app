@@ -66,10 +66,12 @@
       />
     </div>
   </div>
+<Footer></Footer>
 </template>
 
 <script setup>
 import { ref, watch } from 'vue';
+import Footer from './footer.vue';
 
 definePageMeta({ auth: false });
 const authenticated = ref(false)

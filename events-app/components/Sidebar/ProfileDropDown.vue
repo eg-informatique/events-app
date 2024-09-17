@@ -42,33 +42,7 @@ async function handleSignIn() {
 async function handleSignOut() {
     await signOut()
 }
-const item = [
-  [{
-    label: 'ben@example.com',
-    slot: 'account',
-    disabled: true
-  }], [{
-    label: 'Settings',
-    icon: 'i-heroicons-cog-8-tooth'
-  }], 
-  [{
-    label: 'Documentation',
-    icon: 'i-heroicons-book-open'
-  }, {
-    label: 'Changelog',
-    icon: 'i-heroicons-megaphone'
-  }, {
-    label: 'Status',
-    icon: 'i-heroicons-signal'
-  }], [{
-    label: 'Sign out',
-    icon: 'i-heroicons-arrow-left-on-rectangle'
-  }],
-  [{
-    label: 'Sign in',
-    icon: 'i-heroicons-arrow-left-on-rectangle'
-  }]
-]
+
 
 const items = [
   [{
@@ -95,24 +69,11 @@ const items = [
         await signOut()
       }
     }
-  ]
+  ],
+  
+
 ]
 
-const itemsSignedIn = ref([
-    {
-        label: t('home_nav'),
-        to: `${locaPath('/')}`,
-        icon: "i-majesticons-home"
-    },
-    {
-        label : t('about_us_nav'),
-        to: `${locaPath('/about')}`,
-        icon: "i-mdi-about-circle-outline"
-    },
-    {
-        label:t('acount_nav'),
-        to:`${locaPath('/account')}`,
-        icon:'i-mdi-account'
-    }
-])
+
+
 </script>
