@@ -21,7 +21,15 @@
                     <UInput v-model="state.url"></UInput>
                 </UFormGroup>
                 <UFormGroup :label="$t('create_venue_address')" name="address">
-                    <UInput v-model="state.address"></UInput>
+                    <UInput v-model="state.address" @input="fetchAddressSuggestions"></UInput>
+                    <ul v-if="addressSuggestions.length > 0" class="mt-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 rounded-md">
+                        <li v-for="(suggestion, index) in addressSuggestions" 
+                            :key="index" 
+                            @click="selectAddress(suggestion)"
+                            class="cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white">
+                            {{ suggestion.formatted_address }}
+                        </li>
+                    </ul>
                 </UFormGroup>
                 <UFormGroup :label="$t('create_venue_zipcode')" name="zipcode">
                     <UInput v-model="state.zipcode" type="number"></UInput>
@@ -65,6 +73,23 @@ const state = ref({
     phone: ''
 });
 
+interface AddressComponent {
+    long_name: string;
+    short_name: string;
+    types: string[];
+}
+
+interface GeocodeResult {
+    formatted_address: string;
+    address_components: AddressComponent[];
+}
+
+interface GeocodeResponse {
+    results: GeocodeResult[];
+    status: string;
+}
+
+const addressSuggestions = ref<GeocodeResult[]>([]);
 const venueState = ref(false);
 const venueConflictState = ref(false);
 const venueErrorState = ref(false);
@@ -136,8 +161,78 @@ function resetFormState2() {
     venueErrorState.value = false
     venueState.value = false
 }
+
+async function fetchAddressSuggestions() {
+    if (state.value.address.length > 5) {
+        const apiKey = 'AIzaSyBoVK4uOknJxX1yDT1bXga0RehiHXhp9ck';
+        
+        
+        const address = encodeURIComponent(state.value.address + ', Suisse');
+        const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${apiKey}`;
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+
+            if (data.status === 'OK' && data.results.length > 0) {
+                
+                addressSuggestions.value = data.results;
+            } else {
+                addressSuggestions.value = [];
+            }
+        } catch (error) {
+            console.error('Erreur lors de la récupération des suggestions d\'adresse:', error);
+        }
+    }
+}
+
+function formatAddress(suggestion: GeocodeResult): string {
+    const streetNumber = extractComponent(suggestion.address_components, 'street_number');
+    const route = extractComponent(suggestion.address_components, 'route');
+    return `${streetNumber} ${route}`.trim();  // Retourne uniquement le numéro de rue et la rue
+}
+
+function selectAddress(suggestion: any) {
+    state.value.address = formatAddress(suggestion);
+    
+    
+    const addressComponents = suggestion.address_components;
+    state.value.zipcode = extractComponent(addressComponents, 'postal_code');
+    state.value.city = extractComponent(addressComponents, 'locality');
+    state.value.country = extractComponent(addressComponents, 'country');
+    
+    
+    addressSuggestions.value = [];
+}
+
+function extractComponent(components: any[], type: string): string {
+    const component = components.find(c => c.types.includes(type));
+    return component ? component.long_name : '';
+}
+watch(() => state.value.address, (newAddress) => {
+    if (newAddress === '') {
+        state.value.zipcode = '';
+        state.value.city = '';
+        state.value.country = '';
+    }
+});
 </script>
 
-<style scoped>
+<style>
+.suggestions-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
+}
 
+.suggestions-list li {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.suggestions-list li:hover {
+    background-color: #f0f0f0;
+}
 </style>

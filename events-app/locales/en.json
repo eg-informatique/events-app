@@ -103,5 +103,9 @@
     "or":"Or",
     "no_event_register":"You are not registered for any events, create them !!",
     "home_no_result": "This event doesn't exists",
-    "home_all_btn": "All dates"
+    "home_all_btn": "All dates",
+    "terms_service": "Terms Service",
+    "privacy_policy": "Privacy Policy",
+    "reservations_nav": "Manage your reservations",
+    "myevents_venues_nav": "Mangage your events and venues"
 }

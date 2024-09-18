@@ -13,9 +13,6 @@
         />
       </div>
       <div class="right-7 mb-1" >
-        <UButton v-if="authenticated" :label="$t('home_create_event')" to="/account" icon="i-mdi-plus" class="mb-2"/>
-        <UButton v-else :label="$t('home_create_event')" to="/login" icon="i-mdi-sign-in" class="mb-2"/>
-
         <UPopover mode="hover" :popper="{ placement: 'top-end' }">
           <UButton :label="$t('home_sort_by_btn')" trailing-icon="i-heroicons-chevron-down-20-solid" />
             <template #panel="{ close }">
@@ -29,17 +26,34 @@
         </UPopover>
       </div>
     </div>
-    <div v-if="emptyState" class="flex flex-col items-center justify-center h-full mt-20">
-      <Icon name="line-md:compass-loop" size="80px"/>
-      <p class="text-red-500 font-bold text-1xl">{{ $t("home_no_result") }}</p>
-    </div>
     <div class="flex">
-      <div class="grid lg:grid-cols-3 gap-7 flex-grow">     
-        <div v-for="event in events" :key="event.id" >
-          <EventCard :event="event" />
+      <div class="flex-grow">
+        <div v-if="emptyState" class="flex flex-col items-center justify-center h-full mt-20">
+          <div class="grid lg:grid-cols-3 gap-7 w-full">
+            <div class="col-span-3 flex flex-col items-center justify-center">
+              <Icon name="line-md:compass-loop" size="80px"/>
+              <p class="text-red-500 font-bold text-1xl">{{ $t("home_no_result") }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div v-else class="grid lg:grid-cols-3 gap-7">
+          <div v-for="event in events" :key="event.id">
+            <EventCard :event="event" />
+          </div>
         </div>
       </div>
-      <UPopover :popper="{ placement: 'bottom-start' }" overlay class="block lg:hidden">
+
+      <div style="position: sticky; top: 20px;">
+        <div class="hidden lg:block ml-5">
+          <ClientOnly>
+            <div class="flex flex-col">
+              <DatePicker v-model="date" class="top-0 flex-shrink-0 self-start" mode="date" is24hr is-required @update:modelValue="updateDate"/>
+              <UButton :label="$t('home_all_btn')" class="mt-2 text-center" block @click="dateToNull"/>
+            </div>
+          </ClientOnly>
+        </div>
+        <UPopover :popper="{ placement: 'bottom-start' }" overlay class="block lg:hidden">
           <UButton icon="i-heroicons-calendar-days-20-solid"/>
           <template #panel="{ close }">
               <div class="flex flex-col items-center space-y-2">
@@ -47,16 +61,10 @@
                 <UButton :label="$t('home_all_btn')" class="mb-2" @click="dateToNull"/>
               </div>
           </template>
-      </UPopover>
-      <div class="hidden lg:block ml-5">
-        <ClientOnly>
-          <div class="flex flex-col">
-            <DatePicker v-model="date" class="top-0 flex-shrink-0 self-start" mode="date" is24hr is-required @update:modelValue="updateDate"/>
-            <UButton :label="$t('home_all_btn')" class="mt-2 text-center" block @click="dateToNull"/>
-          </div>
-        </ClientOnly>
+        </UPopover>
       </div>
     </div>
+
     <div class="flex justify-center mt-7">
       <UPagination
         v-model="page"
@@ -66,12 +74,10 @@
       />
     </div>
   </div>
-<Footer></Footer>
 </template>
 
 <script setup>
 import { ref, watch } from 'vue';
-import Footer from './footer.vue';
 
 definePageMeta({ auth: false });
 const authenticated = ref(false)

@@ -74,7 +74,6 @@
 </template>
 
 <script setup>
-
     const { $formatShortDate } = useNuxtApp()
     const { event } = defineProps(['event'])
     const venue = await fetch(`https://events-api.org/venue/${event.venue}`)

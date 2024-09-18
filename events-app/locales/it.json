@@ -102,6 +102,8 @@
     "dashboard_desc_creation_deep": "Puoi creare un evento, ma devi creare un luogo se non esiste nella nostra base di dati (puoi verificare nel modulo di creazione eventi)",
     "or": "Oppure",
     "no_event_register": "Non sei registrato a nessun evento, creane uno!!",
-    "home_no_result": "Questo evento non esiste",
-    "home_all_btn": "Tutte le date"
+    "terms_service": "Termini del servizio",
+    "privacy_policy": "Informativa sulla privacy",
+    "reservations_nav": "Gestisci le tue prenotazioni",
+    "myevents_venues_nav": "Gestisci i tuoi eventi e luoghi"
 }

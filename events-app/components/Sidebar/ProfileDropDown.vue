@@ -14,7 +14,7 @@
     </template>
 
     <template #item="{ item }">
-      <span class="truncate">{{ item.label }}</span>
+      <span>{{ item.label }}</span>
 
       <UIcon :name="item.icon" class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto" />
     </template>
@@ -56,7 +56,7 @@ const items = [
     icon:'i-mdi-music'
   },
   {
-    label:t('myevents_nav'),
+    label:t('myevents_venues_nav'),
     to:`${locaPath('/myevents')}`,
     icon:'i-mdi-plus'
   },

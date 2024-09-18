@@ -102,6 +102,8 @@
     "dashboard_desc_creation_deep": "Sie können eine Veranstaltung erstellen, aber Sie müssen einen Ort erstellen, wenn dieser nicht in unserer Datenbank vorhanden ist (Sie können dies im Formular zur Erstellung von Veranstaltungen überprüfen)",
     "or": "Oder",
     "no_event_register": "Sie sind für keine Veranstaltungen angemeldet, erstellen Sie welche!!",
-    "home_no_result": "Diese Veranstaltung existiert nicht",
-    "home_all_btn": "Alle Daten"
+    "terms_service": "Nutzungsbedingungen",
+    "privacy_policy": "Datenschutzerklärung",
+    "reservations_nav": "Verwalte deine Reservierungen",
+    "myevents_venues_nav": "Verwalte deine Veranstaltungen und Orte"
 }

@@ -9,7 +9,7 @@ export const createVenueValidationSchemas = (t: ComposerTranslation<{ [x: string
         name: z.string().nonempty(t('validation_required')),
         url: z.string().url(t('validation_invalid_url')).optional().or(z.literal('')),
         address: z.string().nonempty(t('validation_required')),
-        zipcode: z.number().nonnegative(t('validation_required')),
+        zipcode: z.number().nonnegative(t('validation_required')).or(z.string()),
         city: z.string().nonempty(t('validation_required')),
         country: z.string().nonempty(t('validation_required')),
         email: z.string().email(t('validation_invalid_email')),
