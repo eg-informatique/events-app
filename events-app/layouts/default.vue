@@ -1,9 +1,11 @@
 <template>
-    <div class="grid items-start lg:flex">
-        <Sidebar />
-        <div class="p-5 w-full h-screen overflow-auto lg:mt-20">
-            <slot />
-        </div>
+  <div class="grid lg:flex min-h-screen">
+    <Sidebar />
+    <div class="flex flex-col w-full">
+      <div class="flex-grow p-5 overflow-auto">
+        <slot />
+      </div>
+      <Footer />
     </div>
-    <Footer/>
+  </div>
 </template>
