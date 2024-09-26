@@ -31,15 +31,7 @@
                         </li>
                     </ul>
                 </UFormGroup>
-                <UFormGroup :label="$t('create_venue_zipcode')" name="zipcode">
-                    <UInput v-model="state.zipcode" type="number"></UInput>
-                </UFormGroup>
-                <UFormGroup :label="$t('create_venue_city')" name="city">
-                    <UInput v-model="state.city"></UInput>
-                </UFormGroup>
-                <UFormGroup :label="$t('create_venue_country')" name="country">
-                    <UInput v-model="state.country"></UInput>
-                </UFormGroup>
+                
                 <UFormGroup :label="$t('create_venue_email')" name="email">
                     <UInput v-model="state.email" type="email"/>
                 </UFormGroup>
@@ -163,11 +155,10 @@ function resetFormState2() {
 }
 
 async function fetchAddressSuggestions() {
-    if (state.value.address.length > 5) {
+    if (state.value.address.length > 4) {
         const apiKey = 'AIzaSyBoVK4uOknJxX1yDT1bXga0RehiHXhp9ck';
-        
-        
-        const address = encodeURIComponent(state.value.address + ', Suisse');
+                
+        const address = encodeURIComponent(state.value.address + ', Switzerland');
         const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${apiKey}`;
 
         try {
@@ -189,12 +180,11 @@ async function fetchAddressSuggestions() {
 function formatAddress(suggestion: GeocodeResult): string {
     const streetNumber = extractComponent(suggestion.address_components, 'street_number');
     const route = extractComponent(suggestion.address_components, 'route');
-    return `${streetNumber} ${route}`.trim();  // Retourne uniquement le numéro de rue et la rue
+    return `${streetNumber} ${route}`.trim();  
 }
 
 function selectAddress(suggestion: any) {
-    state.value.address = formatAddress(suggestion);
-    
+    state.value.address = suggestion.formatted_address;
     
     const addressComponents = suggestion.address_components;
     state.value.zipcode = extractComponent(addressComponents, 'postal_code');
