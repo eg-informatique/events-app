@@ -3,13 +3,10 @@
     <div class="w-full p-5">
       <Sidebar />
    
-    <div class= "flex-grow p-5 overflow-auto lg:pt-16">
-      <slot />
+      <div class= "flex-grow overflow-auto lg:pt-16">
+        <slot />
+      </div>
     </div>
-  </div>
-  
-
-    <!-- Footer -->
     <Footer />
   </div>
 </template>

@@ -23,7 +23,7 @@
     @click="handleSignIn"
     :label="$t('signin_nav_btn')"
     icon="i-mdi-sign-in"
-    class="ml-2 mt-1"
+    class="ml-2 mb-5"
   />
 </template>
 
@@ -71,9 +71,5 @@ const items = [
     }
   ],
   
-
 ]
-
-
-
 </script>
