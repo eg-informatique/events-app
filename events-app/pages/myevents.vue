@@ -7,7 +7,7 @@
     <div class="mb-2">
         <UButton :label="$t('home_create_event')" icon="i-mdi-plus" @click="isOpen = true"/>
         <UModal v-model="isOpen">
-            <DashboardCreateEvent/>
+            <DashboardCreateEvent :email="email"/>
         </UModal>
     </div>
     <div v-if="showEvent" class="grid lg:grid-cols-6 gap-2">
