@@ -51,6 +51,7 @@ import { z } from 'zod';
 import type { FormSubmitEvent } from '#ui/types';
 
 const { t } = useI18n();
+const { email } = defineProps(['email'])
 
 const VenueValidationSchemas = createVenueValidationSchemas(t);
 
@@ -62,7 +63,8 @@ const state = ref({
     city: '',
     country: '',
     email: '',
-    phone: ''
+    phone: '',
+    creator: ''
 });
 
 interface AddressComponent {
@@ -87,6 +89,8 @@ const venueConflictState = ref(false);
 const venueErrorState = ref(false);
 
 async function handleFormSubmit(event: FormSubmitEvent<z.output<typeof VenueValidationSchemas>>) {
+    const response = await fetch(`https://events-api.org/user?email=${email}`)
+    const userData = await response.json()
 
     const data = {
         name: state.value.name,
@@ -96,7 +100,8 @@ async function handleFormSubmit(event: FormSubmitEvent<z.output<typeof VenueVali
         city: state.value.city,
         country: state.value.country,
         email: state.value.email,
-        phone: state.value.phone
+        phone: state.value.phone,
+        creator: userData.user.id
     };
 
     try {
@@ -135,7 +140,8 @@ function resetFormState() {
         city: '',
         country: '',
         email: '',
-        phone: ''
+        phone: '',
+        creator: ''
     };
 }
 function resetFormState2() {
@@ -147,7 +153,8 @@ function resetFormState2() {
         city: '',
         country: '',
         email: '',
-        phone: ''
+        phone: '',
+        creator: ''
     };
     venueConflictState.value = false
     venueErrorState.value = false

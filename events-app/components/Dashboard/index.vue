@@ -23,7 +23,7 @@
     </div>
     <div class="col-span-1 md:col-span-2 md:row-span-5 md:col-start-4 w-full">
       <UButton :label="$t('show_venue')" @click="changeValue('venue')" class="mb-2"/>
-      <DashboardCreateVenue v-if="showVenue"></DashboardCreateVenue>
+      <DashboardCreateVenue v-if="showVenue" :email="email"></DashboardCreateVenue>
     </div>
   </div>
   </template>
