@@ -25,10 +25,38 @@
             </UCard>
         </div>
     </div>
+
+    <div class="flex items-center justify-between mb-3 mt-5">
+        <p class="font-bold text-2xl">{{ $t('dashboard_desc_created_venues') }}</p>
+        <UButton v-if="showVenue && !statusVenues" :label="$t('account_hide')" icon="i-mdi-keyboard-arrow-down" @click="showHideVenue('hide')" class="mb-3"/>
+        <UButton v-if="!showVenue && !statusVenues" :label="$t('account_show')" icon="i-mdi-keyboard-arrow-up" @click="showHideVenue('show')" class="mb-3"/>
+    </div>
+    <div class="mb-2">
+        <UButton :label="$t('home_create_venue')" icon="i-mdi-plus" @click="isOpenVenue = true"/>
+        <UModal v-model="isOpenVenue">
+            <DashboardCreateVenue :email="email"/>
+        </UModal>
+    </div>
+    <div v-if="showVenue" class="grid lg:grid-cols-6 gap-2">
+        <div v-for="venue in venuesData" :key="venue.id">
+            <UCard>  
+                <div class="flex">
+                    <img class="rounded-md w-[50px] h-auto mx-auto ml-2" :src="venue.img_url">
+                    <p class="font-bold">{{ venue.name }}</p>
+                </div>
+                <p class="font-bold m-4 text-center">{{ venue.location }}</p>
+                <div class="grid">
+                    <UButton :label="$t('edit_venue')" icon="i-mdi-edit"/>
+                    <UButton class="mt-2" :label="$t('details_btn')" icon="i-mdi-more" :to="`${locaPath('/venue/' + `${venue.id}`)}`"/>
+                </div>
+            </UCard>
+        </div>
+    </div>
 </template>
 
 <script setup>
 const isOpen = ref(false)
+const isOpenVenue = ref(false)
 const { data } = useAuth()
 const { $formatLongDate } = useNuxtApp()
 const locaPath = useLocalePath()
@@ -37,8 +65,12 @@ const response = await fetch(`https://events-api.org/user?email=${email}`)
 const userData = await response.json()
 const response2 = await fetch(`https://events-api.org/events?c=${userData.user.id}`)
 const eventsData = await response2.json()
+const response3 = await fetch(`https://events-api.org/venues?c=${userData.user.id}`)
+const venuesData = await response3.json()
 const showEvent = ref(true)
-const showVenue = ref(false)
+const showVenue = ref(true)
+const statusEvents = ref(false)
+const statusVenues = ref(false)
 
 const showHideEvent = (value) => {
     if(value == 'hide'){
@@ -48,6 +80,15 @@ const showHideEvent = (value) => {
         showEvent.value = true
     }
 }
+const showHideVenue = (value) => {
+    if(value == 'hide'){
+      showVenue.value = false
+    }
+    if(value == 'show'){
+        showVenue.value = true
+    }
+}
+
 </script>
 
 <style lang="scss" scoped>
