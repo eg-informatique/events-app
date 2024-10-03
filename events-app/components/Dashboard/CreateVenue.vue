@@ -95,7 +95,7 @@ async function handleFormSubmit(event: FormSubmitEvent<z.output<typeof VenueVali
     const data = {
         name: state.value.name,
         url: state.value.url,
-        address: state.value.address,
+        address: state.value.address.split(',')[0].trim(),
         zipcode: state.value.zipcode,
         city: state.value.city,
         country: state.value.country,

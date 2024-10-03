@@ -45,7 +45,15 @@
                 <p class="font-bold text-gray-700 dark:text-gray-400 break-words md:break-normal" v-html="formatDescription(event.description)"></p>
             </article>
             <div class="flex-shrink-0">
-                <USkeleton class="h-[300px] w-[450px]" />
+                <iframe
+                    width="400"
+                    height="300"
+                    style="border:0"
+                    loading="lazy"
+                    allowfullscreen
+                    referrerpolicy="no-referrer-when-downgrade"
+                    :src=uri>
+                </iframe>
             </div>
         </div>
 
@@ -86,6 +94,8 @@
     if(status.value == 'authenticated'){
         authenticated.value = true
     }
+    const uri = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBoVK4uOknJxX1yDT1bXga0RehiHXhp9ck
+                &q=${venueData.address}, ${venueData.zipcode} ${venueData.city}, ${venueData.country}`
 </script>
 
 <style scoped>

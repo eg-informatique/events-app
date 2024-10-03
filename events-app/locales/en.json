@@ -109,5 +109,7 @@
     "reservations_nav": "Manage your reservations",
     "myevents_venues_nav": "Mangage your events and venues",
     "edit_event": "Edit event",
-    "dashoard_desc_created_events": "Your events"
+    "dashoard_desc_created_events": "Your events",
+    "dashboard_desc_created_venues": "Your venues",
+    "dashboard_create_venue": "Create a venue"
 }

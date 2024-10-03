@@ -32,7 +32,7 @@
         <UButton v-if="!showVenue && !statusVenues" :label="$t('account_show')" icon="i-mdi-keyboard-arrow-up" @click="showHideVenue('show')" class="mb-3"/>
     </div>
     <div class="mb-2">
-        <UButton :label="$t('home_create_venue')" icon="i-mdi-plus" @click="isOpenVenue = true"/>
+        <UButton :label="$t('dashboard_create_venue')" icon="i-mdi-plus" @click="isOpenVenue = true"/>
         <UModal v-model="isOpenVenue">
             <DashboardCreateVenue :email="email"/>
         </UModal>
@@ -44,7 +44,7 @@
                     <img class="rounded-md w-[50px] h-auto mx-auto ml-2" :src="venue.img_url">
                     <p class="font-bold">{{ venue.name }}</p>
                 </div>
-                <p class="font-bold m-4 text-center">{{ venue.location }}</p>
+                <p class="font-bold m-4 text-center">{{ venue.adress }}</p>
                 <div class="grid">
                     <UButton :label="$t('edit_venue')" icon="i-mdi-edit"/>
                     <UButton class="mt-2" :label="$t('details_btn')" icon="i-mdi-more" :to="`${locaPath('/venue/' + `${venue.id}`)}`"/>
