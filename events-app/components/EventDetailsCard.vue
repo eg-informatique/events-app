@@ -12,10 +12,6 @@
         </div>
 
         <div class="mt-2 px-2">
-            <h1 class="font-bold">{{ $t('events_details_venue_name') }} :</h1>
-            <p class="font-bold text-gray-600 dark:text-gray-400 ml-2">{{ venueData.name }}</p>
-        </div>
-        <div class="mt-2 px-2">
             <h1 class="font-bold">{{ $t('events_details_dates') }} :</h1>
             <p class="font-bold ml-2 text-gray-600 dark:text-gray-400">{{ $formatShortDate(event, 'start_datetime') }} - {{ $formatShortDate(event, 'end_datetime') }}</p>
         </div>
@@ -27,6 +23,12 @@
         <div v-else class="mt-2 px-2">
             <h1 class="font-bold">{{ $t('events_details_prices') }} :</h1>
             <p class="font-bold text-gray-600 dark:text-gray-400 ml-2">{{ event.prices.minor }} - {{ event.prices.major }} {{ event.prices.currency }}</p>
+        </div>
+        <div class="mt-2 px-2">
+            <h1 class="font-bold">{{ $t('events_details_venue_name') }} :</h1>
+            <NuxtLink :to="`${locaPath('/venue/' + `${venueData.id}`)}`">
+                <p class="font-bold text-primary hover:underline ml-2">{{ venueData.name }}</p>
+            </NuxtLink>
         </div>
 
         <template #footer>
@@ -45,33 +47,37 @@
                 <p class="font-bold text-gray-700 dark:text-gray-400 break-words md:break-normal" v-html="formatDescription(event.description)"></p>
             </article>
             <div class="flex-shrink-0">
-                <iframe
-                    width="400"
-                    height="300"
-                    style="border:0"
-                    loading="lazy"
-                    allowfullscreen
-                    referrerpolicy="no-referrer-when-downgrade"
-                    :src=uri>
-                </iframe>
+                <UCard>
+                    <template #header>
+                        <p class="text-2xl font-bold mt-3">{{ venueData.name }}</p>
+                    </template>
+                    <iframe
+                        class="rounded w-[500px] h-[350px]"
+                        loading="lazy"
+                        allowfullscreen
+                        referrerpolicy="no-referrer-when-downgrade"
+                        :src=uri>
+                    </iframe>
+                    <UButton :label="$t('details_btn')" class="mt-2" icon="i-mdi-more" :to="`${locaPath('/venue/' + `${venueData.id}`)}`"/>
+                </UCard> 
             </div>
         </div>
 
-        <div class="flex">
-            <h1 class="font-bold">{{ $t('events_details_venue_name') }} : </h1>
+        <div class="flex mt-3">
+            <UIcon name="i-mdi-map-marker" class="w-6 h-6 text-gray-900 dark:text-gray-100"/>
             <p class="font-bold text-gray-600 dark:text-gray-400 ml-2">{{ venueData.name }}</p>
         </div>
         <div class="flex mt-1.5">
-            <h1 class="font-bold">{{ $t('events_details_dates') }} : </h1>
+            <UIcon name="i-heroicons-calendar-days-20-solid" class="w-6 h-6 text-gray-900 dark:text-gray-100"/>
             <p class="font-bold ml-2 text-gray-600 dark:text-gray-400">{{ $formatShortDate(event, 'start_datetime') }} - {{ $formatShortDate(event, 'end_datetime') }}</p>
         </div>
         
         <div v-if="event.prices.minor===event.prices.major" class="flex mt-1.5">
-            <h1 class="font-bold">{{ $t('events_details_prices') }} : </h1>
+            <UIcon name="i-heroicons-currency-dollar" class="w-6 h-6 text-gray-900 dark:text-gray-100"/>
             <p class="flex font-bold text-gray-600 dark:text-gray-400">{{ event.prices.major }} {{ event.prices.currency }}</p>
         </div>
         <div v-else class="flex mt-1.5">
-            <h1 class="font-bold">{{ $t('events_details_prices') }} : </h1>
+            <UIcon name="i-heroicons-currency-dollar" class="w-6 h-6 text-gray-900 dark:text-gray-100"/>
             <p class="font-bold text-gray-600 dark:text-gray-400 ml-2">{{ event.prices.minor }} - {{ event.prices.major }} {{ event.prices.currency }}</p>
         </div> 
         <template #footer>
@@ -83,6 +89,7 @@
 
 <script setup>
     const { $formatShortDate } = useNuxtApp()
+    const locaPath = useLocalePath()
     const { event } = defineProps(['event'])
     const venue = await fetch(`https://events-api.org/venue/${event.venue}`)
     const venueData = await venue.json()

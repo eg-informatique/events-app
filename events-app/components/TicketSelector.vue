@@ -4,7 +4,7 @@
       <UButton :label="$t('events_details_open_pophover')" trailing-icon="i-heroicons-chevron-down-20-solid" class="text-1xl font-bold mt-3" variant="solid" />
   
       <template #panel="{ close }">
-        <p class="font-bold">{{ $t('event_details_tickets_title') }}</p>
+        <p class="font-bold mx-2 mt-1">{{ $t('event_details_tickets_title') }}</p>
         <div class="p-4 flex flex-col items-center space-y-4">
           <div class="flex items-center space-x-2">
             <UButton @click="decreaseTickets" label="-" />
