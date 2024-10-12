@@ -3,7 +3,7 @@
     <div class="w-full p-5 lg:px-16">
       <Sidebar />
 
-      <div class="flex-grow overflow-auto lg:pt-16 w-full">
+      <div class=" lg:pt-16 w-full">
         <slot />
       </div>
     </div>
