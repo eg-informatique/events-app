@@ -67,6 +67,7 @@
     "home_sort_by": "Sort By",
     "create_venue_pageTitle":"Create a venue",
     "venue_created":"Venue created !",
+    "venue_updated": "Venue updated !",
     "venue_name_conflict":"Venue already exists...",
     "venue_creation_error":"An error has occurred",
     "create_venue_name":"Venue name",
@@ -79,6 +80,7 @@
     "create_venue_phone":"Location-related phone number",
     "create_venue_btn":"Submit",
     "create_venue_clear_btn":"Reset",
+    "create_venue_delete_btn":"Delete",
     "search_events": "Search events",
     "account_welcome":"Hi",
     "login_to_reserve":"Login in to reserve",
@@ -111,5 +113,6 @@
     "edit_event": "Edit event",
     "dashoard_desc_created_events": "Your events",
     "dashboard_desc_created_venues": "Your venues",
-    "dashboard_create_venue": "Create a venue"
+    "dashboard_create_venue": "Create a venue",
+    "venue_delete":"Deleted !"
 }

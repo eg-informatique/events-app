@@ -34,7 +34,7 @@
     <div class="mb-2">
         <UButton :label="$t('dashboard_create_venue')" icon="i-mdi-plus" @click="isOpenVenue = true"/>
         <UModal v-model="isOpenVenue">
-            <DashboardCreateVenue :email="email"/>
+            <DashboardCreateVenue :email="email" id=""/>
         </UModal>
     </div>
     <div v-if="showVenue" class="grid lg:grid-cols-6 gap-2">
@@ -46,7 +46,10 @@
                 </div>
                 <p class="font-bold m-4 text-center">{{ venue.adress }}</p>
                 <div class="grid">
-                    <UButton :label="$t('edit_venue')" icon="i-mdi-edit"/>
+                    <UButton :label="$t('edit_venue')" icon="i-mdi-edit" @click="isOpenVenueEdit = true"/>
+                    <UModal v-model="isOpenVenueEdit">
+                        <DashboardCreateVenue :email="email" :id="venue.id"/>
+                    </UModal>
                     <UButton class="mt-2" :label="$t('details_btn')" icon="i-mdi-more" :to="`${locaPath('/venue/' + `${venue.id}`)}`"/>
                 </div>
             </UCard>
@@ -57,6 +60,7 @@
 <script setup>
 const isOpen = ref(false)
 const isOpenVenue = ref(false)
+const isOpenVenueEdit = ref(false)
 const { data } = useAuth()
 const { $formatLongDate } = useNuxtApp()
 const locaPath = useLocalePath()

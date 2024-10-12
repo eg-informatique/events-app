@@ -5,13 +5,17 @@
                 <p class="font-bold">{{ $t('create_venue_pageTitle') }}</p>
             </template>
             <div v-if="venueState" class="mb-5 text-center">
-                <p class="font-bold text-green-400">{{ $t('venue_created') }}</p>
+                <p v-if="id" class="font-bold text-green-400">{{ $t('venue_updated') }}</p>
+                <p v-else class="font-bold text-green-400">{{ $t('venue_created') }}</p>
             </div>
             <div v-if="venueConflictState" class="mb-5 text-center">
                 <p class="font-bold text-red-400">{{ $t('venue_name_conflict') }}</p>
             </div>
             <div v-if="venueErrorState" class="mb-5 text-center">
                 <p class="font-bold text-red-400">{{ $t('venue_creation_error') }}</p>
+            </div>
+            <div v-if="venueDeleteState" class="mb-5 text-center">
+                <p class="font-bold text-red-400">{{ $t('venue_delete') }}</p>
             </div>
             <UForm id="form" :state="state" class="space-y-4" :schema="VenueValidationSchemas" @submit="handleFormSubmit">
                 <UFormGroup :label="$t('create_venue_name')" name="name">
@@ -40,7 +44,9 @@
                 </UFormGroup>
                 <UButton type="submit">{{ $t('create_venue_btn') }}</UButton>
                 <UButton type="reset" variant="outline" @click="resetFormState2()" class="ml-2">{{ $t('create_venue_clear_btn') }}</UButton>
+                
             </UForm>
+            <UButton color="red" variant="outline" @click="deleteVenue()" class="mt-2">{{ $t('create_venue_delete_btn') }}</UButton>
         </UCard>
     </div>
 </template>
@@ -51,7 +57,8 @@ import { z } from 'zod';
 import type { FormSubmitEvent } from '#ui/types';
 
 const { t } = useI18n();
-const { email } = defineProps(['email'])
+const { email, id } = defineProps(['email', 'id'])
+
 
 const VenueValidationSchemas = createVenueValidationSchemas(t);
 
@@ -66,6 +73,27 @@ const state = ref({
     phone: '',
     creator: ''
 });
+
+let method = 'POST'
+let uri = 'https://events-api.org/venue'
+
+if(id != ""){
+    const data = await fetch(`https://events-api.org/venue/${id}`)
+    const venue = await data.json()
+    state.value = {
+        name: venue.name,
+        url: venue.url,
+        address: venue.address,
+        zipcode: venue.zipcode,
+        city: venue.city,
+        country: venue.country,
+        email: venue.email,
+        phone: venue.phone,
+        creator: venue.creator
+    }
+    method = 'PATCH'
+    uri = `https://events-api.org/venue/${id}`
+}
 
 interface AddressComponent {
     long_name: string;
@@ -87,6 +115,7 @@ const addressSuggestions = ref<GeocodeResult[]>([]);
 const venueState = ref(false);
 const venueConflictState = ref(false);
 const venueErrorState = ref(false);
+const venueDeleteState = ref(false);
 
 async function handleFormSubmit(event: FormSubmitEvent<z.output<typeof VenueValidationSchemas>>) {
     const response = await fetch(`https://events-api.org/user?email=${email}`)
@@ -105,8 +134,8 @@ async function handleFormSubmit(event: FormSubmitEvent<z.output<typeof VenueVali
     };
 
     try {
-        const response = await fetch('https://events-api.org/venue', {
-            method: 'POST',
+        const response = await fetch(`${uri}`, {
+            method: method,
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -143,6 +172,27 @@ function resetFormState() {
         phone: '',
         creator: ''
     };
+}
+
+async function deleteVenue(){
+    try {
+        const response = await fetch(`https://events-api.org/venue/${id}`, {
+            method: 'DELETE',  
+        });
+
+        if (response.status === 409) {
+            venueConflictState.value = true;
+        } else if (!response.ok) {
+            venueErrorState.value = true;
+        } else {
+            venueDeleteState.value = true;
+            venueConflictState.value = false;
+            resetFormState();
+        }
+        
+    } catch (error) {
+        console.error('Error deleting venue:', error);
+    }
 }
 function resetFormState2() {
     state.value = {
