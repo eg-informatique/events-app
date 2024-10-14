@@ -21,7 +21,7 @@
                     <p class="text-gray-900 dark:text-gray-100">{{ $t('privacy_policy') }}</p>
                 </NuxtLink>
             </div>
-            <SidebarLangSwitcher/>
+            <FooterLangSwitcher/>
             <div class="copyright mt-2 mb-4">
                 &copy; 2024 Swiss Events. All rights reserved.
             </div>

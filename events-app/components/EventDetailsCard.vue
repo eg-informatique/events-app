@@ -26,7 +26,7 @@
         </div>
         <div class="mt-2 px-2">
             <h1 class="font-bold">{{ $t('events_details_venue_name') }} :</h1>
-            <NuxtLink :to="`${locaPath('/venue/' + `${venueData.id}`)}`">
+            <NuxtLink :to="`${locaPath('/venue/' + `${venueData.id}`)}?e_id=${event.id}&e_name=${event.title}`">
                 <p class="font-bold text-primary hover:underline ml-2">{{ venueData.name }}</p>
             </NuxtLink>
         </div>
@@ -46,19 +46,19 @@
             <article class="flex-1">
                 <p class="font-bold text-gray-700 dark:text-gray-400 break-words md:break-normal" v-html="formatDescription(event.description)"></p>
             </article>
-            <div class="flex-shrink-0">
+            <div class="flex-shrink-0 w-full max-w-[550px]">
                 <UCard>
                     <template #header>
                         <p class="text-2xl font-bold mt-3">{{ venueData.name }}</p>
                     </template>
                     <iframe
-                        class="rounded w-[500px] h-[350px]"
+                        class="rounded w-full max-w-[500px] h-[350px] max-h-[350px]"
                         loading="lazy"
                         allowfullscreen
                         referrerpolicy="no-referrer-when-downgrade"
                         :src=uri>
                     </iframe>
-                    <UButton :label="$t('details_btn')" class="mt-2" icon="i-mdi-more" :to="`${locaPath('/venue/' + `${venueData.id}`)}`"/>
+                    <UButton :label="$t('details_btn')" class="mt-2" icon="i-mdi-more" :to="`${locaPath('/venue/' + `${venueData.id}`)}?e_id=${event.id}&e_name=${event.title}`"/>
                 </UCard> 
             </div>
         </div>
@@ -103,6 +103,10 @@
     }
     const uri = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBoVK4uOknJxX1yDT1bXga0RehiHXhp9ck
                 &q=${venueData.address}, ${venueData.zipcode} ${venueData.city}, ${venueData.country}`
+
+    const emitID = () => {
+        emits(`emitID : ${event.id}`)
+    }
 </script>
 
 <style scoped>

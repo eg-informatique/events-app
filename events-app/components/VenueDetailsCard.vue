@@ -4,15 +4,30 @@
             <p class="text-xl font-bold mt-3">{{ venue.name }}</p>
         </template>
 
-        <div class="mt-2 px-2">
-            <h1 class="font-bold">{{ $t('venue_name') }} :</h1>
-            <p class="font-bold text-gray-600 dark:text-gray-400 ml-2">{{ venue.address }}</p>
-        </div>
+        <div class="flex items-center">
+                <UIcon name="i-mdi-map-marker" class="w-6 h-6 text-gray-900 dark:text-gray-100"/>
+                <p class="font-bold text-gray-600 dark:text-gray-400 ml-2">{{ venue.address }}</p>
+            </div>
+            
+            <div class="flex items-center">
+                <UIcon name="i-mdi-phone" class="w-6 h-6 text-gray-900 dark:text-gray-100"/>
+                <p class="font-bold text-gray-600 dark:text-gray-400 ml-2">{{ venue.phone }}</p>
+            </div>
+            
+            <div class="flex items-center">
+                <UIcon name="i-mdi-email" class="w-6 h-6 text-gray-900 dark:text-gray-100"/>
+                <a :href="'mailto:' + encodeURIComponent(venue.email)" class="text-primary hover:underline ml-2">{{ venue.email }}</a>
+            </div>
+            
+            <div v-if="venue.url != ''" class="flex items-center">
+                <NuxtLink :to="venue.url" class="flex items-center">
+                    <UIcon name="i-mdi-web" class="w-6 h-6 text-gray-900 dark:text-gray-100"/>
+                    <p class="text-primary hover:underline ml-2">{{ truncatedUrl }}</p>
+                </NuxtLink>
+            </div>
 
         <iframe
-            width="600"
-            height="450"
-            style="border:0"
+            class="rounded w-full max-w-[500px] h-[300px] max-h-[350px] mt-2"
             loading="lazy"
             allowfullscreen
             referrerpolicy="no-referrer-when-downgrade"
@@ -73,6 +88,16 @@ console.log(venue.address);
 
 const uri = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBoVK4uOknJxX1yDT1bXga0RehiHXhp9ck
                 &q=${venue.address}, ${venue.zipcode} ${venue.city}, ${venue.country}`
+
+const truncatedUrl = computed(() => {
+    const url = venue.url;
+    if (url.length <= 30) {
+        return url;
+    }
+    const start = url.slice(0, Math.floor(30 / 2));
+    const end = url.slice(-Math.floor(30 / 2));
+    return `${start}...${end}`;
+});
 </script>
 
 <style lang="scss" scoped>

@@ -1,6 +1,6 @@
 <template>
     <p class="font-bold text-2xl mb-3">{{ $t('dashoard_desc_register_events') }}</p>
-    <p v-if="statusEvents" class="text-lg text-center text-gray-700 dark:text-gray-200">{{ $t('no_event_register') }}</p>
+    <p v-if="statusEvents" class="text-lg text-center text-gray-700 dark:text-gray-200">{{ $t('no_reserved_events') }}</p>
     <div v-if="showRegisterEvents" class="grid lg:grid-cols-6 gap-2">
         <div v-for="event in allEventsData" :key="event.id">
             <CompactEventCard :event="event" class="mb-2"/>
