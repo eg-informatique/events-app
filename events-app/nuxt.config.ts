@@ -8,6 +8,17 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
+  runtimeConfig: {
+    githubClientId : process.env.GITHUB_CLIENTID,
+    githubClientSecret : process.env.GITHUB_SECRET,
+    googleAuthClientId : process.env.GOOGLE_AUTH_CLIENTID,
+    googleAuthClientSecret : process.env.GOOGLE_AUTH_SECRET,
+    public:{
+      googleMapApiKey : process.env.GOOGLE_MAP_API_KEY
+ 
+    }
+  },
+
   postcss: {
     plugins: {
       tailwindcss: {},
