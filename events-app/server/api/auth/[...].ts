@@ -6,6 +6,8 @@ import { addUser } from '../addUserServer'
 import { randomBytes } from 'crypto'
 import jwt from 'jsonwebtoken'
 
+const config = useRuntimeConfig()
+
 const randomPassword = (length: number) => {
     return randomBytes(Math.ceil(length / 2))
         .toString('hex') // Convertit les octets en une chaîne hexadécimale
@@ -20,13 +22,13 @@ export default NuxtAuthHandler({
     providers:[
         // @ts-expect-error You need to use .default here for it to work during SSR. May be fixed via Vite at some point
         GithubProvider.default({
-           clientId: 'Ov23liguUeojPL4ky0Gi',
-           clientSecret: '9989e8c5a1098a874c8886d139cc610abbd48ab8'
+           clientId: config.githubClientId,
+           clientSecret: config.gihubClientSecret
         }),
         // @ts-expect-error You need to use .default here for it to work during SSR. May be fixed via Vite at some point
         GoogleProvider.default({
-            clientId: '1091989876852-tgc9lg2s79rbuom4r93md5097g9jardq.apps.googleusercontent.com',
-            clientSecret: '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'
+            clientId: config.googleAuthClientId,
+            clientSecret: config.googleAuthClientSecret
         }),
         // @ts-expect-error You need to use .default here for it to work during SSR. May be fixed via Vite at some point
         CredentialsProvider.default({

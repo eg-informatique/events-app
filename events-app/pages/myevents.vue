@@ -7,7 +7,7 @@
     <div class="mb-2">
         <UButton :label="$t('home_create_event')" icon="i-mdi-plus" @click="isOpen = true"/>
         <UModal v-model="isOpen">
-            <DashboardCreateEvent :email="email"/>
+            <CreateEvent :email="email"/>
         </UModal>
     </div>
     <div v-if="showEvent" class="grid lg:grid-cols-6 gap-2">
@@ -28,13 +28,13 @@
 
     <div class="flex items-center justify-between mb-3 mt-5">
         <p class="font-bold text-2xl">{{ $t('dashboard_desc_created_venues') }}</p>
-        <UButton v-if="showVenue && !statusVenues" :label="$t('account_hide')" icon="i-mdi-keyboard-arrow-down" @click="showHideVenue('hide')" class="mb-3"/>
-        <UButton v-if="!showVenue && !statusVenues" :label="$t('account_show')" icon="i-mdi-keyboard-arrow-up" @click="showHideVenue('show')" class="mb-3"/>
+        <UButton v-if="showVenue && !statusVenues" :label="$t('venue_hide')" icon="i-mdi-keyboard-arrow-down" @click="showHideVenue('hide')" class="mb-3"/>
+        <UButton v-if="!showVenue && !statusVenues" :label="$t('venue_show')" icon="i-mdi-keyboard-arrow-up" @click="showHideVenue('show')" class="mb-3"/>
     </div>
     <div class="mb-2">
         <UButton :label="$t('dashboard_create_venue')" icon="i-mdi-plus" @click="isOpenVenue = true"/>
         <UModal v-model="isOpenVenue">
-            <DashboardCreateVenue :email="email" id=""/>
+            <CreateVenue :email="email" id=""/>
         </UModal>
     </div>
     <div v-if="showVenue" class="grid lg:grid-cols-6 gap-2">
@@ -48,7 +48,7 @@
                 <div class="grid">
                     <UButton :label="$t('edit_venue')" icon="i-mdi-edit" @click="isOpenVenueEdit = true"/>
                     <UModal v-model="isOpenVenueEdit">
-                        <DashboardCreateVenue :email="email" :id="venue.id"/>
+                        <CreateVenue :email="email" :id="venue.id"/>
                     </UModal>
                     <UButton class="mt-2" :label="$t('details_btn')" icon="i-mdi-more" :to="`${locaPath('/venue/' + `${venue.id}`)}`"/>
                 </div>

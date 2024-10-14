@@ -56,6 +56,7 @@ import { createVenueValidationSchemas } from '~/schemas/CreateVenueValidation';
 import { z } from 'zod';
 import type { FormSubmitEvent } from '#ui/types';
 
+const config = useRuntimeConfig()
 const { t } = useI18n();
 const { email, id } = defineProps(['email', 'id'])
 
@@ -213,7 +214,7 @@ function resetFormState2() {
 
 async function fetchAddressSuggestions() {
     if (state.value.address.length > 4) {
-        const apiKey = 'AIzaSyBoVK4uOknJxX1yDT1bXga0RehiHXhp9ck';
+        const apiKey = config.public.googleMapApiKey;
                 
         const address = encodeURIComponent(state.value.address + ', Switzerland');
         const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${apiKey}`;

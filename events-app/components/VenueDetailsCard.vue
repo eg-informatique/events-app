@@ -84,9 +84,11 @@
 
 <script setup>
 const { venue } = defineProps(['venue'])
-console.log(venue.address);
+const config = useRuntimeConfig()
+const apiKey = config.public.googleMapApiKey
 
-const uri = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBoVK4uOknJxX1yDT1bXga0RehiHXhp9ck
+
+const uri = `https://www.google.com/maps/embed/v1/place?key=${apiKey}
                 &q=${venue.address}, ${venue.zipcode} ${venue.city}, ${venue.country}`
 
 const truncatedUrl = computed(() => {
