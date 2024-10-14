@@ -1,19 +1,23 @@
-<template>
-    <p>
-        {{ test }}
+<script setup lang="ts">
+const links = [{
+  label: 'Home',
+  icon: 'i-heroicons-home',
+  to: '/'
+}, {
+  label: `test`,
+  icon: 'i-heroicons-square-3-stack-3d'
+}, {
+  label: 'Breadcrumb',
+  icon: 'i-heroicons-link'
+}]
 
+const locaPath = useLocalePath()
 
+console.log(locaPath);
 
-    </p>
-    <p>
-        {{ test2 }}
-    </p>
-
-
-
-</template>
-<script setup>
-const {test, test2} = defineProps(["test", "test2"])
-
-console.log(test.id)
 </script>
+
+<template>
+  <UBreadcrumb :links="links" />
+  <p>{{ locaPath('/venue/' + `coucou`) }}</p>
+</template>

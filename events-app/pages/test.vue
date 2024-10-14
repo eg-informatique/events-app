@@ -1,16 +1,19 @@
 <template>
-    <CreateVenue email="paul.lasryrobin@gmail.com" id="c8efe817-1679-45e6-9619-9beead5025fd"/>
-
-
+    <Test/>
+    <p>{{ eventId }}</p>
 </template>
 
 <script setup lang="ts">
-import CreateVenue from '~/components/Dashboard/CreateVenue.vue';
+import CreateVenue from '~/components/CreateVenue.vue';
 
 
+const route = useRoute();
+const eventId = route.query.e_id
+if(eventId){
+   console.log(eventId); 
+}
 
-const test = {id:"12345", email:"hello"}
-const test2 = 'hellop'
+
 </script>
 
 <style lang="scss" scoped>
