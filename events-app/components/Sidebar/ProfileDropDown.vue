@@ -46,11 +46,6 @@ async function handleSignOut() {
 
 const items = [
   [{
-    label:t('acount_nav'),
-    to:`${locaPath('/account')}`,
-    icon:'i-mdi-account'
-  },
-  {
     label:t('reservations_nav'),
     to:`${locaPath('/reservations')}`,
     icon:'i-mdi-music'
