@@ -7,7 +7,7 @@
     <div class="mb-2">
         <UButton :label="$t('home_create_event')" icon="i-mdi-plus" @click="isOpen = true"/>
         <UModal v-model="isOpen">
-            <CreateEvent :email="email"/>
+            <CreateEvent :email="email" id=""/>
         </UModal>
     </div>
     <div v-if="showEvent" class="grid lg:grid-cols-6 gap-2">
@@ -19,7 +19,11 @@
                 </div>
                 <p class="font-bold m-4 text-center">{{ $formatLongDate(event, 'start_datetime') }}</p>
                 <div class="grid">
-                    <UButton :label="$t('edit_event')" icon="i-mdi-edit"/>
+                    <UButton :label="$t('edit_event')" icon="i-mdi-edit" @click="isOpenEventEdit = true" />
+                        <UModal v-model="isOpenEventEdit">
+                            <CreateEvent :email="email" :id="event.id"/>
+                        </UModal>
+
                     <UButton class="mt-2" :label="$t('details_btn')" icon="i-mdi-more" :to="`${locaPath('/event/' + `${event.id}`)}`"/>
                 </div>
             </UCard>
@@ -61,6 +65,7 @@
 const isOpen = ref(false)
 const isOpenVenue = ref(false)
 const isOpenVenueEdit = ref(false)
+const isOpenEventEdit = ref(false)
 const { data } = useAuth()
 const { $formatLongDate } = useNuxtApp()
 const locaPath = useLocalePath()

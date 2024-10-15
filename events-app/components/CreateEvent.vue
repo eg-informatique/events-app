@@ -78,7 +78,7 @@ import type { FormSubmitEvent } from '#ui/types'
 
 const { t } = useI18n()
 
-const { email } = defineProps(['email'])
+const { email, id } = defineProps(['email', 'id'])
 
 const EventValidatonSchemas = createEventValidationSchemas(t)
 
@@ -132,6 +132,27 @@ const handleFileChange = (event: Event) => {
         state.value.img = file;  
     }
 }
+let method = 'POST'
+let uri = 'https://events-api.org/event'
+console.log(id);
+
+if(id != ""){
+    const data = await fetch(`https://events-api.org/event/${id}`)
+    const event = await data.json()
+    state.value = {
+        title: event.title,
+        start_datetime: event.start_datetime,
+        end_datetime: event.end_datetime,
+        description: event.description,
+        major_price: event.major_price,
+        minor_price: event.minor_price,
+        img: null as File | null,
+        venue: event.venue,
+    }
+    method = 'PATCH'
+    uri = `https://events-api.org/event/${id}`
+}
+
 
 async function handleFormSubmit(event: FormSubmitEvent<z.output<typeof EventValidatonSchemas>>) {
     const response = await fetch(`https://events-api.org/user?email=${email}`)
@@ -146,7 +167,6 @@ async function handleFormSubmit(event: FormSubmitEvent<z.output<typeof EventVali
     formData.append('minor_price', state.value.minor_price.toString());
     formData.append('venue', state.value.venue);
     formData.append('organizer', userData.user.id)
-    
     if (state.value.img) {
         formData.append('file', state.value.img);
     } else {
@@ -155,8 +175,8 @@ async function handleFormSubmit(event: FormSubmitEvent<z.output<typeof EventVali
     }
 
     try {
-        const response = await fetch('https://events-api.org/event', {
-            method: 'POST',
+        const response = await fetch(`${uri}`,  {
+            method: method,
             body: formData,
         });
 
