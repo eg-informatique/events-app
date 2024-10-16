@@ -46,7 +46,7 @@
                 <UButton type="reset" variant="outline" @click="resetFormState2()" class="ml-2">{{ $t('create_venue_clear_btn') }}</UButton>
                 
             </UForm>
-            <UButton color="red" variant="outline" @click="deleteVenue()" class="mt-2">{{ $t('create_venue_delete_btn') }}</UButton>
+            <UButton v-if="id != ''" color="red" variant="outline" @click="deleteVenue()" class="mt-2">{{ $t('create_venue_delete_btn') }}</UButton>
         </UCard>
     </div>
 </template>

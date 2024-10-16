@@ -114,5 +114,7 @@
     "dashoard_desc_created_events": "Your events",
     "dashboard_desc_created_venues": "Your venues",
     "dashboard_create_venue": "Create a venue",
-    "venue_delete":"Deleted !"
+    "venue_delete":"Deleted !",
+    "venue_hide": "Hide venues",
+    "venue_show": "Show venues"
 }

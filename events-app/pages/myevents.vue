@@ -19,11 +19,10 @@
                 </div>
                 <p class="font-bold m-4 text-center">{{ $formatLongDate(event, 'start_datetime') }}</p>
                 <div class="grid">
-                    <UButton :label="$t('edit_event')" icon="i-mdi-edit" @click="isOpenEventEdit = true" />
-                        <UModal v-model="isOpenEventEdit">
+                    <UButton :label="$t('edit_event')" icon="i-mdi-edit" @click="openEventModal(event.id)" />
+                        <UModal v-model="eventEdit[event.id]">
                             <CreateEvent :email="email" :id="event.id"/>
                         </UModal>
-
                     <UButton class="mt-2" :label="$t('details_btn')" icon="i-mdi-more" :to="`${locaPath('/event/' + `${event.id}`)}`"/>
                 </div>
             </UCard>
@@ -50,8 +49,8 @@
                 </div>
                 <p class="font-bold m-4 text-center">{{ venue.adress }}</p>
                 <div class="grid">
-                    <UButton :label="$t('edit_venue')" icon="i-mdi-edit" @click="isOpenVenueEdit = true"/>
-                    <UModal v-model="isOpenVenueEdit">
+                    <UButton :label="$t('edit_venue')" icon="i-mdi-edit" @click="openVenueModal(venue.id)"/>
+                    <UModal v-model="venueEdit[venue.id]">
                         <CreateVenue :email="email" :id="venue.id"/>
                     </UModal>
                     <UButton class="mt-2" :label="$t('details_btn')" icon="i-mdi-more" :to="`${locaPath('/venue/' + `${venue.id}`)}`"/>
@@ -64,8 +63,8 @@
 <script setup>
 const isOpen = ref(false)
 const isOpenVenue = ref(false)
-const isOpenVenueEdit = ref(false)
-const isOpenEventEdit = ref(false)
+const venueEdit = reactive({})
+const eventEdit = reactive({})
 const { data } = useAuth()
 const { $formatLongDate } = useNuxtApp()
 const locaPath = useLocalePath()
@@ -81,6 +80,12 @@ const showVenue = ref(true)
 const statusEvents = ref(false)
 const statusVenues = ref(false)
 
+const openEventModal = (eventId) => {
+  eventEdit[eventId] = true;
+}
+const openVenueModal = (venueId) => {
+    venueEdit[venueId] = true;
+}
 const showHideEvent = (value) => {
     if(value == 'hide'){
       showEvent.value = false
