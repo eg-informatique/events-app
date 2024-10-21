@@ -30,7 +30,10 @@
                 <p class="font-bold text-primary hover:underline ml-2">{{ venueData.name }}</p>
             </NuxtLink>
         </div>
-
+        <div class="flex items-center">
+            <UIcon name="i-mdi-email" class="w-6 h-6 text-gray-900 dark:text-gray-100"/>
+            <a :href="'mailto:' + encodeURIComponent(user.email)" class="text-primary hover:underline ml-2">{{ user.email }}</a>
+        </div>
         <template #footer>
             <TicketSelector v-if="authenticated" :eventId="event.id"/>
             <UButton v-else :label="$t('login_to_reserve')" to="/login" icon="i-mdi-sign-in"/>
