@@ -105,5 +105,14 @@
     "terms_service": "Nutzungsbedingungen",
     "privacy_policy": "Datenschutzerklärung",
     "reservations_nav": "Verwalte deine Reservierungen",
-    "myevents_venues_nav": "Verwalte deine Veranstaltungen und Orte"
+    "myevents_venues_nav": "Verwalte deine Veranstaltungen und Orte",
+    "venue_updated": "Veranstaltungsort aktualisiert!",
+    "create_venue_delete_btn": "Löschen",
+    "edit_event": "Ereignis bearbeiten",
+    "dashoard_desc_created_events": "Ihre Veranstaltungen",
+    "dashboard_desc_created_venues": "Ihre Veranstaltungsorte",
+    "dashboard_create_venue": "Veranstaltungsort erstellen",
+    "venue_delete": "Gelöscht!",
+    "venue_hide": "Veranstaltungsorte ausblenden",
+    "venue_show": "Veranstaltungsorte anzeigen"
 }

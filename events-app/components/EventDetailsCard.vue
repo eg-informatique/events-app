@@ -7,25 +7,25 @@
             <img class="rounded-md w-full" :src="event.img_url">
             <article class="w-full px-2">
             <p class="font-bold text-lg">{{ $t('events_details_description') }} :</p>
-            <p class="font-bold text-gray-700 dark:text-gray-400 break-words" v-html="formatDescription(event.description)"></p>
+            <p class="font-bold ml-2 text-gray-700 dark:text-gray-400 break-words" v-html="formatDescription(event.description)"></p>
             </article>
         </div>
 
-        <div class="mt-2 px-2">
-            <h1 class="font-bold">{{ $t('events_details_dates') }} :</h1>
+        <div class="flex mt-4">
+            <UIcon name="i-heroicons-calendar-days-20-solid" class="w-6 h-6 text-gray-900 dark:text-gray-100"/>
             <p class="font-bold ml-2 text-gray-600 dark:text-gray-400">{{ $formatShortDate(event, 'start_datetime') }} - {{ $formatShortDate(event, 'end_datetime') }}</p>
         </div>
 
-        <div v-if="event.prices.minor === event.prices.major" class="mt-2 px-2">
-            <h1 class="font-bold">{{ $t('events_details_prices') }} :</h1>
+        <div v-if="event.prices.minor === event.prices.major" class="flex mt-2">
+            <UIcon name="i-heroicons-currency-dollar" class="w-6 h-6 text-gray-900 dark:text-gray-100"/>
             <p class="flex font-bold text-gray-600 dark:text-gray-400">{{ event.prices.major }} {{ event.prices.currency }}</p>
         </div>
-        <div v-else class="mt-2 px-2">
-            <h1 class="font-bold">{{ $t('events_details_prices') }} :</h1>
+        <div v-else class="flex mt-2">
+            <UIcon name="i-heroicons-currency-dollar" class="w-6 h-6 text-gray-900 dark:text-gray-100"/>
             <p class="font-bold text-gray-600 dark:text-gray-400 ml-2">{{ event.prices.minor }} - {{ event.prices.major }} {{ event.prices.currency }}</p>
         </div>
-        <div class="mt-2 px-2">
-            <h1 class="font-bold">{{ $t('events_details_venue_name') }} :</h1>
+        <div class="flex mt-2">
+            <UIcon name="i-mdi-map-marker" class="w-6 h-6 text-gray-900 dark:text-gray-100"/>
             <NuxtLink :to="`${locaPath('/venue/' + `${venueData.id}`)}?e_id=${event.id}&e_name=${event.title}`">
                 <p class="font-bold text-primary hover:underline ml-2">{{ venueData.name }}</p>
             </NuxtLink>
@@ -80,6 +80,10 @@
             <UIcon name="i-heroicons-currency-dollar" class="w-6 h-6 text-gray-900 dark:text-gray-100"/>
             <p class="font-bold text-gray-600 dark:text-gray-400 ml-2">{{ event.prices.minor }} - {{ event.prices.major }} {{ event.prices.currency }}</p>
         </div> 
+        <div class="flex items-center">
+            <UIcon name="i-mdi-email" class="w-6 h-6 text-gray-900 dark:text-gray-100"/>
+            <a :href="'mailto:' + encodeURIComponent(user.email)" class="text-primary hover:underline ml-2">{{ user.email }}</a>
+        </div>
         <template #footer>
             <TicketSelector v-if="authenticated" :eventId="event.id"/>
             <UButton v-else :label="$t('login_to_reserve')" to="/login" icon="i-mdi-sign-in"/>
@@ -93,6 +97,8 @@
     const { event } = defineProps(['event'])
     const venue = await fetch(`https://events-api.org/venue/${event.venue}`)
     const venueData = await venue.json()
+    const userData = await fetch(`https://events-api.org/user/${event.organizer}`)
+    const user = await userData.json()
     const formatDescription = (description) => {
         return description.replace(/\n/g, '<br><br>');
     };

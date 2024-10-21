@@ -105,5 +105,14 @@
     "terms_service": "Conditions de service",
     "privacy_policy": "Politique de confidentialité",
     "reservations_nav": "Gérer vos réservations",
-    "myevents_venues_nav": "Gérer vos événements et lieux"
+    "myevents_venues_nav": "Gérer vos événements et lieux",
+    "venue_updated": "Lieu mis à jour !",
+    "create_venue_delete_btn": "Supprimer",
+    "edit_event": "Modifier l'événement",
+    "dashoard_desc_created_events": "Vos événements",
+    "dashboard_desc_created_venues": "Vos lieux",
+    "dashboard_create_venue": "Créer un lieu",
+    "venue_delete": "Supprimé !",
+    "venue_hide": "Masquer les lieux",
+    "venue_show": "Afficher les lieux"
 }

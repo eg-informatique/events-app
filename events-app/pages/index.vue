@@ -14,7 +14,7 @@
       </div>
       <div class="right-7 mb-1" >
         <UPopover mode="hover" :popper="{ placement: 'top-end' }">
-          <UButton :label="$t('home_sort_by_btn')" trailing-icon="i-heroicons-chevron-down-20-solid" />
+          <UButton :label="$t('home_sort_by_btn')" class="mb-4" trailing-icon="i-heroicons-chevron-down-20-solid" />
             <template #panel="{ close }">
               <div class="button-container mb-3">
                 <UButton :label="$t('home_datesort_asc')" @click="() => changeSortOrder($t('home_datesort_asc'), 'ascending', close)" />
@@ -53,7 +53,7 @@
             </div>
           </ClientOnly>
         </div>
-        <UPopover :popper="{ placement: 'bottom-start' }" overlay class="block lg:hidden">
+        <UPopover :popper="{ placement: 'bottom-start', modifiers: [{ name: 'offset', options: { offset: [10, 0] } }] }" overlay class="block lg:hidden ml-2">
           <UButton icon="i-heroicons-calendar-days-20-solid"/>
           <template #panel="{ close }">
               <div class="flex flex-col items-center space-y-2">
