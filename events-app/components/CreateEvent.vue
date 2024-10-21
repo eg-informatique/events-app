@@ -10,8 +10,11 @@
             <div v-if="eventConflictState" class="mb-5 text-center">
                 <p class="font-bold text-red-400">{{  $t('event_name_conflict') }}</p>
             </div>
-            <div v-if="eventErrortState" class="mb-5 text-center">
+            <div v-if="eventErrorState" class="mb-5 text-center">
                 <p class="font-bold text-red-400">{{  $t('event_creation_error') }}</p>
+            </div>
+            <div v-if="eventDeleteState" class="mb-5 text-center">
+                <p class="font-bold text-red-400">{{ $t('venue_delete') }}</p>
             </div>
             <UForm id="form" :state="state" class="space-y-4" :schema="EventValidatonSchemas" @submit="handleFormSubmit">
                 <UFormGroup :label="$t('create_event_title')" name="title">
@@ -65,6 +68,7 @@
                 <UButton type="submit">{{$t('create_event_btn')}}</UButton>
                 <UButton type="reset" variant="outline" @click="resetFormState()" class="ml-2">{{ $t('create_event_clear_btn') }}</UButton>
             </UForm>
+            <UButton v-if="id != ''" color="red" variant="outline" @click="deleteEvent()" class="mt-2">{{ $t('create_venue_delete_btn') }}</UButton>
         </UCard>
     </div>
 </template>
@@ -97,7 +101,8 @@ const startDate = ref(new Date())
 const endDate = ref(new Date())
 const eventState = ref(false)
 const eventConflictState = ref(false)
-const eventErrortState = ref(false)
+const eventErrorState = ref(false)
+const eventDeleteState = ref(false)
 
 function resetFormState() {
     state.value = {
@@ -193,7 +198,7 @@ async function handleFormSubmit(event: FormSubmitEvent<z.output<typeof EventVali
         if(response.status==409){
             eventConflictState.value = true
         } else if (!response.ok) {
-            eventErrortState.value = true
+            eventErrorState.value = true
         } 
         else {
             eventState.value = true;
@@ -204,6 +209,25 @@ async function handleFormSubmit(event: FormSubmitEvent<z.output<typeof EventVali
     } catch (error) {
         // Handle error (e.g., show an error message)
         console.error('Error creating event:', error);
+    }
+}
+
+async function deleteEvent(){
+    try {
+        const response = await fetch(`https://events-api.org/event/${id}`, {
+            method: 'DELETE',  
+        });
+  
+        if (!response.ok) {
+            eventErrorState.value = true;
+        } else {
+            eventDeleteState.value = true;
+            eventConflictState.value = false;
+            window.location.reload()
+        }
+        
+    } catch (error) {
+        console.error('Error deleting venue:', error);
     }
 }
 </script>

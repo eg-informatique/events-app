@@ -181,14 +181,12 @@ async function deleteVenue(){
             method: 'DELETE',  
         });
 
-        if (response.status === 409) {
-            venueConflictState.value = true;
-        } else if (!response.ok) {
+        if (!response.ok) {
             venueErrorState.value = true;
         } else {
             venueDeleteState.value = true;
             venueConflictState.value = false;
-            resetFormState();
+            window.location.reload()
         }
         
     } catch (error) {
