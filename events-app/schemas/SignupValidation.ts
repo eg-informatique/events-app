@@ -1,11 +1,9 @@
-
-import type { LocaleMessage, RemoveIndexSignature } from '@intlify/core-base'
-import type { ComposerTranslation, VueMessageType, LocaleMessageValue } from 'vue-i18n'
+import type { ComposerTranslation } from 'vue-i18n'
 import { z } from 'zod'
 
 const nameRegex = /^[a-zA-ZÀ-ÿ\s'-]+$/
 
-export const createSignUpValidationSchemas = (t: ComposerTranslation<{ [x: string]: LocaleMessage<VueMessageType> }, string, RemoveIndexSignature<{ [x: string]: LocaleMessageValue<VueMessageType> }>, never, string, string>) => {
+export const createSignUpValidationSchemas = (t: ComposerTranslation) => {
     return z.object({
         first_name: z.string()
             .max(64, t("first_name_validation_len"))

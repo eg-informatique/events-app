@@ -6,7 +6,7 @@ const nameRegex = /^[a-zA-ZÀ-ÿ\s'-]+$/;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
 
-export const createEventValidationSchemas = (t: ComposerTranslation<{ [x: string]: LocaleMessage<VueMessageType> }, string, RemoveIndexSignature<{ [x: string]: LocaleMessageValue<VueMessageType> }>, never, string, string>) => {
+export const createEventValidationSchemas = (t: ComposerTranslation) => {
     return z.object({
         title: z.string().max(100, t("title_validation_len")),
         start_datetime: z.string().refine((val) => !isNaN(Date.parse(val)), {
