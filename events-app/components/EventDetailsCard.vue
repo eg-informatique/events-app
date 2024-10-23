@@ -110,7 +110,8 @@
     if(status.value == 'authenticated'){
         authenticated.value = true
     }
-    const uri = `https://www.google.com/maps/embed/v1/place?key=${process.env.GOOGLE_MAP_API_KEY}
+    const apiKey = config.public.googleMapApiKey
+    const uri = `https://www.google.com/maps/embed/v1/place?key=${apiKey}
                 &q=${venueData.address}, ${venueData.zipcode} ${venueData.city}, ${venueData.country}`
 
     const emitID = () => {
