@@ -97,6 +97,7 @@
 <script setup>
     const { $formatShortDate } = useNuxtApp()
     const locaPath = useLocalePath()
+    const config = useRuntimeConfig()
     const { event } = defineProps(['event'])
     const venue = await fetch(`https://events-api.org/venue/${event.venue}`)
     const venueData = await venue.json()
