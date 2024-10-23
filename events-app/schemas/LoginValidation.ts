@@ -1,4 +1,4 @@
-import type { ComposerTranslation} from 'vue-i18n'
+import type { ComposerTranslation } from 'vue-i18n'
 import { z } from 'zod'
 
 export const createLoginValidationSchemas = (t: ComposerTranslation) => {

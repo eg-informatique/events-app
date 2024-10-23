@@ -1,5 +1,4 @@
-import type { LocaleMessage, RemoveIndexSignature } from '@intlify/core-base';
-import type { ComposerTranslation, VueMessageType, LocaleMessageValue } from 'vue-i18n';
+import type { ComposerTranslation} from 'vue-i18n';
 import { z } from 'zod';
 
 const nameRegex = /^[a-zA-ZÀ-ÿ\s'-]+$/;
