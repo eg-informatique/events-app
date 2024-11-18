@@ -106,7 +106,6 @@ events.value = await response.json()
 
 const updateDate = (date) => {
   dateOnly.value = date.toISOString().split('T')[0]
-  console.log(dateOnly.value)
   fetchEvents()
 }
 
@@ -123,7 +122,6 @@ const dateToNull = () => {
 }
 
 const fetchEvents = async () => {
-  console.log(dateOnly.value)
   emptyState.value = false
   if(dateOnly.value == null){
     try {
