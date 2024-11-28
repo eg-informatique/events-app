@@ -23,7 +23,7 @@ export default NuxtAuthHandler({
         // @ts-expect-error You need to use .default here for it to work during SSR. May be fixed via Vite at some point
         GithubProvider.default({
            clientId: config.githubClientId,
-           clientSecret: config.gihubClientSecret
+           clientSecret: config.githubClientSecret
         }),
         // @ts-expect-error You need to use .default here for it to work during SSR. May be fixed via Vite at some point
         GoogleProvider.default({
