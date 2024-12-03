@@ -14,7 +14,7 @@
 </template>
 <script setup>
   useHead({
-    title: 'Events Manages | About'
+    title: 'Swiss Events | About'
   })
   definePageMeta({
     auth: false

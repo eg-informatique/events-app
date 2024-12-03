@@ -116,5 +116,9 @@
     "dashboard_create_venue": "Créer un lieu",
     "venue_delete":"Lieu supprimé !",
     "venue_hide": "Masquer les lieux",
-    "venue_show": "Afficher les lieux"
+    "venue_show": "Afficher les lieux",
+    "verify_email_txt": "Vérifiez votre email",
+    "verify_email_btn": "Cliquez pour vérifier",
+    "verify_email_complet": "Email confirmé",
+    "verify_email_notcomplet": "Une erreur s'est produite, réessayez plus tard"
 }

@@ -139,7 +139,6 @@ const handleFileChange = (event: Event) => {
 }
 let method = 'POST'
 let uri = 'https://events-api.org/event'
-console.log(id);
 
 if(id != ""){
     const data = await fetch(`https://events-api.org/event/${id}`)

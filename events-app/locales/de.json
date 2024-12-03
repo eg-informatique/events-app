@@ -116,5 +116,9 @@
     "dashboard_create_venue": "Ort erstellen",
     "venue_delete": "Gelöscht!",
     "venue_hide": "Veranstaltungsorte ausblenden",
-    "venue_show": "Veranstaltungsorte anzeigen"
+    "venue_show": "Veranstaltungsorte anzeigen",
+    "verify_email_txt": "Bestätige deine E-Mail",
+    "verify_email_btn": "Klicken, um zu verifizieren",
+    "verify_email_complet": "E-Mail bestätigt",
+    "verify_email_notcomplet": "Es ist ein Fehler aufgetreten, bitte versuche es später erneut"
 }

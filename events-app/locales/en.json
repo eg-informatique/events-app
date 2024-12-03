@@ -116,5 +116,9 @@
     "dashboard_create_venue": "Create a venue",
     "venue_delete":"Deleted !",
     "venue_hide": "Hide venues",
-    "venue_show": "Show venues"
+    "venue_show": "Show venues",
+    "verify_email_txt":"Verify your email",
+    "verify_email_btn":"Click for verify",
+    "verify_email_complet":"Confirmed email",
+    "verify_email_notcomplet":"An error has occurred, try later"
 }

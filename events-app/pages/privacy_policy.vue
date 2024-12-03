@@ -62,5 +62,8 @@
         <a href="mailto:eventsapi48@gmail.com" class="text-primary hover:underline">eventsapi48@gmail.com</a>.
       </p>
     </div>
-  </template>
+</template>
+<script setup lang="ts">
+  definePageMeta({ auth: false });
+</script>
   
