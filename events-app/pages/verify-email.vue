@@ -44,6 +44,7 @@ const verifyEmail = async () => {
         ok.value = true
     }
     else{
+        load.value = false
         notok.value = true
     }
 }
