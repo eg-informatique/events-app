@@ -16,7 +16,7 @@ const { data } = useAuth()
 const email = data.value.user.email
 const response = await fetch(`https://events-api.org/user?email=${email}`)
 const userData = await response.json()
-const notVeriyUser = ref(true)
+const notVeriyUser = ref(false)
 const response2 = await fetch(`https://events-api.org/event_list/${userData.user.id}`)
 const eventsId = await response2.json()
 const allEventsData = []
@@ -32,7 +32,6 @@ for(const events in eventsId){
 }
 if (userData.user.verify == false){
     notVeriyUser.value = true
-
 }
 </script>
 

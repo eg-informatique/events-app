@@ -27,14 +27,13 @@
   />
 </template>
 
-<script setup lang="ts">
-import { icons } from '@iconify-json/majesticons/index.js';
-
-
+<script setup>
 const { t } = useI18n()
 const { status, signIn, signOut, data } = useAuth()
 const locaPath = useLocalePath()
 const logedIn = computed(() => status.value === 'authenticated')
+const currentUser = await fetch(`https://events-api.org/user?email=${data.value.user.email}`)
+const currentUserData = await currentUser.json()
 
 async function handleSignIn() {
     await signIn()
@@ -43,28 +42,39 @@ async function handleSignOut() {
     await signOut()
 }
 
-
-const items = [
-  [{
-    label:t('reservations_nav'),
-    to:`${locaPath('/reservations')}`,
-    icon:'i-mdi-music'
-  },
-  {
-    label:t('myevents_venues_nav'),
-    to:`${locaPath('/myevents')}`,
-    icon:'i-mdi-plus'
-  },
-  ],
-  [
-    {
-      label:t('signout_nav_btn'),
-      icon:'i-mdi-sign-out',
-      click: async () => {
-        await signOut()
-      }
-    }
-  ],
+console.log(currentUserData);
+let items = []
+if (currentUserData.exists != false){
   
-]
+    items = [
+    [
+      {
+        label:currentUserData.user.first_name,
+        icon:'i-mdi-account',
+      }
+    ],
+    [{
+      label:t('reservations_nav'),
+      to:`${locaPath('/reservations')}`,
+      icon:'i-mdi-music'
+    },
+    {
+      label:t('myevents_venues_nav'),
+      to:`${locaPath('/myevents')}`,
+      icon:'i-mdi-plus'
+    },
+    ],
+    [
+      {
+        label:t('signout_nav_btn'),
+        icon:'i-mdi-sign-out',
+        click: async () => {
+          await signOut()
+        }
+      }
+    ],
+    
+  ]
+}
+
 </script>

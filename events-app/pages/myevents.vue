@@ -86,9 +86,9 @@ const showVenue = ref(true)
 const statusEvents = ref(false)
 const statusVenues = ref(false)
 
-const verify = ref(false)
-if (userData.user.verify == true ){
-    verify.value == true
+const verify = ref(true)
+if (userData.user.verify == false ){
+    verify.value == false
 }
 
 const openEventModal = (eventId) => {
