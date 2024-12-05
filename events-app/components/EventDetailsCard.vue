@@ -35,7 +35,7 @@
             <a :href="'mailto:' + encodeURIComponent(user.email)" class="text-primary hover:underline ml-2">{{ user.email }}</a>
         </div>
         <template #footer>
-            <TicketSelector v-if="authenticated" :eventId="event.id"/>
+            <TicketSelector v-if="authenticated && verify" :eventId="event.id"/>
             <UButton v-else :label="$t('login_to_reserve')" to="/login" icon="i-mdi-sign-in"/>
         </template>
     </UCard>
@@ -88,8 +88,12 @@
             <a :href="'mailto:' + encodeURIComponent(user.email)" class="text-primary hover:underline ml-2">{{ user.email }}</a>
         </div>
         <template #footer>
-            <TicketSelector v-if="authenticated" :eventId="event.id"/>
-            <UButton v-else :label="$t('login_to_reserve')" to="/login" icon="i-mdi-sign-in"/>
+            <TicketSelector v-if="authenticated && verify" :eventId="event.id"/>
+            <UButton v-if="!authenticated" :label="$t('login_to_reserve')" to="/login" icon="i-mdi-sign-in"/>
+            <div v-if="!verify && authenticated" class="justify-center text-center">
+                <p class="font-bold">{{ $t("not_verify_reservation_txt") }}</p>
+                <NotVerifiedEmail :email="data.user.email"/>
+            </div>
         </template>
     </UCard>
 </template>
@@ -103,18 +107,26 @@
     const venueData = await venue.json()
     const userData = await fetch(`https://events-api.org/user/${event.organizer}`)
     const user = await userData.json()
+    const verify = ref(false)
     const formatDescription = (description) => {
         return description.replace(/\n/g, '<br><br>');
     };
+    let email = "example"
     const authenticated = ref(false)
-    const { status } = useAuth()
+    const { data, status } = useAuth()
     if(status.value == 'authenticated'){
         authenticated.value = true
+        const currentUser = await fetch(`https://events-api.org/user?email=${data.value.user.email}`)
+        const currentUserData = await currentUser.json()
+        if(currentUserData.user.verify == true){
+            verify.value = true
+        }
+        email = data.value.user.email
     }
+    
     const apiKey = config.public.googleMapApiKey
     const uri = `https://www.google.com/maps/embed/v1/place?key=${apiKey}
                 &q=${venueData.address}, ${venueData.zipcode} ${venueData.city}, ${venueData.country}`
-
     const emitID = () => {
         emits(`emitID : ${event.id}`)
     }

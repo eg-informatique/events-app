@@ -2,7 +2,7 @@
     <UCard>  
         <div class="flex">
             <img class="rounded-md w-[50px] mx-auto ml-2" :src="event.img_url">
-            <p class="font-bold">{{ event.title }}</p>
+            <p class="font-bold ml-2">{{ event.title }}</p>
         </div>
         <p class="font-bold m-4 text-center">{{ $formatLongDate(event, 'start_datetime') }}</p>
         <div class="grid">

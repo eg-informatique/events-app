@@ -120,5 +120,9 @@
     "verify_email_txt": "Bestätige deine E-Mail",
     "verify_email_btn": "Klicken, um zu verifizieren",
     "verify_email_complet": "E-Mail bestätigt",
-    "verify_email_notcomplet": "Es ist ein Fehler aufgetreten, bitte versuche es später erneut"
+    "verify_email_notcomplet": "Es ist ein Fehler aufgetreten, bitte versuche es später erneut",
+    "email_not_verrified": "Ihre E-Mail ist nicht verifiziert",
+    "verify_email_sent": "Eine Bestätigungs-E-Mail wurde gesendet",
+    "not_verify_reservation_txt": "Sie können sich nicht für diese Veranstaltung anmelden, bitte überprüfen Sie Ihre E-Mail.",
+    "not_verify_myevents_txt": "Sie können keine Veranstaltung oder keinen Veranstaltungsort erstellen, wenn Ihre E-Mail-Adresse nicht verifiziert ist."
 }

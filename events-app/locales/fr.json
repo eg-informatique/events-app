@@ -120,5 +120,9 @@
     "verify_email_txt": "Vérifiez votre email",
     "verify_email_btn": "Cliquez pour vérifier",
     "verify_email_complet": "Email confirmé",
-    "verify_email_notcomplet": "Une erreur s'est produite, réessayez plus tard"
+    "verify_email_notcomplet": "Une erreur s'est produite, réessayez plus tard",
+    "email_not_verrified": "Votre email n'est pas vérifié",
+    "verify_email_sent": "Un email de vérification a été envoyé",
+    "not_verify_reservation_txt": "Vous ne pouvez pas vous inscrire à cet événement, veuillez vérifier votre email.",
+    "not_verify_myevents_txt": "Vous ne pouvez pas créer un événement ou un lieu si votre adresse email n'est pas vérifiée."
 }

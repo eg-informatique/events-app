@@ -120,5 +120,9 @@
     "verify_email_txt":"Verify your email",
     "verify_email_btn":"Click for verify",
     "verify_email_complet":"Confirmed email",
-    "verify_email_notcomplet":"An error has occurred, try later"
+    "verify_email_notcomplet":"An error has occurred, try later",
+    "email_not_verrified": "Your email isn't verified",
+    "verify_email_sent": "A verification e-mail has been sent",
+    "not_verify_reservation_txt":"You can't register for this event, please check your email for this.",
+    "not_verify_myevents_txt":"You cannot create an event or a venue if your email address is not verified."
 }
