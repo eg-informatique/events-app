@@ -32,8 +32,6 @@ const { t } = useI18n()
 const { status, signIn, signOut, data } = useAuth()
 const locaPath = useLocalePath()
 const logedIn = computed(() => status.value === 'authenticated')
-const currentUser = await fetch(`https://events-api.org/user?email=${data.value.user.email}`)
-const currentUserData = await currentUser.json()
 
 async function handleSignIn() {
     await signIn()
@@ -41,12 +39,12 @@ async function handleSignIn() {
 async function handleSignOut() {
     await signOut()
 }
-
-console.log(currentUserData);
 let items = []
-if (currentUserData.exists != false){
-  
-    items = [
+
+if(logedIn){
+	const currentUser = await fetch(`https://events-api.org/user?email=${data.value.user.email}`)
+	const currentUserData = await currentUser.json()
+	items = [
     [
       {
         label:currentUserData.user.first_name,
@@ -76,5 +74,4 @@ if (currentUserData.exists != false){
     
   ]
 }
-
 </script>
