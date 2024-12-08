@@ -16,6 +16,6 @@ export const addUser = async (user) => {
         return data;
     } catch (error) {
         console.error('Error:', error);
-        throw new Error('Error creating user');
+        throw new Error('Error creating user', user);
     }
 };

@@ -70,7 +70,7 @@ export default NuxtAuthHandler({
                     
                     if(response.status === 404 || !data.exists) {
                         const newUser = {
-                            first_name: user?.name || 'Unknown',
+                            first_name: '',
                             last_name: '',
                             email: user.email,
                             password: randomPassword(12)
