@@ -26,6 +26,14 @@ export default defineNuxtConfig({
     },
   },
 
+  app: {
+    head:{
+      title: 'Swiss Events',
+      meta: [
+        { name: 'Swiss Events', content: 'Open source events manager webb app' }
+      ],
+    }
+  },
   auth: {
     baseURL: 'https://swiss-events.org',
     redirect: {
