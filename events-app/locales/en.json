@@ -124,5 +124,6 @@
     "email_not_verrified": "Your email isn't verified",
     "verify_email_sent": "A verification e-mail has been sent",
     "not_verify_reservation_txt":"You can't register for this event, please check your email for this.",
-    "not_verify_myevents_txt":"You cannot create an event or a venue if your email address is not verified."
+    "not_verify_myevents_txt":"You cannot create an event or a venue if your email address is not verified.",
+    "email_verification_sent":"A verification email has been sent to your email address"
 }

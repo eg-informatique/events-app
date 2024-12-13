@@ -8,6 +8,14 @@
       </template>
         <UForm :schema="SignUpValidationSchemas" :state="state" class="space-y-4" @submit="handleFormSubmit">
           <p v-if="status" class="text-red-500">{{ $t('signup_error') }}</p>
+          <UAlert v-if="ok"
+            icon="i-heroicons-check-circle"
+            color="primary"
+            variant="solid"
+            :title="$t('email_verification_sent')",
+            class="mt-3"
+          />
+          <p v-if="ok" class="text-primary-500">{{ $t('mail_verification_sent') }}</p>
           <UFormGroup :label="$t('first_name')" name="first_name">
             <UInput v-model="state.first_name" placeholder="Harry "></UInput>
           </UFormGroup>
@@ -27,7 +35,7 @@
         </UForm>
         <template #footer>
           <CreateUserGitHubSignUp/><br>
-          <CreateUserGoogleSignUp/>
+          <CreateUserGoogleSignUp class="mt-3"/>
         </template>
     </UCard>
   </div>
@@ -48,6 +56,8 @@ const SignUpValidationSchemas = createSignUpValidationSchemas(t)
 async function handleSignIn() {
     await signIn()
 }
+
+const ok = ref(false)
 
 const state = ref({
     first_name: undefined,
@@ -73,7 +83,12 @@ async function handleFormSubmit(event: FormSubmitEvent < z.output < typeof SignU
       status.value = true
     }
     else if(response==200) {
-      handleSignIn()
+      console.log('OK. .L??')
+      ok.value = true
+      setTimeout(() => {
+        ok.value = true
+        handleSignIn()
+      }, 10000)
     }
   } catch (error) {
     console.error('error adding user:', error);

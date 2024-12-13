@@ -124,5 +124,6 @@
     "email_not_verrified": "Ihre E-Mail ist nicht verifiziert",
     "verify_email_sent": "Eine Bestätigungs-E-Mail wurde gesendet",
     "not_verify_reservation_txt": "Sie können sich nicht für diese Veranstaltung anmelden, bitte überprüfen Sie Ihre E-Mail.",
-    "not_verify_myevents_txt": "Sie können keine Veranstaltung oder keinen Veranstaltungsort erstellen, wenn Ihre E-Mail-Adresse nicht verifiziert ist."
+    "not_verify_myevents_txt": "Sie können keine Veranstaltung oder keinen Veranstaltungsort erstellen, wenn Ihre E-Mail-Adresse nicht verifiziert ist.",
+    "email_verification_sent":"Eine Bestätigungs-E-Mail wurde an Sie gesendet."
 }

@@ -13,7 +13,7 @@ export const addUser = async (user) => {
         if (!response.ok) {
             throw new Error(data.message || 'Failed to create account');
         }
-        return data;
+        return response.status;
     } catch (error) {
         console.error('Error:', error);
         throw new Error('Error creating user', user);

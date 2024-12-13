@@ -22,13 +22,23 @@ export default NuxtAuthHandler({
     providers:[
         // @ts-expect-error You need to use .default here for it to work during SSR. May be fixed via Vite at some point
         GithubProvider.default({
-           clientId: config.githubClientId,
-           clientSecret: config.githubClientSecret
+        clientId: config.githubClientId,
+            clientSecret: config.githubClientSecret,
+            authorization: {
+                params: {
+                    scope: "read:user"
+                }
+            }
         }),
         // @ts-expect-error You need to use .default here for it to work during SSR. May be fixed via Vite at some point
         GoogleProvider.default({
             clientId: config.googleAuthClientId,
-            clientSecret: config.googleAuthClientSecret
+            clientSecret: config.googleAuthClientSecret,
+            authorization: {
+                params: {
+                    scope: "openid email profile"
+                }
+            }
         }),
         // @ts-expect-error You need to use .default here for it to work during SSR. May be fixed via Vite at some point
         CredentialsProvider.default({
@@ -50,8 +60,12 @@ export default NuxtAuthHandler({
                         const response = await fetch(`https://events-api.org/user?email=${credentials?.email}`)
                         const userData = await response.json()
                         return{
-                            name: userData.user.first_name,
+                            id: userData.user.id,
                             email: userData.user.email,
+                            profile: {
+                                first_name: userData.user.first_name,
+                                last_name: userData.user.last_name,
+                            }
                         }
                     }
                 } catch(error){
@@ -75,7 +89,6 @@ export default NuxtAuthHandler({
                             email: user.email,
                             password: randomPassword(12)
                         }
-                        console.log(newUser)
                         await addUser(newUser)
                     } else if(!response.ok){
                         throw new Error('Failed to fetch user')
@@ -96,11 +109,15 @@ export default NuxtAuthHandler({
         async jwt({ token, user }) {
             if (user) {
                 token.jwt = jwt.sign({ email: user.email }, 'polosecrets', { expiresIn: '1h' });
+                token.id = user.id;
+                token.profile = user.profile
             }
             return token;
         },
-        async session({ session, token }) {
+        async session({ session, token, user }) {
             session.jwt = token.jwt;
+            session.id = token.id;
+            session.profile = token.profile;
             return session;
         }
     }

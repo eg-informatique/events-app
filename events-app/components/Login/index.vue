@@ -6,7 +6,7 @@
           {{$t('signin_welcome')}}
         </h1>
         <LoginGitHubLogin class="mt-3" /><br>
-        <LoginGoogleLogin class="mt-3"/>
+        <LoginGoogleLogin class="mt-3 mb-3"/>
       <UDivider :label="$t('or')"/>
       <p v-if="status" class="text-red-500"> {{ $t('signin_error') }}</p>
       <UForm :schema="LoginValidationSchemas" :state="state" class="space-y-4" @submit="handleFormSubmit">
