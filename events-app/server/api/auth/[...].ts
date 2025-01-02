@@ -76,16 +76,15 @@ export default NuxtAuthHandler({
                             password: randomPassword(12)
                         }
                         await addUser(newUser)
+                        const newUserResponse = await fetch(`https://events-api.org/user?email=${user.email}`)
+                        const newUserData = await newUserResponse.json()
+                        if(!newUserResponse.ok){
+                            throw new Error('Failed to fetch user')
+                        }
+                        user.id = newUserData.user.id
                     } else if(!response.ok){
                         throw new Error('Failed to fetch user')
                     }
-
-                    const response2 = await fetch(`https://events-api.org/user?email=${user.email}`)
-                    const data2 = await response.json()
-                    if(!response2.ok){
-                        throw new Error('Failed to fetch user')
-                    }
-                    user.id = data2.user.id
                     return true
                 } catch (error) {
                     console.error('Error in signIn callback', error)
