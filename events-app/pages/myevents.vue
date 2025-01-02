@@ -25,6 +25,8 @@
                                 <CreateEvent :email="email" :id="event.id"/>
                             </UModal>
                         <UButton class="mt-2" :label="$t('details_btn')" icon="i-mdi-more" :to="`${locaPath('/event/' + `${event.id}`)}`"/>
+                        <UButton class="mt-2" :label="$t('get-pdf')" icon='i-mdi-file-pdf-box' @click="getPdf(event)"/>
+                        <p v-if="nopdf" class="text-red-500">{{ $t('no_pdf') }}</p>
                     </div>
                 </UCard>
             </div>
@@ -75,16 +77,21 @@ const { data } = useAuth()
 const { $formatLongDate } = useNuxtApp()
 const locaPath = useLocalePath()
 const email = data.value.user.email
+
 const response = await fetch(`https://events-api.org/user?email=${email}`)
 const userData = await response.json()
+
 const response2 = await fetch(`https://events-api.org/events?c=${userData.user.id}`)
 const eventsData = await response2.json()
 const response3 = await fetch(`https://events-api.org/venues?c=${userData.user.id}`)
 const venuesData = await response3.json()
+
+
 const showEvent = ref(true)
 const showVenue = ref(true)
 const statusEvents = ref(false)
 const statusVenues = ref(false)
+const nopdf = ref(false)
 
 const verify = ref(true)
 if (userData.user.verify == false ){
@@ -113,6 +120,32 @@ const showHideVenue = (value) => {
         showVenue.value = true
     }
 }
+
+const getPdf = async (event) => {
+  try {
+    const response = await fetch(`https://events-api.org/registred-events-pdf?event_id=${event.id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/pdf',
+      },
+    });
+    if (!response.ok) {
+        nopdf.value = true
+      throw new Error('Network response was not ok')
+    }
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `${event.title}_list.pdf`
+    document.body.appendChild(a)
+    a.click()
+    a.remove()
+    window.URL.revokeObjectURL(url)
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error)
+  }
+};
 
 </script>
 

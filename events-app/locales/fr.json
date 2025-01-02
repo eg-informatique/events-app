@@ -125,5 +125,7 @@
     "verify_email_sent": "Un email de vérification a été envoyé",
     "not_verify_reservation_txt": "Vous ne pouvez pas vous inscrire à cet événement, veuillez vérifier votre email.",
     "not_verify_myevents_txt": "Vous ne pouvez pas créer un événement ou un lieu si votre adresse email n'est pas vérifiée.",
-    "email_verification_sent":"Un email de confirmation vous a été envoyé."
+    "email_verification_sent":"Un email de confirmation vous a été envoyé.",
+    "get-pdf":"Obtenez la liste des inscrits",
+    "no_pdf":"Aucun abonné, vous ne pouvez pas obtenir la liste"
 }

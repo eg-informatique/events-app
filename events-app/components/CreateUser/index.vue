@@ -1,11 +1,14 @@
 <template>
   <div class="flex flex-col items-center justify-center h-full">
     <UCard class="lg:w-4/12 sm:mx-4">
-      <template #header>
+
         <h1 class="text-xl font-bold text-color(leading-tight tracking-tightmd:text-2px">
           {{$t('signup_welcome')}}
         </h1>
-      </template>
+        
+        <CreateUserGoogleSignUp class="mt-3 mb-3"/>
+        
+        <UDivider :label="$t('or')"/>
         <UForm :schema="SignUpValidationSchemas" :state="state" class="space-y-4" @submit="handleFormSubmit">
           <p v-if="status" class="text-red-500">{{ $t('signup_error') }}</p>
           <UAlert v-if="ok"
@@ -33,10 +36,6 @@
           </UFormGroup>
           <UButton type="submit">{{$t("signin_submit_btn")}}</UButton>
         </UForm>
-        <template #footer>
-          <CreateUserGitHubSignUp/><br>
-          <CreateUserGoogleSignUp class="mt-3"/>
-        </template>
     </UCard>
   </div>
 </template>

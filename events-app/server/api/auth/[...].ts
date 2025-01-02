@@ -21,16 +21,6 @@ export default NuxtAuthHandler({
     secret: 'polosecrets',
     providers:[
         // @ts-expect-error You need to use .default here for it to work during SSR. May be fixed via Vite at some point
-        GithubProvider.default({
-        clientId: config.githubClientId,
-            clientSecret: config.githubClientSecret,
-            authorization: {
-                params: {
-                    scope: "read:user"
-                }
-            }
-        }),
-        // @ts-expect-error You need to use .default here for it to work during SSR. May be fixed via Vite at some point
         GoogleProvider.default({
             clientId: config.googleAuthClientId,
             clientSecret: config.googleAuthClientSecret,
@@ -63,8 +53,8 @@ export default NuxtAuthHandler({
                             id: userData.user.id,
                             email: userData.user.email,
                             profile: {
-                                first_name: userData.user.first_name,
-                                last_name: userData.user.last_name,
+                                first_name: userData.user.first_name || '',
+                                last_name: userData.user.last_name || '',
                             }
                         }
                     }
@@ -77,15 +67,15 @@ export default NuxtAuthHandler({
     ],
     callbacks: {
         async signIn({user, account, profile}) {
-            if(account?.provider === 'github' || account?.provider === 'google') {
+            if(account?.provider === 'google') {
                 try{
                     const response = await fetch(`https://events-api.org/user?email=${user.email}`)
                     const data = await response.json()
                     
                     if(response.status === 404 || !data.exists) {
                         const newUser = {
-                            first_name: '',
-                            last_name: '',
+                            first_name: profile.given_name || '',
+                            last_name: profile.family_name || '',
                             email: user.email,
                             password: randomPassword(12)
                         }
@@ -110,7 +100,10 @@ export default NuxtAuthHandler({
             if (user) {
                 token.jwt = jwt.sign({ email: user.email }, 'polosecrets', { expiresIn: '1h' });
                 token.id = user.id;
-                token.profile = user.profile
+                token.profile = user.profile || {
+                    first_name: user.first_name || '',
+                    last_name: user.last_name || ''
+                };
             }
             return token;
         },
