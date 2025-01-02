@@ -81,9 +81,11 @@ export default NuxtAuthHandler({
                         if(!newUserResponse.ok){
                             throw new Error('Failed to fetch user')
                         }
-                        user.id = newUserData.user.id
+                        user.id = newUserData.user.id // Set the user ID from your API
                     } else if(!response.ok){
                         throw new Error('Failed to fetch user')
+                    } else {
+                        user.id = data.user.id // Set the user ID from your API
                     }
                     return true
                 } catch (error) {
