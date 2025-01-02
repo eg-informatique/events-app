@@ -48,7 +48,7 @@ const { $formatLongDate } = useNuxtApp()
 const locaPath = useLocalePath()
 const { event } = defineProps(["event"])
 const { data } = useAuth()
-const response = await fetch(`https://events-api.org/user?email=${data.value.user.email}`)
+const response = await fetch(`https://events-api.org/user/${data.value.id}`)
 const userData = await response.json()
 const response2 = await fetch(`https://events-api.org/event_nb_tickets/${event.id}/${userData.user.id}`)
 const data2 = await response2.json()
@@ -58,15 +58,11 @@ const reserveStatusOk = ref(false)
 const reserveStatusErr = ref(false)
 
 const editReserve = async (close) => {
-        const response = await fetch(`https://events-api.org/user?email=${data.value.user.email}`)
-        if (response.ok) {
-            const userData = await response.json()
-            const response2 = await fetch(`https://events-api.org/reserve/${event.id}/${userData.user.id}/${nbTickets.value}`, {method:'PATCH'})
-            if(response2.ok){
-              reserveStatusOk.value = true
-            }
-            close()
+        const response2 = await fetch(`https://events-api.org/reserve/${event.id}/${userData.id}/${nbTickets.value}`, {method:'PATCH'})
+        if(response2.ok){
+            reserveStatusOk.value = true
         }
+        close()   
   }
 
 const increaseTickets = () => {
