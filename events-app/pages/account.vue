@@ -3,6 +3,14 @@
         <p>{{ status }} {{  data }}</p>
         <p>{{ data.id }}</p>
     </div>
+    <UAlert
+      icon="i-heroicons-exclamation-circle"
+      color="red"
+      variant="solid"
+      title="hi"
+      description="'reserve_err_description')"
+      class="mt-3"
+    />
 </template>
 
 <script setup>

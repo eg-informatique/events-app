@@ -35,7 +35,7 @@
     />
     <UAlert v-if="reserveStatusErr"
       icon="i-heroicons-exclamation-circle"
-      color="red-400"
+      color="red"
       variant="solid"
       :title="$t('reserve_err')"
       :description="$t('reserve_err_description')"
@@ -48,22 +48,34 @@ const { $formatLongDate } = useNuxtApp()
 const locaPath = useLocalePath()
 const { event } = defineProps(["event"])
 const { data } = useAuth()
-const response = await fetch(`https://events-api.org/user/${data.value.id}`)
-const userData = await response.json()
-const response2 = await fetch(`https://events-api.org/event_nb_tickets/${event.id}/${userData.user.id}`)
-const data2 = await response2.json()
-const nbTickets = ref(Number(data2))
 
 const reserveStatusOk = ref(false)
 const reserveStatusErr = ref(false)
+const nbTickets = ref(0)
+let userData = null
+
+try {
+    const response = await fetch(`https://events-api.org/user/${data.value.id}`)
+    userData = await response.json()
+    const response2 = await fetch(`https://events-api.org/event_nb_tickets/${event.id}/${userData.id}`)
+    const data2 = await response2.json()
+    nbTickets.value = Number(data2)
+} catch (error) {
+    console.error('Error fetching data:', error)
+}
 
 const editReserve = async (close) => {
-        const response2 = await fetch(`https://events-api.org/reserve/${event.id}/${userData.id}/${nbTickets.value}`, {method:'PATCH'})
-        if(response2.ok){
+    try {
+        const response3 = await fetch(`https://events-api.org/reserve/${event.id}/${userData.id}/${nbTickets.value}`, {method:'PATCH'})
+        if(response3.ok){
             reserveStatusOk.value = true
         }
-        close()   
-  }
+    } catch (error) {
+        reserveStatusErr.value = true
+        console.error('Error editing reservation:', error)
+    }
+    close()   
+}
 
 const increaseTickets = () => {
     nbTickets.value++
@@ -75,7 +87,6 @@ const decreaseTickets = () => {
         nbTickets.value--
     }
 }
-
 
 </script>
 
