@@ -52,10 +52,6 @@ export default NuxtAuthHandler({
                         return{
                             id: userData.user.id,
                             email: userData.user.email,
-                            profile: {
-                                first_name: userData.user.first_name || '',
-                                last_name: userData.user.last_name || '',
-                            }
                         }
                     }
                 } catch(error){
@@ -83,6 +79,13 @@ export default NuxtAuthHandler({
                     } else if(!response.ok){
                         throw new Error('Failed to fetch user')
                     }
+
+                    const response2 = await fetch(`https://events-api.org/user?email=${user.email}`)
+                    const data2 = await response.json()
+                    if(!response2.ok){
+                        throw new Error('Failed to fetch user')
+                    }
+                    user.id = data2.user.id
                     return true
                 } catch (error) {
                     console.error('Error in signIn callback', error)
