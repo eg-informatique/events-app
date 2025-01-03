@@ -116,7 +116,7 @@
     const { data, status } = useAuth()
     if(status.value == 'authenticated'){
         authenticated.value = true
-        const currentUser = await fetch(`https://events-api.org/user?email=${data.value.id}`)
+        const currentUser = await fetch(`https://events-api.org/user?email=${data.value.user.email}`)
         const currentUserData = await currentUser.json()
         if(currentUserData.user.verify == true){
             verify.value = true
