@@ -15,10 +15,9 @@
             icon="i-heroicons-check-circle"
             color="primary"
             variant="solid"
-            :title="$t('email_verification_sent')",
+            :title="$t('email_verification_sent')"
             class="mt-3"
           />
-          <p v-if="ok" class="text-primary-500">{{ $t('mail_verification_sent') }}</p>
           <UFormGroup :label="$t('first_name')" name="first_name">
             <UInput v-model="state.first_name" placeholder="Harry "></UInput>
           </UFormGroup>
@@ -82,12 +81,11 @@ async function handleFormSubmit(event: FormSubmitEvent < z.output < typeof SignU
       status.value = true
     }
     else if(response==200) {
-      console.log('OK. .L??')
+      status.value = false
       ok.value = true
       setTimeout(() => {
-        ok.value = true
         handleSignIn()
-      }, 10000)
+      }, 4000)
     }
   } catch (error) {
     console.error('error adding user:', error);
