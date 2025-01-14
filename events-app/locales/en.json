@@ -127,5 +127,6 @@
     "not_verify_myevents_txt":"You cannot create an event or a venue if your email address is not verified.",
     "email_verification_sent":"A verification email has been sent to your email address",
     "get-pdf":"Get the list of subscribers",
-    "no_pdf":"No subscribers, you can't get the list"
+    "no_pdf":"No subscribers, you can't get the list",
+    "edit_venue":"Edit venue"
 }
